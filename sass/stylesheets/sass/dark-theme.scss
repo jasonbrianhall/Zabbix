@@ -257,16 +257,3 @@ $ok-ack-fg-color: #00ff00;
 		color: $font-color;
 	}
 }
-
-// WIDGET "PROBLEMS BY SEVERITY"
-
-.by-severity-widget {
-
-	> div {
-		color: darken($font-color, 85%);
-	}
-
-	.by-severity-count {
-		color: $font-color;
-	}
-}

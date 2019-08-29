@@ -5124,8 +5124,3 @@ table.preprocessing-test-results .rel-container {
   color: #191919; }
   .host-avail-widget .host-avail-total {
     color: #f2f2f2; }
-
-.by-severity-widget > div {
-  color: #191919; }
-.by-severity-widget .by-severity-count {
-  color: #f2f2f2; }
