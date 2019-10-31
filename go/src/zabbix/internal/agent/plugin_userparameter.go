@@ -144,6 +144,10 @@ func InitUserParameterPlugin(userParameterConfig []string, unsafeUserParameters 
 			return fmt.Errorf("cannot add user parameter \"%s\": syntax error", userParameterConfig[i])
 		}
 
+		if Options.UserParameterPath != "" && parameter.cmd != "" {
+			parameter.cmd = "PATH=" + Options.UserParameterPath + " " + parameter.cmd
+		}
+
 		userParameter.parameters[key] = parameter
 		plugin.RegisterMetrics(&userParameter, "UserParameter", key, fmt.Sprintf("User parameter: %s.", s[1]))
 	}

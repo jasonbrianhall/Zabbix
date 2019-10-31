@@ -51,6 +51,7 @@ type AgentOptions struct {
 	SourceIP             string   `conf:",optional"`
 	Server               string   `conf:",optional"`
 	MaxLinesPerSecond    int      `conf:",,1:1000,20"`
+	UserParameterPath    string   `conf:",optional"`
 	UserParameter        []string `conf:",optional"`
 	UnsafeUserParameters int      `conf:",optional,0:1,0"`
 	LogRemoteCommands    int      `conf:",optional,0:1,0"`
