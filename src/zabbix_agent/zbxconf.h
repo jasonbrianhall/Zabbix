@@ -57,7 +57,7 @@ extern char	*CONFIG_TLS_PSK_IDENTITY;
 extern char	*CONFIG_TLS_PSK_FILE;
 
 void	load_aliases(char **lines);
-void	load_user_parameters(char **lines);
+void	load_user_parameters(char **lines, char *path);
 #ifdef _WINDOWS
 void	load_perf_counters(const char **def_lines, const char **eng_lines);
 #endif

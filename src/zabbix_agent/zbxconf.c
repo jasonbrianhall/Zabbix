@@ -86,9 +86,10 @@ void	load_aliases(char **lines)
  * Comments: calls add_user_parameter() for each entry                        *
  *                                                                            *
  ******************************************************************************/
-void	load_user_parameters(char **lines)
+void	load_user_parameters(char **lines, char *path)
 {
 	char	*p, **pline, error[MAX_STRING_LEN];
+	long	p_offset;
 
 	for (pline = lines; NULL != *pline; pline++)
 	{
@@ -96,6 +97,14 @@ void	load_user_parameters(char **lines)
 		{
 			zabbix_log(LOG_LEVEL_CRIT, "cannot add user parameter \"%s\": not comma-separated", *pline);
 			exit(EXIT_FAILURE);
+		}
+		*p = '\0';
+
+		if (NULL != path && 0 < strlen(path))
+		{
+			p_offset = (p - *pline);
+			*pline = zbx_dsprintf(*pline, "%s,PATH=%s %s", *pline, path, p + 1);
+			p = *pline + p_offset;
 		}
 		*p = '\0';
 
