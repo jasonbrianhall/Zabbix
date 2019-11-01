@@ -61,12 +61,6 @@ int	get_value_external(DC_ITEM *item, AGENT_RESULT *result)
 
 	zbx_snprintf_alloc(&cmd, &cmd_alloc, &cmd_offset, "PATH=%s %s", CONFIG_EXTERNALSCRIPTS, get_rkey(&request));
 
-	if (-1 == access(cmd, X_OK))
-	{
-		SET_MSG_RESULT(result, zbx_dsprintf(NULL, "%s: %s", cmd, zbx_strerror(errno)));
-		goto out;
-	}
-
 	for (i = 0; i < get_rparams_num(&request); i++)
 	{
 		const char	*param;
