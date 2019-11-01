@@ -1389,7 +1389,7 @@ static int	am_prepare_mediatype_exec_command(zbx_am_mediatype_t *mediatype, zbx_
 
 	*cmd = (char *)zbx_malloc(NULL, cmd_alloc);
 
-	zbx_snprintf_alloc(cmd, &cmd_alloc, &cmd_offset, "%s/%s", CONFIG_ALERT_SCRIPTS_PATH, mediatype->exec_path);
+	zbx_snprintf_alloc(cmd, &cmd_alloc, &cmd_offset, "PATH=%s %s", CONFIG_ALERT_SCRIPTS_PATH, mediatype->exec_path);
 
 	if (0 == access(*cmd, X_OK))
 	{
