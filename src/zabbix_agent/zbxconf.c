@@ -103,7 +103,13 @@ void	load_user_parameters(char **lines, char *path)
 		if (NULL != path && 0 < strlen(path))
 		{
 			p_offset = (p - *pline);
-			*pline = zbx_dsprintf(*pline, "%s,PATH=%s %s", *pline, path, p + 1);
+			*pline = zbx_dsprintf(*pline,
+#ifdef _WINDOWS
+				"%s,set PATH=%s && cmd /C %s",
+#else
+				"%s,PATH=%s %s",
+#endif
+				*pline, path, p + 1);
 			p = *pline + p_offset;
 		}
 		*p = '\0';
