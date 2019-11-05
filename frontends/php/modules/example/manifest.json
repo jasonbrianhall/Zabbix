@@ -1,0 +1,25 @@
+{
+    "manifest_version": 1,
+    "id": "example",
+    "author": "Some Author",
+    "url": "http://module.demo.com",
+    "description": "This is is demo module short description, will be shown in frontend with module name",
+    "version": "1.0",
+    "require": {
+        "zabbix": "^5.0"
+    },
+    "actions": [
+        {
+            "action": "index",
+			"class": "MyPageIndexAction"
+        },
+        {
+            "action": "list",
+			"class": "MyPageListAction",
+			"view": "example/views/mypage.list"
+        }
+    ],
+    "defines": {
+        "MY_MODULE_DEFINE": "test"
+    }
+}
