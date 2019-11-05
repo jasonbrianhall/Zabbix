@@ -130,9 +130,7 @@ class CModuleRegistry {
 				$namespace = $module['id'];
 
 				foreach ($module['manifest']['actions'] as $action) {
-					$route = $namespace.static::NAMESPACE_SEPARATOR.$action['action'];
-
-					$routes[$route] = [
+					$routes[$action['action']] = [
 						'fqcn' => 'Modules\\'.ucfirst($namespace).'\\Actions\\'.$action['class'],
 						'view' => array_key_exists('view', $action) ? $action['view'] : null,
 						'layout' => array_key_exists('layout', $action) ? $action['layout'] : 'layout.htmlpage',

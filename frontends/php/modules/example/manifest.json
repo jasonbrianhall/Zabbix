@@ -14,7 +14,7 @@
 			"class": "MyPageIndexAction"
         },
         {
-            "action": "list",
+            "action": "problem.view",
 			"class": "MyPageListAction",
 			"view": "example/views/mypage.list"
         }
