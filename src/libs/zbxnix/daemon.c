@@ -348,13 +348,13 @@ int	daemon_start(int allow_root, const char *user, unsigned int flags)
 #endif
 		if (-1 == setenv("HOME", pwd->pw_dir, 1))
 		{
-			zbx_error("cannot setenv HOME='%s': %s", pwd->pw_dir, zbx_strerror(errno));
+			zbx_error("cannot setenv HOME to %s: %s", pwd->pw_dir, zbx_strerror(errno));
 			exit(EXIT_FAILURE);
 		}
 
 		if (-1 == setenv("USER", pwd->pw_name, 1))
 		{
-			zbx_error("cannot setenv USER='%s': %s", pwd->pw_name, zbx_strerror(errno));
+			zbx_error("cannot setenv USER to %s: %s", pwd->pw_name, zbx_strerror(errno));
 			exit(EXIT_FAILURE);
 		}
 	}
