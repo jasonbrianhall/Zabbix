@@ -23,7 +23,7 @@
  * The Zabbix autoloader class.
  */
 class CAutoloader {
-
+	protected $root_dir;
 	/**
 	 * An array of directories, where the autoloader will look for the classes.
 	 *
@@ -34,10 +34,12 @@ class CAutoloader {
 	/**
 	 * Initializes object with array of include paths.
 	 *
-	 * @param array $includePaths absolute paths
+	 * @param array     $includePaths absolute paths
+	 * @param string    frontend root directory
 	 */
-	public function __construct(array $includePaths) {
+	public function __construct(array $includePaths, $root_dir) {
 		$this->includePaths = $includePaths;
+		$this->root_dir = $root_dir;
 	}
 
 	/**
@@ -55,8 +57,14 @@ class CAutoloader {
 	 * @param $className
 	 */
 	protected function loadClass($className) {
-		if ($classFile = $this->findClassFile($className)) {
-			require $classFile;
+		$class_path = $this->findClassFile($className);
+
+		if ($class_path === false) {
+			$class_path = $this->findNamespaceClassFile($className);
+		}
+
+		if ($class_path) {
+			require $class_path;
 		}
 	}
 
@@ -74,6 +82,28 @@ class CAutoloader {
 			if (is_file($filePath)) {
 				return $filePath;
 			}
+		}
+
+		return false;
+	}
+
+	/**
+	 * Get path to class with namespace. All namespace parts except class name will be lowercased.
+	 *
+	 * @param string $class    Fully qualified class name.
+	 * @return bool|string
+	 */
+	protected function findNamespaceClassFile($class) {
+		$path = explode('\\', $class);
+
+		if (count($path) > 1) {
+			$name = array_pop($path);
+			$path = array_map('strtolower', $path);
+			array_unshift($path, $this->root_dir);
+			$path[] = $name.'.php';
+			$file_path = implode('/', $path);
+
+			return is_file($file_path) ? $file_path : false;
 		}
 
 		return false;

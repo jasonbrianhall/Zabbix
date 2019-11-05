@@ -88,7 +88,7 @@ class CView {
 	 *
 	 * @var array
 	 */
-	static $viewsDir = ['local/app/views', 'app/views', 'include/views'];
+	static $viewsDir = ['local/app/views', 'app/views', 'include/views', 'modules'];
 
 	/**
 	 * Web layout mode enabled flag.

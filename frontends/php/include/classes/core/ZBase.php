@@ -121,11 +121,19 @@ class ZBase {
 
 		$this->setMaintenanceMode();
 		set_error_handler('zbx_err_handler');
+		$module_registry = null;
 
 		switch ($mode) {
 			case self::EXEC_MODE_DEFAULT:
+				$module_registry = new CModuleRegistry($this->rootDir.'/modules');
+				$module_registry->scanModulesDirectory();
+
 				$this->loadConfigFile();
 				$this->initDB();
+
+				// TODO: This is only development example, all modules status will be read from database
+				$module_registry->setModuleStatus('example', CModuleRegistry::MODULE_ENABLED);
+
 				$this->authenticateUser();
 				$this->initLocales(CWebUser::$data);
 				$this->setLayoutModeByUrl();
@@ -150,8 +158,11 @@ class ZBase {
 		}
 
 		// new MVC processing, otherwise we continue execution old style
-		if (hasRequest('action')) {
+		if (hasRequest('action') && $module_registry !== null) {
 			$router = new CRouter(getRequest('action'));
+			$router->registerModuleRoutes($module_registry->getModulesRoutes());
+			$module_registry->initModules();
+			$router->calculateRoute();
 
 			if ($router->getController() !== null) {
 				CProfiler::getInstance()->start();
@@ -183,7 +194,7 @@ class ZBase {
 	 * Register autoloader.
 	 */
 	private function registerAutoloader() {
-		$autoloader = new CAutoloader($this->getIncludePaths());
+		$autoloader = new CAutoloader($this->getIncludePaths(), $this->rootDir);
 		$autoloader->register();
 	}
 

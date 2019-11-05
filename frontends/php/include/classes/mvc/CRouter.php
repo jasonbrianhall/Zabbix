@@ -160,9 +160,13 @@ class CRouter {
 		'search'						=> ['CControllerSearch',							'layout.htmlpage',		'search']
 	];
 
+	/**
+	 * Array of 'keys' for routes registered by module
+	 */
+	private $module_routes = [];
+
 	public function __construct($action) {
 		$this->action = $action;
-		$this->calculateRoute();
 	}
 
 	/**
@@ -175,6 +179,16 @@ class CRouter {
 			$this->controller = $this->routes[$this->action][0];
 			$this->layout = $this->routes[$this->action][1];
 			$this->view = $this->routes[$this->action][2];
+		}
+	}
+
+	/**
+	 * Register module actions.
+	 */
+	public function registerModuleRoutes(array $routes) {
+		foreach ($routes as $route => $action) {
+			$this->routes[$route] = [$action['fqcn'], $action['layout'], $action['view']];
+			$this->module_routes[$route] = $action['module'];
 		}
 	}
 
