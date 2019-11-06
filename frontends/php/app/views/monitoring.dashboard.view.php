@@ -182,4 +182,5 @@ else {
 			'.dashboardGrid("addWidgets", '.CJs::encodeJson($data['grid_widgets']).
 		');'
 	);
+	$this->addPostJS('chkbxRange.prefix = "dashboard";');
 }

@@ -249,6 +249,8 @@ else {
 	));
 }
 
+zbx_add_post_js('chkbxRange.prefix = "mediatype";');
+
 // append tab to form
 $mediaTypeForm->addItem($tabs);
 
