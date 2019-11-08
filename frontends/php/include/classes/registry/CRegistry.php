@@ -19,13 +19,25 @@
 **/
 
 
-require_once dirname(__FILE__).'/ZBase.php';
+class CRegistry {
+	protected $collection = [];
 
-/**
- * A wrapper for the ZBase class.
- *
- * Feel free to modify and extend it to change the functionality of ZBase.
- */
-class Z extends ZBase {
-	static public $registry;
+	public function add($object) {
+		$class = get_class($object);
+
+		if (array_key_exists($class, $this->collection)) {
+			throw new Exception($class.' instance already registered.');
+		}
+
+		$this->collection[$class] = $object;
+		return $this;
+	}
+
+	public function get($class) {
+		if (array_key_exists($class, $this->collection)) {
+			return $this->collection[$class];
+		}
+
+		throw new Exception($class.' instance is not registered.');
+	}
 }

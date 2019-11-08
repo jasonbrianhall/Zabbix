@@ -66,6 +66,7 @@ class ZBase {
 	protected function init() {
 		$this->rootDir = $this->findRootDir();
 		$this->registerAutoloader();
+		Z::$registry = new CRegistry;
 
 		// initialize API classes
 		$apiServiceFactory = new CApiServiceFactory();
@@ -127,7 +128,8 @@ class ZBase {
 			case self::EXEC_MODE_DEFAULT:
 				$module_registry = new CModuleRegistry($this->rootDir.'/modules');
 				$module_registry->scanModulesDirectory();
-				Z::register(new CMenu());
+				Z::$registry->add($module_registry);
+				Z::$registry->add(new CMainMenu);
 
 				$this->loadConfigFile();
 				$this->initDB();
@@ -207,6 +209,7 @@ class ZBase {
 	private function getIncludePaths() {
 		return [
 			$this->rootDir.'/include/classes/core',
+			$this->rootDir.'/include/classes/registry',
 			$this->rootDir.'/include/classes/menu',
 			$this->rootDir.'/include/classes/module',
 			$this->rootDir.'/include/classes/mvc',

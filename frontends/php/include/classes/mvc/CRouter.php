@@ -179,6 +179,11 @@ class CRouter {
 			$this->controller = $this->routes[$this->action][0];
 			$this->layout = $this->routes[$this->action][1];
 			$this->view = $this->routes[$this->action][2];
+
+			// TODO: path should be set more granularly - modules/{action module}.
+			if (array_key_exists($this->action, $this->module_routes)) {
+				CView::$viewsDir[] = 'modules';
+			}
 		}
 	}
 
