@@ -55,7 +55,7 @@ class CModuleRegistry {
 			$module = $dir.'/Module.php';
 
 			// TODO: add php -l syntax check for Module.php file?
-			if (file_exists($manifest) && file_exists($module)) {
+			if (file_exists($manifest)) {
 				$manifest_json = json_decode(file_get_contents($manifest), true);
 
 				if (!$manifest_json) {
@@ -69,7 +69,7 @@ class CModuleRegistry {
 						'path' => [
 							'root' => $dir,
 							'manifest' => $manifest,
-							'module' => $module
+							'module' =>  file_exists($module) ? $module : ''
 						],
 						'manifest' => $manifest_json,
 						'status' => false
@@ -106,7 +106,7 @@ class CModuleRegistry {
 	 */
 	public function initModules() {
 		foreach ($this->modules as &$module_details) {
-			if ($module_details['status']) {
+			if ($module_details['status'] && $module_details['path']['module']) {
 				$module_class = 'Modules\\'.$module_details['id'].'\\Module';
 				$manifest = $module_details['manifest'];
 				$instance = new $module_class($manifest);
