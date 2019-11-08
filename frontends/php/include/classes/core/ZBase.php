@@ -127,12 +127,13 @@ class ZBase {
 			case self::EXEC_MODE_DEFAULT:
 				$module_registry = new CModuleRegistry($this->rootDir.'/modules');
 				$module_registry->scanModulesDirectory();
+				Z::register(new CMenu());
 
 				$this->loadConfigFile();
 				$this->initDB();
 
 				// TODO: This is only development example, all modules status will be read from database
-				$module_registry->setModuleStatus('example', CModuleRegistry::MODULE_ENABLED);
+				$module_registry->enable('example');
 
 				$this->authenticateUser();
 				$this->initLocales(CWebUser::$data);
@@ -206,6 +207,8 @@ class ZBase {
 	private function getIncludePaths() {
 		return [
 			$this->rootDir.'/include/classes/core',
+			$this->rootDir.'/include/classes/menu',
+			$this->rootDir.'/include/classes/module',
 			$this->rootDir.'/include/classes/mvc',
 			$this->rootDir.'/include/classes/api',
 			$this->rootDir.'/include/classes/api/services',

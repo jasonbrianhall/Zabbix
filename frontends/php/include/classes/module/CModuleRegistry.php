@@ -21,10 +21,6 @@
 
 class CModuleRegistry {
 
-	const MODULE_ENABLED = true;
-	const MODULE_DISABLED = false;
-	const NAMESPACE_SEPARATOR = '.';
-
 	/**
 	 * Modules directory absolute path.
 	 */
@@ -76,7 +72,7 @@ class CModuleRegistry {
 							'module' => $module
 						],
 						'manifest' => $manifest_json,
-						'status' => static::MODULE_DISABLED
+						'status' => false
 					];
 				}
 			}
@@ -87,11 +83,21 @@ class CModuleRegistry {
 	 * Set module runtime enabled/disabled status.
 	 *
 	 * @param string $id        Module id.
-	 * @param bool   $status    Module status.
 	 */
-	public function setModuleStatus($id, $status) {
+	public function enable($id) {
 		if (array_key_exists($id, $this->modules)) {
-			$this->modules[$id]['status'] = $status ? static::MODULE_ENABLED : static::MODULE_DISABLED;
+			$this->modules[$id]['status'] = true;
+		}
+	}
+
+	/**
+	 * Set module runtime disabled status.
+	 *
+	 * @param string $id        Module id.
+	 */
+	public function disable($id) {
+		if (array_key_exists($id, $this->modules)) {
+			$this->modules[$id]['status'] = false;
 		}
 	}
 
@@ -100,7 +106,7 @@ class CModuleRegistry {
 	 */
 	public function initModules() {
 		foreach ($this->modules as &$module_details) {
-			if ($module_details['status'] == static::MODULE_ENABLED) {
+			if ($module_details['status']) {
 				$module_class = 'Modules\\'.$module_details['id'].'\\Module';
 				$manifest = $module_details['manifest'];
 				$instance = new $module_class($manifest);
@@ -125,8 +131,7 @@ class CModuleRegistry {
 		$routes = [];
 
 		foreach ($this->modules as $module) {
-			if ($module['status'] === static::MODULE_ENABLED && $module['manifest']
-					&& array_key_exists('actions', $module['manifest'])) {
+			if ($module['status'] && $module['manifest'] && array_key_exists('actions', $module['manifest'])) {
 				$namespace = $module['id'];
 
 				foreach ($module['manifest']['actions'] as $action) {
