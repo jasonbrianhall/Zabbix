@@ -72,7 +72,8 @@ class CModuleRegistry {
 							'module' =>  file_exists($module) ? $module : ''
 						],
 						'manifest' => $manifest_json,
-						'status' => false
+						'status' => false,
+						'errors' => []
 					];
 				}
 			}
@@ -109,9 +110,14 @@ class CModuleRegistry {
 			if ($module_details['status'] && $module_details['path']['module']) {
 				$module_class = 'Modules\\'.$module_details['id'].'\\Module';
 				$manifest = $module_details['manifest'];
-				$instance = new $module_class($manifest);
-				$instance->init();
-				$module_details['instance'] = $instance;
+				try {
+					$instance = new $module_class($manifest);
+					$instance->init();
+					$module_details['instance'] = $instance;
+				}
+				catch (Exception $e) {
+					$module_details['errors'][] = $e;
+				}
 			}
 		}
 		unset($module_details);
@@ -146,6 +152,27 @@ class CModuleRegistry {
 		}
 
 		return $routes;
+	}
+
+	/**
+	 * Get module init errors. Return array where key is module id and value is array of error string messages.
+	 *
+	 * @return array
+	 */
+	public function getErrors() {
+		$errors = [];
+
+		foreach ($this->modules as $module_details) {
+			if ($module_details['errors']) {
+				$errors[$module_details['id']] = [];
+
+				foreach ($module_details['errors'] as $error) {
+					$errors[$module_details['id']][] = $error->getMessage();
+				}
+			}
+		}
+
+		return $errors;
 	}
 
 	/**
