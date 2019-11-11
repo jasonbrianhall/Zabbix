@@ -25,10 +25,12 @@ class CMenuItem {
 	protected $alias = [];
 	protected $visible = null;
 	protected $action;
+	protected $selected = false;
 
 	public function __construct($label, array $item) {
 		$this->label = $label;
 		$this->action = array_key_exists('action', $item) ? $item['action'] : '';
+		$this->alias = array_key_exists('alias', $item) ? $item['alias'] : [];
 		$this->items = [];
 
 		if (array_key_exists('items', $item)) {
@@ -44,6 +46,37 @@ class CMenuItem {
 
 	public function getItems() {
 		return $this->items;
+	}
+
+	public function getLabel() {
+		return $this->label;
+	}
+
+	public function getAction() {
+		return $this->action;
+	}
+
+	public function getSelected() {
+		return array_reduce($this->items, function($carry, $child) {
+			return $carry || $child->getSelected();
+		}, $this->selected);
+	}
+
+	public function getAlias() {
+		return $this->alias;
+	}
+
+	public function setSelected($action) {
+		if ($this->action === $action || in_array($action, $this->alias)) {
+			$this->selected = true;
+		}
+		else {
+			foreach ($this->items as $item) {
+				$item->setSelected($action);
+			}
+		}
+
+		return $this;
 	}
 
 	public function add($label, $item) {

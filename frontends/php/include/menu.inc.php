@@ -504,8 +504,7 @@ if (CWebUser::getType() >= USER_TYPE_ZABBIX_ADMIN) {
 				'action' => 'hostgroups.php'
 			],
 			'Templates' => [
-				'action' => 'templates.php',
-				'alias' => ['screenconf.php', 'screenedit.php']
+				'action' => 'templates.php'
 			],
 			'Hosts' => [
 				'action' => 'hosts.php',
@@ -570,7 +569,24 @@ if (CWebUser::getType() == USER_TYPE_SUPER_ADMIN) {
 				'action' => 'authentication.edit',
 				'alias' => ['authentication.edit', 'authentication.update']
 			],
-
+			'User groups' => [
+				'action' => 'usergrps.php'
+			],
+			'Users' => [
+				'action' => 'user.list',
+				'alias' => ['user.edit']
+			],
+			'Media types' => [
+				'action' => 'mediatype.list',
+				'alias' => ['mediatype.edit']
+			],
+			'Scripts' => [
+				'action' => 'script.list',
+				'alias' => ['script.edit']
+			],
+			'Queue' => [
+				'action' => 'queue.php'
+			]
 		]
 	]);
 }

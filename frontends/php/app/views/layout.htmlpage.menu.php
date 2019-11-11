@@ -102,9 +102,7 @@ $top_menu = (new CDiv())
 
 $sub_menu_div = (new CTag('nav', true))
 	->setAttribute('aria-label', _('Sub navigation'))
-	->addClass(ZBX_STYLE_TOP_SUBNAV_CONTAINER)
-	->onMouseover('javascript: MMenu.submenu_mouseOver();')
-	->onMouseout('javascript: MMenu.mouseOut();');
+	->addClass(ZBX_STYLE_TOP_SUBNAV_CONTAINER);
 
 // 2nd level menu
 foreach ($data['menu']['sub_menus'] as $label => $sub_menu) {

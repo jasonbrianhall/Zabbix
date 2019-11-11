@@ -58,7 +58,9 @@ function local_generateHeader($data) {
 	$main_menu = [];
 	$sub_menus = [];
 
-	zbx_construct_menu($main_menu, $sub_menus, $page, $data['controller']['action']);
+	//zbx_construct_menu($main_menu, $sub_menus, $page, $data['controller']['action']);
+	$mmenu = Z::$registry->get(CMainMenu::class);
+	$mmenu->setSelected($page ? $page['file'] : $data['controller']['action']);
 
 	$pageHeader = new CView('layout.htmlpage.header', [
 		'javascript' => [

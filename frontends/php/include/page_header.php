@@ -138,7 +138,10 @@ switch ($page['type']) {
 $main_menu = [];
 $sub_menus = [];
 
-$denied_page_requested = zbx_construct_menu($main_menu, $sub_menus, $page);
+//$denied_page_requested = zbx_construct_menu($main_menu, $sub_menus, $page);
+$denied_page_requested = false;
+$mmenu = Z::$registry->get(CMainMenu::class);
+$mmenu->setSelected($page['file']);
 
 // render the "Deny access" page
 if ($denied_page_requested) {
