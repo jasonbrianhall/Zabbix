@@ -140,6 +140,7 @@ class ZBase {
 				$this->authenticateUser();
 				$this->initLocales(CWebUser::$data);
 				$this->setLayoutModeByUrl();
+				require_once  $this->getRootDir().'/include/menu.inc.php';
 				break;
 
 			case self::EXEC_MODE_API:

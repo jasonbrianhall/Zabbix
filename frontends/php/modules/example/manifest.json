@@ -10,11 +10,12 @@
     },
     "actions": [
         {
-            "action": "index",
-			"class": "MyPageIndexAction"
+            "action": "module.form",
+			"class": "ModuleFormAction",
+			"view": "example/views/mypage.form"
         },
         {
-            "action": "problem.view",
+            "action": "module.list",
 			"class": "MyPageListAction",
 			"view": "example/views/mypage.list"
         }

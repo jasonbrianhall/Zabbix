@@ -32,9 +32,9 @@ $widget = (new CWidget())
 			),
 			(new CFormList())->addRow(_('Status'),
 				(new CRadioButtonList('filter_status', -1))
-					->addValue(_('Any'), -1)
-					->addValue(_('On'), MEDIA_TYPE_STATUS_ACTIVE)
-					->addValue(_('Off'), MEDIA_TYPE_STATUS_DISABLED)
+					->addValue(_('all'), -1)
+					->addValue(_('Enabled'), MEDIA_TYPE_STATUS_ACTIVE)
+					->addValue(_('Disabled'), MEDIA_TYPE_STATUS_DISABLED)
 					->setModern(true)
 			)
 		])
@@ -53,9 +53,9 @@ $mediaTypeTable = (new CTableInfo())
 		))->addClass(ZBX_STYLE_CELL_WIDTH),
 		make_sorting_header(_('Id'), 'name', 'asc', 'Id'),
 		_('Version'),
-		_('Status'),
+		_('Author'),
 		(new CColHeader(_('Description')))->addStyle('width: 60%'),
-		_('Home page')
+		_('Status'),
 	]);
 
 foreach ($data['modules'] as $module) {
@@ -63,9 +63,11 @@ foreach ($data['modules'] as $module) {
 		new CCheckBox('mediatypeids[]', 1),
 		(new CCol(new CLink($module['id'])))->addClass(ZBX_STYLE_NOWRAP),
 		$module['version'],
-		(new CSpan($module['enabled'] ? 'ON' : 'OFF'))->addStyle('border-radius:2px; color: white;padding: 2px 6px;background-color: '.($module['enabled'] ? 'green' : 'red')),
+		$module['author'],
 		$module['description'],
-		new CLink($module['url'])
+		$module['enabled']
+			? (new CLink(_('Enabled'), '#'))->addClass(ZBX_STYLE_LINK_ACTION)->addClass(ZBX_STYLE_ORANGE)
+			: (new CLink(_('Disabled'), '#'))->addClass(ZBX_STYLE_LINK_ACTION)->addClass(ZBX_STYLE_GREEN),
 	]);
 }
 

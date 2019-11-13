@@ -26,6 +26,7 @@ class MyPageListAction extends CController {
 					'id' => 'example',
 					'enabled' => false,
 					'description' => 'Example module.',
+					'author' => 'Some Author',
 					'url' => 'http://example.com'
 				],
 				[
@@ -33,6 +34,7 @@ class MyPageListAction extends CController {
 					'id' => 'custom_hosts',
 					'enabled' => true,
 					'description' => 'Custom hosts list page module.',
+					'author' => '',
 					'url' => 'http://example.org'
 				]
 			]
