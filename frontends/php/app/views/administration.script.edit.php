@@ -142,8 +142,6 @@ else {
 	));
 }
 
-zbx_add_post_js('chkbxRange.prefix = "script";');
-
 $scriptForm->addItem($scriptView);
 
 $widget->addItem($scriptForm)->show();

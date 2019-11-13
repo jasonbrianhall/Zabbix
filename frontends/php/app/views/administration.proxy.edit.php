@@ -141,7 +141,5 @@ else {
 	));
 }
 
-zbx_add_post_js('chkbxRange.prefix = "proxy";');
-
 $proxyForm->addItem($tabs);
 $widget->addItem($proxyForm)->show();
