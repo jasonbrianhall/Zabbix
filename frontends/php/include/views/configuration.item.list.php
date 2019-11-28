@@ -44,7 +44,7 @@ $widget->addItem($data['main_filter']);
 
 // create form
 $itemForm = (new CForm())->setName('items');
-$itemForm->addVar('checkbox_hash', $data['checkbox_hash']);
+
 if (!empty($data['hostid'])) {
 	$itemForm->addVar('hostid', $data['hostid']);
 }

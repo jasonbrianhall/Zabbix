@@ -139,7 +139,7 @@ $fields = [
 	'cancel' =>									[T_ZBX_STR, O_OPT, P_SYS,	null,		null],
 	'form' =>									[T_ZBX_STR, O_OPT, P_SYS,	null,		null],
 	'form_refresh' =>							[T_ZBX_INT, O_OPT, null,	null,		null],
-	'checkbox_hash' =>							[T_ZBX_STR, O_OPT, null,	null,		null],
+//	'checkbox_hash' =>							[T_ZBX_STR, O_OPT, null,	null,		null],
 	// Sort and sortorder.
 	'sort' =>									[T_ZBX_STR, O_OPT, P_SYS, IN('"description","priority","status"'),		null],
 	'sortorder' =>								[T_ZBX_STR, O_OPT, P_SYS, IN('"'.ZBX_SORT_DOWN.'","'.ZBX_SORT_UP.'"'),	null]
@@ -164,6 +164,104 @@ if ($triggerId !== null) {
 	}
 }
 
+/*
+ * Filter
+ */
+$filter_groupids_ms = [];
+$filter_hostids_ms = [];
+
+if (getRequest('filter_set')) {
+	$filter_inherited = getRequest('filter_inherited', -1);
+	$filter_discovered = getRequest('filter_discovered', -1);
+	$filter_dependent = getRequest('filter_dependent', -1);
+	$filter_name = getRequest('filter_name', '');
+	$filter_priority = getRequest('filter_priority', []);
+	$filter_groupids = getRequest('filter_groupids', []);
+	$filter_hostids = getRequest('filter_hostids', []);
+	$filter_state = getRequest('filter_state', -1);
+	$filter_status = getRequest('filter_status', -1);
+	$filter_value = getRequest('filter_value', -1);
+	$filter_evaltype = getRequest('filter_evaltype', TAG_EVAL_TYPE_AND_OR);
+	$filter_tags = getRequest('filter_tags', []);
+}
+elseif (getRequest('filter_rst')) {
+	$filter_inherited = -1;
+	$filter_discovered = -1;
+	$filter_dependent = -1;
+	$filter_name = '';
+	$filter_priority = [];
+	$filter_groupids = [];
+	$filter_hostids = getRequest('filter_hostids', CProfile::getArray('web.triggers.filter_hostids', []));
+	if (count($filter_hostids) != 1) {
+		$filter_hostids = [];
+	}
+	$filter_state = -1;
+	$filter_status = -1;
+	$filter_value = -1;
+	$filter_evaltype = TAG_EVAL_TYPE_AND_OR;
+	$filter_tags = [];
+}
+else {
+	$filter_inherited = CProfile::get('web.triggers.filter_inherited', -1);
+	$filter_discovered = CProfile::get('web.triggers.filter_discovered', -1);
+	$filter_dependent = CProfile::get('web.triggers.filter_dependent', -1);
+	$filter_name = CProfile::get('web.triggers.filter_name', '');
+	$filter_priority = CProfile::getArray('web.triggers.filter_priority', []);
+	$filter_groupids = CProfile::getArray('web.triggers.filter_groupids', []);
+	$filter_hostids = CProfile::getArray('web.triggers.filter_hostids', []);
+	$filter_state = CProfile::get('web.triggers.filter_state', -1);
+	$filter_status = CProfile::get('web.triggers.filter_status', -1);
+	$filter_value = CProfile::get('web.triggers.filter_value', -1);
+	$filter_evaltype = CProfile::get('web.triggers.filter.evaltype', TAG_EVAL_TYPE_AND_OR);
+
+	$filter_tags = [];
+
+	foreach (CProfile::getArray('web.triggers.filter.tags.tag', []) as $i => $tag) {
+		$filter_tags[] = [
+			'tag' => $tag,
+			'value' => CProfile::get('web.triggers.filter.tags.value', null, $i),
+			'operator' => CProfile::get('web.triggers.filter.tags.operator', null, $i)
+		];
+	}
+}
+
+$filter_groupids_enriched =  [];
+if ($filter_groupids) {
+	$filter_groupids = API::HostGroup()->get([
+		'output' => ['groupid', 'name'],
+		'groupids' => $filter_groupids,
+		'editable' => true,
+		'preservekeys' => true
+	]);
+	$filter_groupids_ms = CArrayHelper::renameObjectsKeys($filter_groupids, ['groupid' => 'id']);
+	$filter_groupids = array_keys($filter_groupids);
+	$filter_groupids_enriched = getSubGroups($filter_groupids);
+}
+
+if ($filter_hostids) {
+	$filter_hostids = API::Host()->get([
+		'output' => ['hostid', 'name'],
+		'hostids' => $filter_hostids,
+		'templated_hosts' => true,
+		'editable' => true,
+		'preservekeys' => true
+	]);
+	$filter_hostids_ms = CArrayHelper::renameObjectsKeys($filter_hostids, ['hostid' => 'id']);
+	$filter_hostids = array_keys($filter_hostids_ms);
+}
+
+// Skip empty tags.
+$filter_tags = array_filter($filter_tags, function ($v) {
+	return (bool) $v['tag'];
+});
+
+$sort = getRequest('sort', CProfile::get('web.'.$page['file'].'.sort', 'description'));
+$sortorder = getRequest('sortorder', CProfile::get('web.'.$page['file'].'.sortorder', ZBX_SORT_UP));
+$active_tab = CProfile::get('web.triggers.filter.active', 1);
+
+sort($filter_hostids);
+$checkbox_hash = crc32(implode('', $filter_hostids));
+
 // Validate permissions to a group of triggers for mass enable/disable actions.
 $triggerIds = getRequest('g_triggerid', []);
 $triggerIds = zbx_toArray($triggerIds);
@@ -178,7 +276,7 @@ if ($triggerIds) {
 	]);
 
 	if (count($triggers) != count($triggerIds)) {
-		uncheckTableRows(getRequest('checkbox_hash'), zbx_objectValues($triggers, 'triggerid'));
+		uncheckTableRows($checkbox_hash, zbx_objectValues($triggers, 'triggerid'));
 	}
 }
 
@@ -403,7 +501,7 @@ elseif (hasRequest('add') || hasRequest('update')) {
 
 	if ($result) {
 		unset($_REQUEST['form']);
-		uncheckTableRows(getRequest('checkbox_hash'));
+		uncheckTableRows($checkbox_hash);
 	}
 }
 elseif (isset($_REQUEST['delete']) && isset($_REQUEST['triggerid'])) {
@@ -411,7 +509,7 @@ elseif (isset($_REQUEST['delete']) && isset($_REQUEST['triggerid'])) {
 
 	if ($result) {
 		unset($_REQUEST['form'], $_REQUEST['triggerid']);
-		uncheckTableRows(getRequest('checkbox_hash'));
+		uncheckTableRows($checkbox_hash);
 	}
 	show_messages($result, _('Trigger deleted'), _('Cannot delete trigger'));
 }
@@ -514,7 +612,7 @@ elseif (hasRequest('action') && getRequest('action') === 'trigger.massupdate'
 
 	if ($result) {
 		unset($_REQUEST['form'], $_REQUEST['g_triggerid']);
-		uncheckTableRows(getRequest('checkbox_hash'));
+		uncheckTableRows($checkbox_hash);
 	}
 	show_messages($result, _('Trigger updated'), _('Cannot update trigger'));
 }
@@ -553,7 +651,7 @@ elseif (hasRequest('action') && str_in_array(getRequest('action'), ['trigger.mas
 		: _n('Cannot disable trigger', 'Cannot disable triggers', $updated);
 
 	if ($result) {
-		uncheckTableRows(getRequest('checkbox_hash'));
+		uncheckTableRows($checkbox_hash);
 		unset($_REQUEST['g_triggerid']);
 	}
 
@@ -592,7 +690,7 @@ elseif (hasRequest('action') && getRequest('action') === 'trigger.masscopyto' &&
 		$triggers_count = count(getRequest('g_triggerid'));
 
 		if ($result) {
-			uncheckTableRows(getRequest('checkbox_hash'));
+			uncheckTableRows($checkbox_hash);
 			unset($_REQUEST['g_triggerid']);
 		}
 
@@ -609,7 +707,7 @@ elseif (hasRequest('action') && getRequest('action') === 'trigger.massdelete' &&
 	$result = API::Trigger()->delete(getRequest('g_triggerid'));
 
 	if ($result) {
-		uncheckTableRows(getRequest('checkbox_hash'));
+		uncheckTableRows($checkbox_hash);
 	}
 
 	show_messages($result, _('Triggers deleted'), _('Cannot delete triggers'));
@@ -677,98 +775,6 @@ elseif (hasRequest('action') && getRequest('action') === 'trigger.masscopyto' &&
 	$triggersView->show();
 }
 else {
-	$filter_groupids_ms = [];
-	$filter_hostids_ms = [];
-
-	if (getRequest('filter_set')) {
-		$filter_inherited = getRequest('filter_inherited', -1);
-		$filter_discovered = getRequest('filter_discovered', -1);
-		$filter_dependent = getRequest('filter_dependent', -1);
-		$filter_name = getRequest('filter_name', '');
-		$filter_priority = getRequest('filter_priority', []);
-		$filter_groupids = getRequest('filter_groupids', []);
-		$filter_hostids = getRequest('filter_hostids', []);
-		$filter_state = getRequest('filter_state', -1);
-		$filter_status = getRequest('filter_status', -1);
-		$filter_value = getRequest('filter_value', -1);
-		$filter_evaltype = getRequest('filter_evaltype', TAG_EVAL_TYPE_AND_OR);
-		$filter_tags = getRequest('filter_tags', []);
-	}
-	elseif (getRequest('filter_rst')) {
-		$filter_inherited = -1;
-		$filter_discovered = -1;
-		$filter_dependent = -1;
-		$filter_name = '';
-		$filter_priority = [];
-		$filter_groupids = [];
-		$filter_hostids = getRequest('filter_hostids', CProfile::getArray('web.triggers.filter_hostids', []));
-		if (count($filter_hostids) != 1) {
-			$filter_hostids = [];
-		}
-		$filter_state = -1;
-		$filter_status = -1;
-		$filter_value = -1;
-		$filter_evaltype = TAG_EVAL_TYPE_AND_OR;
-		$filter_tags = [];
-	}
-	else {
-		$filter_inherited = CProfile::get('web.triggers.filter_inherited', -1);
-		$filter_discovered = CProfile::get('web.triggers.filter_discovered', -1);
-		$filter_dependent = CProfile::get('web.triggers.filter_dependent', -1);
-		$filter_name = CProfile::get('web.triggers.filter_name', '');
-		$filter_priority = CProfile::getArray('web.triggers.filter_priority', []);
-		$filter_groupids = CProfile::getArray('web.triggers.filter_groupids', []);
-		$filter_hostids = CProfile::getArray('web.triggers.filter_hostids', []);
-		$filter_state = CProfile::get('web.triggers.filter_state', -1);
-		$filter_status = CProfile::get('web.triggers.filter_status', -1);
-		$filter_value = CProfile::get('web.triggers.filter_value', -1);
-		$filter_evaltype = CProfile::get('web.triggers.filter.evaltype', TAG_EVAL_TYPE_AND_OR);
-
-		$filter_tags = [];
-
-		foreach (CProfile::getArray('web.triggers.filter.tags.tag', []) as $i => $tag) {
-			$filter_tags[] = [
-				'tag' => $tag,
-				'value' => CProfile::get('web.triggers.filter.tags.value', null, $i),
-				'operator' => CProfile::get('web.triggers.filter.tags.operator', null, $i)
-			];
-		}
-	}
-
-	$filter_groupids_enriched =  [];
-	if ($filter_groupids) {
-		$filter_groupids = API::HostGroup()->get([
-			'output' => ['groupid', 'name'],
-			'groupids' => $filter_groupids,
-			'editable' => true,
-			'preservekeys' => true
-		]);
-		$filter_groupids_ms = CArrayHelper::renameObjectsKeys($filter_groupids, ['groupid' => 'id']);
-		$filter_groupids = array_keys($filter_groupids);
-		$filter_groupids_enriched = getSubGroups($filter_groupids);
-	}
-
-	if ($filter_hostids) {
-		$filter_hostids = API::Host()->get([
-			'output' => ['hostid', 'name'],
-			'hostids' => $filter_hostids,
-			'templated_hosts' => true,
-			'editable' => true,
-			'preservekeys' => true
-		]);
-		$filter_hostids_ms = CArrayHelper::renameObjectsKeys($filter_hostids, ['hostid' => 'id']);
-		$filter_hostids = array_keys($filter_hostids_ms);
-	}
-
-	// Skip empty tags.
-	$filter_tags = array_filter($filter_tags, function ($v) {
-		return (bool) $v['tag'];
-	});
-
-	$sort = getRequest('sort', CProfile::get('web.'.$page['file'].'.sort', 'description'));
-	$sortorder = getRequest('sortorder', CProfile::get('web.'.$page['file'].'.sortorder', ZBX_SORT_UP));
-	$active_tab = CProfile::get('web.triggers.filter.active', 1);
-
 	// Get triggers (build options).
 	$options = [
 		'output' => ['triggerid', $sort],
@@ -972,9 +978,6 @@ else {
 	if (count($filter_hostids) == 1) {
 		$single_selected_hostid = reset($filter_hostids);
 	}
-
-	sort($filter_hostids);
-	$checkbox_hash = crc32(implode('', $filter_hostids));
 
 	$data = [
 		'config' => $config,

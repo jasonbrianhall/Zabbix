@@ -181,9 +181,7 @@ if ($data['single_selected_hostid'] != 0) {
 $widget->addItem($filter);
 
 // create form
-$triggers_form = (new CForm())
-	->addVar('checkbox_hash', $data['checkbox_hash'])
-	->setName('triggersForm');
+$triggers_form = (new CForm())->setName('triggersForm');
 
 $url = (new CUrl('triggers.php'))->getUrl();
 

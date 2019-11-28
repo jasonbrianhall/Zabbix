@@ -338,7 +338,6 @@ $fields = [
 	'subfilter_interval' =>			[T_ZBX_STR, O_OPT, null,	null,		null],
 	'subfilter_history' =>			[T_ZBX_STR, O_OPT, null,	null,		null],
 	'subfilter_trends' =>			[T_ZBX_STR, O_OPT, null,	null,		null],
-	'checkbox_hash' =>				[T_ZBX_STR, O_OPT, null,	null,		null],
 	// sort and sortorder
 	'sort' =>						[T_ZBX_STR, O_OPT, P_SYS,
 										IN('"delay","history","key_","name","status","trends","type"'),
@@ -512,6 +511,9 @@ if (!hasRequest('form') && $filter_hostids) {
 	}
 }
 
+sort($filter_hostids);
+$checkbox_hash = crc32(implode('', $filter_hostids));
+
 // Convert CR+LF to LF in preprocessing script.
 if (hasRequest('preprocessing')) {
 	foreach ($_REQUEST['preprocessing'] as &$step) {
@@ -533,7 +535,7 @@ if (isset($_REQUEST['delete']) && isset($_REQUEST['itemid'])) {
 	}
 
 	if ($result) {
-		uncheckTableRows(getRequest('checkbox_hash'));
+		uncheckTableRows($checkbox_hash);
 	}
 	unset($_REQUEST['itemid'], $_REQUEST['form']);
 	show_messages($result, _('Item deleted'), _('Cannot delete item'));
@@ -960,7 +962,7 @@ elseif (hasRequest('add') || hasRequest('update')) {
 
 	if ($result) {
 		unset($_REQUEST['itemid'], $_REQUEST['form']);
-		uncheckTableRows(getRequest('checkbox_hash'));
+		uncheckTableRows($checkbox_hash);
 	}
 }
 elseif (hasRequest('check_now') && hasRequest('itemid')) {
@@ -1312,7 +1314,7 @@ elseif ($valid_input && hasRequest('massupdate') && hasRequest('group_itemid')) 
 
 	if ($result) {
 		unset($_REQUEST['group_itemid'], $_REQUEST['massupdate'], $_REQUEST['form']);
-		uncheckTableRows(getRequest('checkbox_hash'));
+		uncheckTableRows($checkbox_hash);
 	}
 	show_messages($result, _('Items updated'), _('Cannot update items'));
 }
@@ -1328,7 +1330,7 @@ elseif (hasRequest('action') && str_in_array(getRequest('action'), ['item.massen
 	$result = (bool) API::Item()->update($items);
 
 	if ($result) {
-		uncheckTableRows(getRequest('checkbox_hash'));
+		uncheckTableRows($checkbox_hash);
 	}
 
 	$updated = count($itemids);
@@ -1373,7 +1375,7 @@ elseif (hasRequest('action') && getRequest('action') === 'item.masscopyto' && ha
 		$items_count = count(getRequest('group_itemid'));
 
 		if ($result) {
-			uncheckTableRows(getRequest('checkbox_hash'));
+			uncheckTableRows($checkbox_hash);
 			unset($_REQUEST['group_itemid']);
 		}
 		show_messages($result,
@@ -1418,7 +1420,7 @@ elseif (hasRequest('action') && getRequest('action') === 'item.massclearhistory'
 		$result = DBend($result);
 
 		if ($result) {
-			uncheckTableRows(getRequest('checkbox_hash'));
+			uncheckTableRows($checkbox_hash);
 		}
 	}
 
@@ -1430,7 +1432,7 @@ elseif (hasRequest('action') && getRequest('action') === 'item.massdelete' && ha
 	$result = API::Item()->delete($group_itemid);
 
 	if ($result) {
-		uncheckTableRows(getRequest('checkbox_hash'));
+		uncheckTableRows($checkbox_hash);
 	}
 	show_messages($result, _('Items deleted'), _('Cannot delete items'));
 }
@@ -1441,7 +1443,7 @@ elseif (hasRequest('action') && getRequest('action') === 'item.masscheck_now' &&
 	]);
 
 	if ($result) {
-		uncheckTableRows(getRequest('checkbox_hash'));
+		uncheckTableRows($checkbox_hash);
 	}
 
 	show_messages($result, _('Request sent successfully'), _('Cannot send request'));
@@ -1453,7 +1455,7 @@ if (hasRequest('action') && hasRequest('group_itemid') && !$result) {
 		'itemids' => getRequest('group_itemid'),
 		'editable' => true
 	]);
-	uncheckTableRows(getRequest('checkbox_hash'), zbx_objectValues($itemids, 'itemid'));
+	uncheckTableRows($checkbox_hash, zbx_objectValues($itemids, 'itemid'));
 }
 
 /*
@@ -2132,8 +2134,7 @@ else {
 
 	$data['trigger_parent_templates'] = getTriggerParentTemplates($data['itemTriggers'], ZBX_FLAG_DISCOVERY_NORMAL);
 
-	sort($filter_hostids);
-	$data['checkbox_hash'] = crc32(implode('', $filter_hostids));
+	$data['checkbox_hash'] = $checkbox_hash;
 
 	// render view
 	$itemView = new CView('configuration.item.list', $data);
