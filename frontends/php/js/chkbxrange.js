@@ -96,7 +96,7 @@ var chkbxRange = {
 
 		if (objName == this.pageGoName) {
 			var objId = jQuery(obj).val();
-			obj.checked = (isset(objId, this.selectedIds));
+			obj.checked = isset(objId, this.selectedIds);
 		}
 	},
 
