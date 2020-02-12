@@ -51,8 +51,8 @@ class testFormAdministrationGeneralGUI extends CLegacyWebTest {
 					'dropdown' => [				// type
 						'adm.gui.php' => 'GUI'	// option
 					]
-                ]
-            ]
+				]
+			]
 		];
 
 		$this->checkRrightlabeledForm($nav_form, $nav_form_elements, ['configDropDown' => 'adm.gui.php']);
@@ -70,7 +70,7 @@ class testFormAdministrationGeneralGUI extends CLegacyWebTest {
 						'dark-theme' => 'Dark',
 						'hc-light' => 'High-contrast light',
 						'hc-dark' => 'High-contrast dark'
-				   ]
+					]
 				]
 			],
 			'Dropdown first entry' => [
