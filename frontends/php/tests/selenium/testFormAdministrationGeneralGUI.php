@@ -19,11 +19,14 @@
 **/
 
 require_once dirname(__FILE__).'/../include/CLegacyWebTest.php';
+require_once dirname(__FILE__).'/traits/FormLayoutTrait.php';
 
 /**
  * @backup config
  */
 class testFormAdministrationGeneralGUI extends CLegacyWebTest {
+
+	use FormLayoutTrait;
 
 	public static function allValues() {
 		return CDBHelper::getDataProvider(
@@ -38,52 +41,75 @@ class testFormAdministrationGeneralGUI extends CLegacyWebTest {
 	* @dataProvider allValues
 	*/
 	public function testFormAdministrationGeneralGUI_CheckLayout($allValues) {
+		$this->page->login()->open('adm.gui.php');
 
-		$this->zbxTestLogin('adm.gui.php');
-		$this->zbxTestDropdownSelectWait('configDropDown', 'GUI');
-		$this->zbxTestCheckTitle('Configuration of GUI');
-		$this->zbxTestCheckHeader('GUI');
-		$this->zbxTestTextPresent([
-			'Default theme',
-			'Dropdown first entry',
-			'remember selected',
-			'Limit for search and filter results',
-			'Max count of elements to show inside table cell',
-			'Show warning if Zabbix server is down'
-		]);
+		$nav_form = $this->query('xpath:.//nav/form')->asForm()->waitUntilVisible()->one();
 
-		$this->zbxTestDropdownHasOptions('default_theme', ['Blue', 'Dark']);
-		$this->zbxTestDropdownHasOptions('dropdown_first_entry', ['All', 'None']);
+		$nav_form_elements = [
+			'configDropDown' => [				// id
+					0 => [						// no label
+					'dropdown' => [				// type
+						'adm.gui.php' => 'GUI'	// option
+					]
+                ]
+            ]
+		];
 
-		$this->zbxTestAssertElementPresentId('search_limit');
-		$this->zbxTestAssertAttribute('//input[@id="search_limit"]', 'maxlength', '6');
-		$this->zbxTestAssertElementPresentId('max_in_table');
-		$this->zbxTestAssertAttribute('//input[@id="max_in_table"]','maxlength', '5');
+		$this->checkRrightlabeledForm($nav_form, $nav_form_elements, ['configDropDown' => 'adm.gui.php']);
 
-		$this->zbxTestAssertElementPresentId('dropdown_first_remember');
-		$this->zbxTestAssertElementPresentId('server_check_interval');
+		$form = $this->query('xpath:.//main/form')->asForm()->waitUntilVisible()->one();
 
-		$this->zbxTestAssertElementPresentId('update');
+		$this->assertPageTitle('Configuration of GUI');
+		$this->assertEquals('GUI', $this->query('tag:h1')->waitUntilVisible()->one()->getText());
 
-		$this->zbxTestAssertAttribute("//select[@id='default_theme']/option[@selected='selected']", "value", $allValues['default_theme']);
-		$this->zbxTestAssertAttribute("//select[@id='dropdown_first_entry']/option[@selected='selected']", "value", $allValues['dropdown_first_entry']);
+		$labels = [
+			'Default theme' => [					// label
+				'default_theme' => [				// id
+					'dropdown' => [					// type
+						'blue-theme' => 'Blue',
+						'dark-theme' => 'Dark',
+						'hc-light' => 'High-contrast light',
+						'hc-dark' => 'High-contrast dark'
+				   ]
+				]
+			],
+			'Dropdown first entry' => [
+				'dropdown_first_entry' => ['dropdown' => ['None', 'All']]
+			],
+			'Limit for search and filter results' => [
+				'search_limit' => ['input' => ['maxlength' => '6']]
+			],
+			'Max count of elements to show inside table cell' => [
+				'max_in_table' => ['input' => ['maxlength' => '5']]
+			],
+			'Show warning if Zabbix server is down' => [
+				'server_check_interval' => ['checkbox' => true]
+			]
+		];
 
-		if ($allValues['dropdown_first_remember']) {
-			$this->assertTrue($this->zbxTestCheckboxSelected('dropdown_first_remember'));
-		}
-		if ($allValues['dropdown_first_remember']==0) {
-			$this->assertFalse($this->zbxTestCheckboxSelected('dropdown_first_remember'));
-		}
+		$form_buttons = [
+			'update' => [					// id
+				'Update' => [				// label
+					'button' => [			// type
+						'name' => 'update',
+						'value' => 'Update'
+					]
+				]
+			],
+		];
 
-		if ($allValues['server_check_interval']) {
-			$this->assertTrue($this->zbxTestCheckboxSelected('server_check_interval'));
-		}
-		if ($allValues['server_check_interval']==0) {
-			$this->assertFalse($this->zbxTestCheckboxSelected('server_check_interval'));
-		}
+		$right_labeled = [
+			'dropdown_first_remember' => [		// id
+				'remember selected' => [		// label
+					'checkbox' => true			// type
+				]
+			],
+		];
 
-		$this->zbxTestAssertElementValue('search_limit', $allValues['search_limit']);
-		$this->zbxTestAssertElementValue('max_in_table', $allValues['max_in_table']);
+		$this->checkOrdinaryForm($form, $labels, $allValues);
+		$this->checkFormButtons($form, $form_buttons, $allValues);
+		$this->checkRrightlabeledForm($form, $right_labeled, $allValues);
+
 	}
 
 	public function testFormAdministrationGeneralGUI_ChangeTheme() {

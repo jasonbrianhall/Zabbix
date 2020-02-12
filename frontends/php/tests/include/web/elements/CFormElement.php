@@ -168,9 +168,14 @@ class CFormElement extends CElement {
 		}
 
 		if (!$element->isValid()) {
-			$label = $this->getLabel($name);
+			if (count($parts) === 2) {
+				$label = null;
+			}
+			else {
+				$label = $this->getLabel($name);
+			}
 
-			if (($element = $this->getFieldByLabelElement($label))->isValid() === false) {
+			if ($label === null || ($element = $this->getFieldByLabelElement($label))->isValid() === false) {
 				throw new Exception('Failed to find form field by label name or selector: "'.$name.'".');
 			}
 		}
