@@ -83,10 +83,12 @@ $form_list
 		(new CDiv((new CLabel(_('At least one update operation or message must exist.')))->setAsteriskMark()))
 	);
 
-$footer_buttons = makeFormFooter(
-	new CSubmitButton(_('Update'), 'action', 'acknowledge.create'),
-	[new CRedirectButton(_('Cancel'), (new CUrl($data['backurl']))->removeArgument('uncheck')->getUrl())]
-);
+$footer_buttons = makeFormFooter(new CSubmitButton(_('Update'), 'action', 'acknowledge.create'), [
+	new CRedirectButton(_('Cancel'),
+		(new CUrl($data['backurl']))
+			->removeArgument('uncheck')
+			->getUrl())
+]);
 
 (new CWidget())
 	->setTitle(_('Update problem'))
