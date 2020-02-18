@@ -45,7 +45,7 @@ class testFormAdministrationGeneralGUI extends CWebTest {
 	*/
 	public function testFormAdministrationGeneralGUI_CheckLayout($allValues) {
 		$this->page->login()->open('zabbix.php?action=gui.edit');
-        $popup = $this->query('id:page-title-general')->asPopupButton()->one()->select('GUI');
+		$popup = $this->query('id:page-title-general')->asPopupButton()->one()->select('GUI');
 
 		$form = $this->query('xpath:.//main/form')->asForm()->waitUntilVisible()->one();
 
