@@ -23,7 +23,7 @@ require_once dirname(__FILE__).'/../../include/CWebTest.php';
 /**
  * Trait for check form layout.
  */
-trait FormLayoutTrait {
+trait FormTrait {
 
 	/**
 	 * Check ordinary form with left and right parts.
@@ -32,7 +32,7 @@ trait FormLayoutTrait {
 	 * @param array        $labels     Form elements configuration array (label->id->type->(options|attributes)).
 	 * @param array        $allValues  Data provider array.
 	 */
-	protected function checkOrdinaryForm(CFormElement $form, array $labels, array $allValues) {
+	protected function assertOrdinaryForm(CFormElement $form, array $labels, array $allValues) {
 		$fields = $form->getFields();
 
 		foreach ($labels as $label => $field) {
@@ -41,7 +41,7 @@ trait FormLayoutTrait {
 
 			foreach ($field as $id => $input) {
 				$this->assertEquals($id, $form_field->getAttribute('id'), 'Element was not found');
-				$this->checkFormInput($form_field, $id, $input, $allValues);
+				$this->assertFormInput($form_field, $id, $input, $allValues);
 			}
 		}
 	}
@@ -53,7 +53,7 @@ trait FormLayoutTrait {
 	 * @param array        $right_labeled  Form elements configuration array (id->label->type->attributes).
 	 * @param array        $allValues      Data provider array.
 	 */
-	protected function checkRrightlabeledForm(CFormElement $form, array $right_labeled, array $allValues) {
+	protected function assertRrightlabeledForm(CFormElement $form, array $right_labeled, array $allValues) {
 		foreach ($right_labeled as $id => $field) {
 			$form_field = $form->getField('id:'.$id);
 
@@ -62,7 +62,7 @@ trait FormLayoutTrait {
 					$field_label = $form_field->query('xpath:./following-sibling::label[1]')->one();
 					$this->assertEquals($label, $field_label->getText(), '"'.$label.'" must exist.');
 				}
-				$this->checkFormInput($form_field, $id, $input, $allValues);
+				$this->assertFormInput($form_field, $id, $input, $allValues);
 			}
 		}
 	}
@@ -74,13 +74,13 @@ trait FormLayoutTrait {
 	 * @param array        $form_buttons  Form elements configuration array (id->label->type->attributes).
 	 * @param array        $allValues     Data provider array.
 	 */
-	protected function checkFormButtons(CFormElement $form, array $form_buttons, array $allValues) {
+	protected function assertFormButtons(CFormElement $form, array $form_buttons, array $allValues) {
 		foreach ($form_buttons as $id => $buttons) {
 			$form_field = $form->getField('id:'.$id);
 
 			foreach ($buttons as $label => $button) {
 				$this->assertEquals($label, $form_field->getText(), '"'.$label.'" must exist.');
-				$this->checkFormInput($form_field, $id, $button, $allValues);
+				$this->assertFormInput($form_field, $id, $button, $allValues);
 			}
 		}
 	}
@@ -93,43 +93,52 @@ trait FormLayoutTrait {
 	 * @param array    $input       Element configuration array (type->(options|attributes)).
 	 * @param array    $allValues   Data provider array.
 	 */
-	protected function checkFormInput(CElement $form_field, $id, array $input, array $allValues) {
+	protected function assertFormInput(CElement $form_field, $id, array $input, array $allValues) {
 		foreach ($input as $type => $elements) {
-			if ($type == 'dropdown') {
-				$options = [];
+			switch ($type) {
+				case TEST_DROPDOWN:
+					$options = [];
 
-				foreach ($form_field->getOptions() as $option) {
-					if ($option->isSelected()) {
-						$this->assertEquals($allValues[$id], $option->getValue(),
-							sprintf('option %1$s not selected', $allValues[$id])
+					foreach ($form_field->getOptions() as $option) {
+						if ($option->isSelected()) {
+							$this->assertEquals($allValues[$id], $option->getValue(),
+								sprintf('option %1$s not selected', $allValues[$id])
+							);
+						}
+						$options[$option->getValue()] = $option->getText();
+					}
+
+					$this->assertEquals($options[$allValues[$id]], $form_field->getValue());
+
+					foreach ($elements as $value => $text) {
+						$this->assertArrayHasKey($value, $options,
+							sprintf('option value "%1$s" was not found', $value)
+						);
+						$this->assertEquals($text, $options[$value],
+							sprintf('option text "%1$s" was not found', $text)
 						);
 					}
-					$options[$option->getValue()] = $option->getText();
-				}
+					break;
 
-				$this->assertEquals($options[$allValues[$id]], $form_field->getValue());
+				case TEST_CHECKBOX:
+					if ($allValues[$id]) {
+						$this->assertTrue($form_field->isSelected());
+					}
+					if ($allValues[$id] == 0) {
+						$this->assertFalse($form_field->isSelected());
+					}
+					break;
 
-				foreach ($elements as $value => $text) {
-					$this->assertArrayHasKey($value, $options, sprintf('option value "%1$s" was not found', $value));
-					$this->assertEquals($text, $options[$value], sprintf('option text "%1$s" was not found', $text));
-				}
-			}
-			elseif ($type == 'checkbox') {
-				if ($allValues[$id]) {
-					$this->assertTrue($form_field->isSelected());
-				}
-				if ($allValues[$id] == 0) {
-					$this->assertFalse($form_field->isSelected());
-				}
-			}
-			elseif ($type == 'input') {
-				$this->assertEquals($allValues[$id], $form_field->getValue(),
-					sprintf('wrong value "%1$s" for input "%2$s"', $form_field->getValue(), $id)
-				);
-				$this->checkAttributes($form_field, $id, $type, $elements);
-			}
-			elseif ($type == 'button') {
-				$this->checkAttributes($form_field, $id, $type, $elements);
+				case TEST_INPUT:
+					$this->assertEquals($allValues[$id], $form_field->getValue(),
+						sprintf('wrong value "%1$s" for input "%2$s"', $form_field->getValue(), $id)
+					);
+					$this->assertAttributes($form_field, $id, $type, $elements);
+					break;
+
+				case TEST_BUTTON:
+					$this->assertAttributes($form_field, $id, $type, $elements);
+					break;
 			}
 		}
 	}
@@ -142,7 +151,7 @@ trait FormLayoutTrait {
 	 * @param string   $type        Type of input element (dropdown|checkbox|input|button).
 	 * @param array    $attributes  Array of attributes.
 	 */
-	protected function checkAttributes($form_field, $id, $type, $attributes) {
+	protected function assertAttributes($form_field, $id, $type, $attributes) {
 		foreach ($attributes as $attribute => $value) {
 			$this->assertEquals($value, $form_field->getAttribute($attribute),
 				sprintf(
@@ -153,6 +162,50 @@ trait FormLayoutTrait {
 					$id
 				)
 			);
+		}
+	}
+
+	/**
+	 * Check the field values after update.
+	 *
+	 * @param CFormElement $form          Form element.
+	 * @param array        $check_fields  Array with fields list.
+	 * @param array        $data          Data Array.
+	 */
+	protected function assertFormFields(CFormElement $form, array $check_fields, array $data) {
+		foreach ($check_fields as $field_name) {
+			if (array_key_exists($field_name, $data['fields'])) {
+				$this->assertEquals($data['fields'][$field_name], $form->getField($field_name)->getValue(),
+					sprintf('Incorrect value in the DB field "%s" after update.', $field_name)
+				);
+			}
+		}
+	}
+
+	/**
+	 * Check form messages after update.
+	 *
+	 * @param array  $data        Data Array.
+	 * @param string $good_title  Expected good message.
+	 * @param string $bad_title   Expected error message..
+	 */
+	protected function assertFormMessage(array $data, $good_title, $bad_title) {
+		$message = CMessageElement::find()->one();
+		switch ($data['expected']) {
+			case TEST_GOOD:
+				$this->assertTrue($message->isGood(), $message->getTitle());
+				$this->assertEquals($good_title, $message->getTitle());
+				break;
+
+			case TEST_BAD:
+				$this->assertTrue($message->isBad(), 'No expected error message.');
+				$this->assertEquals(CTestArrayHelper::get($data, 'error_title', $data['error_title'] = $bad_title),
+					$message->getTitle()
+				);
+				if (array_key_exists('error_details', $data)) {
+					$this->assertTrue($message->hasLine($data['error_details']), 'No expected error message details.');
+				}
+				break;
 		}
 	}
 }
