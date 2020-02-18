@@ -87,7 +87,8 @@ $footer_buttons = makeFormFooter(new CSubmitButton(_('Update'), 'action', 'ackno
 	new CRedirectButton(_('Cancel'),
 		(new CUrl($data['backurl']))
 			->removeArgument('uncheck')
-			->getUrl())
+			->getUrl()
+	)
 ]);
 
 (new CWidget())
