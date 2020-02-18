@@ -19,11 +19,17 @@
 **/
 
 require_once dirname(__FILE__).'/../include/CLegacyWebTest.php';
+require_once dirname(__FILE__).'/traits/FormTrait.php';
 
 /**
  * @backup config
  */
-class testFormAdministrationGeneralGUI extends CLegacyWebTest {
+class testFormAdministrationGeneralGUI extends CWebTest {
+
+	use FormTrait;
+
+	private static $test_dropdown_first_entry = true;
+	const MESSAGE_SNIPPET = 'The value of the "%1$s" field in the config does not %2$s.';
 
 	public static function allValues() {
 		return CDBHelper::getDataProvider(
@@ -38,266 +44,335 @@ class testFormAdministrationGeneralGUI extends CLegacyWebTest {
 	* @dataProvider allValues
 	*/
 	public function testFormAdministrationGeneralGUI_CheckLayout($allValues) {
+		$this->page->login()->open('zabbix.php?action=gui.edit');
+        $popup = $this->query('id:page-title-general')->asPopupButton()->one()->select('GUI');
 
-		$this->zbxTestLogin('zabbix.php?action=gui.edit');
-		$this->query('id:page-title-general')->asPopupButton()->one()->select('GUI');
-		$this->zbxTestCheckTitle('Configuration of GUI');
-		$this->zbxTestCheckHeader('GUI');
-		$this->zbxTestTextPresent([
-			'Default theme',
-			'Dropdown first entry',
-			'remember selected',
-			'Limit for search and filter results',
-			'Max count of elements to show inside table cell',
-			'Show warning if Zabbix server is down'
-		]);
+		$form = $this->query('xpath:.//main/form')->asForm()->waitUntilVisible()->one();
 
-		$this->zbxTestDropdownHasOptions('default_theme', ['Blue', 'Dark']);
-		$this->zbxTestDropdownHasOptions('dropdown_first_entry', ['All', 'None']);
+		$this->assertPageTitle('Configuration of GUI');
+		$this->assertEquals('GUI', $this->query('tag:h1')->one()->getText());
 
-		$this->zbxTestAssertElementPresentId('search_limit');
-		$this->zbxTestAssertAttribute('//input[@id="search_limit"]', 'maxlength', '6');
-		$this->zbxTestAssertElementPresentId('max_in_table');
-		$this->zbxTestAssertAttribute('//input[@id="max_in_table"]','maxlength', '5');
+		$labels = [
+			'Default theme' => [					// label
+				'default_theme' => [				// id
+					TEST_DROPDOWN => [				// type
+						'blue-theme' => 'Blue',
+						'dark-theme' => 'Dark',
+						'hc-light' => 'High-contrast light',
+						'hc-dark' => 'High-contrast dark'
+					]
+				]
+			],
+			'Dropdown first entry' => [
+				'dropdown_first_entry' => [TEST_DROPDOWN => ['None', 'All']]
+			],
+			'Limit for search and filter results' => [
+				'search_limit' => [TEST_INPUT => ['maxlength' => '6']]
+			],
+			'Max count of elements to show inside table cell' => [
+				'max_in_table' => [TEST_INPUT => ['maxlength' => '5']]
+			],
+			'Show warning if Zabbix server is down' => [
+				'server_check_interval' => [TEST_CHECKBOX => true]
+			]
+		];
 
-		$this->zbxTestAssertElementPresentId('dropdown_first_remember');
-		$this->zbxTestAssertElementPresentId('server_check_interval');
+		$form_buttons = [
+			'update' => [					// id
+				'Update' => [				// label
+					TEST_BUTTON => [		// type
+						'name' => 'update',
+						'value' => 'Update'
+					]
+				]
+			],
+		];
 
-		$this->zbxTestAssertElementPresentId('update');
+		$right_labeled = [
+			'dropdown_first_remember' => [		// id
+				'remember selected' => [		// label
+					TEST_CHECKBOX => true		// type
+				]
+			],
+		];
 
-		$this->zbxTestAssertAttribute("//select[@id='default_theme']/option[@selected='selected']", "value", $allValues['default_theme']);
-		$this->zbxTestAssertAttribute("//select[@id='dropdown_first_entry']/option[@selected='selected']", "value", $allValues['dropdown_first_entry']);
+		$this->assertOrdinaryForm($form, $labels, $allValues);
+		$this->assertFormButtons($form, $form_buttons, $allValues);
+		$this->assertRrightlabeledForm($form, $right_labeled, $allValues);
 
-		if ($allValues['dropdown_first_remember']) {
-			$this->assertTrue($this->zbxTestCheckboxSelected('dropdown_first_remember'));
+	}
+
+	public function getUpdateData() {
+		return [
+			// All minimal values.
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Default theme' => 'Blue',
+						'Dropdown first entry' => 'None',
+						'Limit for search and filter results' => '1',
+						'Max count of elements to show inside table cell' => '1',
+						'Show warning if Zabbix server is down' => false,
+						'id:dropdown_first_remember' => false
+					],
+					'check_form' => true
+				]
+			],
+			// All maximal values.
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Default theme' => 'High-contrast dark',
+						'Dropdown first entry' => 'All',
+						'Limit for search and filter results' => '999999',
+						'Max count of elements to show inside table cell' => '99999',
+						'Show warning if Zabbix server is down' => true,
+						'id:dropdown_first_remember' => true
+					],
+					'check_form' => true
+				]
+			],
+			// Test "Dark" theme.
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Default theme' => 'Dark'
+					],
+					'check_form' => true
+				]
+			],
+			// Test "High-contrast light" theme.
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Default theme' => 'High-contrast light'
+					],
+					'check_form' => true
+				]
+			],
+			// All defaults values.
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Default theme' => 'Blue',
+						'Dropdown first entry' => 'All',
+						'Limit for search and filter results' => '1000',
+						'Max count of elements to show inside table cell' => '50',
+						'Show warning if Zabbix server is down' => false,
+						'id:dropdown_first_remember' => true
+					],
+					'check_form' => true
+				]
+			],
+			// Test hosts table row count after update.
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Dropdown first entry' => 'All',
+						'Limit for search and filter results' => '3',
+					],
+					'check_form' => true
+				]
+			],
+			// Test hosts table cell limit after update.
+			[
+				[
+					'expected' => TEST_GOOD,
+					'fields' => [
+						'Dropdown first entry' => 'All',
+						'Limit for search and filter results' => '1001',
+						'Max count of elements to show inside table cell' => '1'
+					],
+					'check_form' => true
+				]
+			],
+			// Incorrect Limit for search and filter results.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Limit for search and filter results' => '0'
+					],
+					'error_title' => 'Cannot update configuration',
+					'error_details' => 'Incorrect value "0" for "search_limit" field.'
+				]
+			],
+			// Incorrect Limit for search and filter results.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Limit for search and filter results' => '-1'
+					],
+					'error_title' => 'Cannot update configuration',
+					'error_details' => 'Incorrect value "-1" for "search_limit" field.'
+				]
+			],
+			// Incorrect Max count of elements to show inside table cell.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Max count of elements to show inside table cell' => '0'
+					],
+					'error_title' => 'Cannot update configuration',
+					'error_details' => 'Incorrect value "0" for "max_in_table" field.'
+				]
+			],
+			// Incorrect Max count of elements to show inside table cell.
+			[
+				[
+					'expected' => TEST_BAD,
+					'fields' => [
+						'Max count of elements to show inside table cell' => '-1'
+					],
+					'error_title' => 'Cannot update configuration',
+					'error_details' => 'Incorrect value "-1" for "max_in_table" field.'
+				]
+			]
+		];
+	}
+
+	/**
+	 * @dataProvider getUpdateData
+	 */
+	public function testFormAdministrationGeneralGUI_Update($data) {
+		$sql = 'SELECT default_theme,dropdown_first_entry,dropdown_first_remember,search_limit,max_in_table,'.
+				'server_check_interval'.
+			' FROM config'.
+			' ORDER BY configid';
+
+		$old_hash = CDBHelper::getHash($sql);
+
+		$this->page->login()->open('zabbix.php?action=gui.edit');
+
+		$form = $this->query('xpath:.//main/form')->asForm()->waitUntilVisible()->one();
+		$form->fill($data['fields']);
+		$form->submit();
+		$this->page->waitUntilReady();
+
+		// Verify if the config was updated.
+		$this->assertFormMessage($data, 'Configuration updated', 'Page received incorrect data');
+
+
+		if ($data['expected'] === TEST_BAD) {
+			$this->assertEquals($old_hash, CDBHelper::getHash($sql), 'Error form should not be saved.');
 		}
-		if ($allValues['dropdown_first_remember']==0) {
-			$this->assertFalse($this->zbxTestCheckboxSelected('dropdown_first_remember'));
+
+		if (CTestArrayHelper::get($data, 'check_form', false)) {
+			$this->page->open('zabbix.php?action=gui.edit');
+			$form_update = $this->query('xpath:.//main/form')->asForm()->waitUntilVisible()->one();
+
+			// Verify that fields are updated.
+			$check_fields = [
+				'Default theme',
+				'Dropdown first entry',
+				'Limit for search and filter results',
+				'Max count of elements to show inside table cell',
+				'Show warning if Zabbix server is down',
+				'id:dropdown_first_remember'
+			];
+
+			$this->assertFormFields($form_update, $check_fields, $data);
+
+			array_shift($check_fields);
+
+			$this->assertResultFields($check_fields, $data);
 		}
 
-		if ($allValues['server_check_interval']) {
-			$this->assertTrue($this->zbxTestCheckboxSelected('server_check_interval'));
+	}
+
+	private function assertResultFields($check_result_for, $data) {
+		foreach ($check_result_for as $field_name) {
+			if (array_key_exists($field_name, $data['fields'])) {
+				switch ($field_name) {
+					case 'Dropdown first entry':
+						if (self::$test_dropdown_first_entry) {
+							$this->page->open('hosts.php');
+							$select = $this->query('css:div.header-title select')->asDropdown()->waitUntilVisible()->one();
+							$option = $select->query("xpath:.//option[@value='0']")->one();
+
+							$pattern = ['None' => 'not selected', 'All' => 'all'];
+
+							$this->assertEquals($pattern[$data['fields'][$field_name]], $option->getText(),
+								sprintf(self::MESSAGE_SNIPPET, $field_name, 'match the first dropdown option in Group')
+							);
+							if ($data['fields'][$field_name] == 'All') {
+								self::$test_dropdown_first_entry = false;
+							}
+						}
+						break;
+
+					case 'Limit for search and filter results':
+						if ($data['fields'][$field_name] == '3') {
+							$this->page->open('hosts.php');
+							$table = $this->query('xpath:.//main/form/table')->asTable()->waitUntilVisible()->one();
+
+							$this->assertEquals(3, $table->getRows()->count(),
+								sprintf(self::MESSAGE_SNIPPET, $field_name, 'limit table size')
+							);
+						}
+						break;
+
+					case 'Max count of elements to show inside table cell':
+						if ($data['fields'][$field_name] == '1'
+								&& $data['fields']['Limit for search and filter results'] == '1001') {
+							$this->page->open('hosts.php');
+							$cell = $this->query("xpath://a[text()='Template App Zabbix Server']/..")
+								->asTableRow()->waitUntilVisible()->one();
+
+							$this->assertEquals(html_entity_decode('&hellip;'), mb_substr($cell->getText(), -1),
+								sprintf(self::MESSAGE_SNIPPET, $field_name, 'limit table row elements')
+							);
+						}
+						break;
+
+					case 'Show warning if Zabbix server is down':
+						if ($data['fields'][$field_name] == true) {
+							$this->page->open('hosts.php');
+							$message = $this->query('xpath://output')->waitUntilVisible()->one();
+
+							$this->assertEquals(
+								'Zabbix server is not running: the information displayed may not be current.',
+								$message->getText(),
+								sprintf(self::MESSAGE_SNIPPET, $field_name, 'allow displaying a warning in the footer')
+							);
+						}
+						break;
+
+					case 'id:dropdown_first_remember':
+						if ($data['fields'][$field_name] == true &&  $data['fields']['Default theme'] == 'Blue') {
+							$this->page->open('hosts.php');
+							$select = $this->query('css:div.header-title select')
+								->asDropdown()->waitUntilVisible()->one();
+
+							$option = $select->query("xpath:.//option[@value='4']")->one()->click();
+							$this->page->open('templates.php')->waitUntilReady();
+
+							$this->page->open('hosts.php?ddreset=1');
+							$select = $this->query('css:div.header-title select')
+								->asDropdown()->waitUntilVisible()->one();
+
+							$option = $select->query("xpath:.//option[@value='4']")->one();
+
+							$this->assertTrue(
+								$option->isSelected(),
+								sprintf(
+									self::MESSAGE_SNIPPET,
+									$field_name,
+									'allow saving the value of the selected option'
+								)
+							);
+						}
+						break;
+				}
+			}
 		}
-		if ($allValues['server_check_interval']==0) {
-			$this->assertFalse($this->zbxTestCheckboxSelected('server_check_interval'));
-		}
-
-		$this->zbxTestAssertElementValue('search_limit', $allValues['search_limit']);
-		$this->zbxTestAssertElementValue('max_in_table', $allValues['max_in_table']);
-	}
-
-	public function testFormAdministrationGeneralGUI_ChangeTheme() {
-
-		$this->zbxTestLogin('zabbix.php?action=gui.edit');
-		$sql_hash = 'SELECT '.CDBHelper::getTableFields('config', ['default_theme']).' FROM config ORDER BY configid';
-		$old_hash = CDBHelper::getHash($sql_hash);
-
-		$this->zbxTestDropdownSelect('default_theme', 'Dark');
-		$this->zbxTestAssertElementValue('default_theme', 'dark-theme');
-		$this->zbxTestClickWait('update');
-		$this->zbxTestTextPresent(['Configuration updated', 'GUI', 'Default theme']);
-		$sql = 'SELECT default_theme FROM config WHERE default_theme='.zbx_dbstr('dark-theme');
-		$this->assertEquals(1, CDBHelper::getCount($sql), 'Chuck Norris: "Dark" theme can not be selected as default theme: it does not exist in the DB');
-
-		$this->zbxTestDropdownSelect('default_theme', 'Blue');
-		$this->zbxTestAssertElementValue('default_theme', 'blue-theme');
-		$this->zbxTestClickWait('update');
-		$this->zbxTestTextPresent(['Configuration updated', 'GUI', 'Default theme']);
-		$sql = 'SELECT default_theme FROM config WHERE default_theme='.zbx_dbstr('blue-theme');
-		$this->assertEquals(1, CDBHelper::getCount($sql), 'Chuck Norris: "Blue" theme can not be selected as default theme: it does not exist in the DB');
-
-		$this->assertEquals($old_hash, CDBHelper::getHash($sql_hash));
-	}
-
-	public function testFormAdministrationGeneralGUI_ChangeDropdownFirstEntry() {
-
-		$this->zbxTestLogin('zabbix.php?action=gui.edit');
-		$sql_hash = 'SELECT configid,refresh_unsupported,work_period,alert_usrgrpid,default_theme,authentication_type,ldap_host,ldap_port,ldap_base_dn,ldap_bind_dn,ldap_bind_password,ldap_search_attribute,dropdown_first_remember,discovery_groupid,max_in_table,search_limit,severity_color_0,severity_color_1,severity_color_2,severity_color_3,severity_color_4,severity_color_5,severity_name_0,severity_name_1,severity_name_2,severity_name_3,severity_name_4,severity_name_5,ok_period,blink_period,problem_unack_color,problem_ack_color,ok_unack_color,ok_ack_color,problem_unack_style,problem_ack_style,ok_unack_style,ok_ack_style,snmptrap_logging FROM config ORDER BY configid';
-		$old_hash = CDBHelper::getHash($sql_hash);
-
-		$this->zbxTestDropdownSelect('dropdown_first_entry', 'None');
-		$this->zbxTestClickWait('update');
-		$this->zbxTestTextPresent(['Configuration updated', 'GUI', 'Dropdown first entry']);
-		$sql = 'SELECT dropdown_first_entry FROM config WHERE dropdown_first_entry=0';
-		$this->assertEquals(1, CDBHelper::getCount($sql), 'Chuck Norris: Value "None" can not be selected as "dropdown first entry" value');
-
-		$this->zbxTestDropdownSelect('dropdown_first_entry', 'All');
-		$this->zbxTestClickWait('update');
-		$this->zbxTestTextPresent(['Configuration updated', 'GUI', 'Dropdown first entry']);
-
-		$sql = 'SELECT dropdown_first_entry FROM config WHERE dropdown_first_entry=1';
-		$this->assertEquals(1, CDBHelper::getCount($sql), 'Chuck Norris: Value "All" can not be selected as "dropdown first entry" value');
-
-		$this->assertEquals($old_hash, CDBHelper::getHash($sql_hash));
-	}
-
-	public function testFormAdministrationGeneralGUI_ChangeDropdownFirstRemember() {
-
-		$this->zbxTestLogin('zabbix.php?action=gui.edit');
-		$sql_hash = 'SELECT '.CDBHelper::getTableFields('config', ['dropdown_first_remember']).' FROM config ORDER BY configid';
-		$old_hash = CDBHelper::getHash($sql_hash);
-
-		$this->zbxTestCheckboxSelect('dropdown_first_remember');
-		$this->zbxTestClickWait('update');
-		$this->zbxTestTextPresent(['Configuration updated', 'GUI', 'remember selected']);
-		$this->assertTrue($this->zbxTestCheckboxSelected('dropdown_first_remember'));
-
-		$sql = 'SELECT dropdown_first_remember FROM config WHERE dropdown_first_remember=0';
-		$this->assertEquals(0, CDBHelper::getCount($sql), 'Chuck Norris: Incorrect value in the DB field "dropdown_first_remember"');
-
-		$this->zbxTestCheckboxSelect('dropdown_first_remember', false);
-		$this->zbxTestClickWait('update');
-		$this->zbxTestTextPresent(['Configuration updated', 'GUI', 'remember selected']);
-		$this->assertFalse($this->zbxTestCheckboxSelected('dropdown_first_remember'));
-
-		$sql = 'SELECT dropdown_first_remember FROM config WHERE dropdown_first_remember=1';
-		$this->assertEquals(0, CDBHelper::getCount($sql), 'Chuck Norris: Incorrect value in the DB field "dropdown_first_remember"');
-
-		$this->assertEquals($old_hash, CDBHelper::getHash($sql_hash));
-	}
-
-	public function testFormAdministrationGeneralGUI_ChangeSearchLimit() {
-		$this->zbxTestLogin('zabbix.php?action=gui.edit');
-		$sql_hash = 'SELECT '.CDBHelper::getTableFields('config', ['search_limit']).' FROM config ORDER BY configid';
-		$old_hash = CDBHelper::getHash($sql_hash);
-
-		$this->zbxTestInputType('search_limit', '1000');
-		$this->zbxTestClickWait('update');
-		$this->zbxTestTextPresent(['Configuration updated', 'GUI', 'Limit for search and filter results']);
-
-		$sql = 'SELECT search_limit FROM config WHERE search_limit=1000';
-		$this->assertEquals(1, CDBHelper::getCount($sql), 'Chuck Norris: Incorrect value in the DB field "search_limit"');
-
-		$this->query('id:page-title-general')->asPopupButton()->one()->select('GUI');
-		$this->zbxTestCheckTitle('Configuration of GUI');
-		$this->zbxTestCheckHeader('GUI');
-		$this->zbxTestInputTypeOverwrite('search_limit', '1');
-		$this->zbxTestClickWait('update');
-		$this->zbxTestTextPresent(['Configuration updated', 'GUI', 'Limit for search and filter results']);
-
-		$sql = 'SELECT search_limit FROM config WHERE search_limit=1';
-		$this->assertEquals(1, CDBHelper::getCount($sql), 'Chuck Norris: Incorrect value in the DB field "search_limit"');
-
-		$this->query('id:page-title-general')->asPopupButton()->one()->select('GUI');
-		$this->zbxTestCheckTitle('Configuration of GUI');
-		$this->zbxTestCheckHeader('GUI');
-		$this->zbxTestInputTypeOverwrite('search_limit', '999999');
-		$this->zbxTestClickWait('update');
-		$this->zbxTestTextPresent(['Configuration updated', 'GUI', 'Limit for search and filter results']);
-
-		$sql = 'SELECT search_limit FROM config WHERE search_limit=999999';
-		$this->assertEquals(1, CDBHelper::getCount($sql), 'Chuck Norris: Incorrect value in the DB field "search_limit"');
-
-		// Check to enter 0 value
-		$this->query('id:page-title-general')->asPopupButton()->one()->select('GUI');
-		$this->zbxTestCheckTitle('Configuration of GUI');
-		$this->zbxTestCheckHeader('GUI');
-		$this->zbxTestInputTypeOverwrite('search_limit', '0');
-		$this->zbxTestClickWait('update');
-
-		$this->zbxTestTextPresent(['GUI', 'Limit for search and filter results']);
-		$this->zbxTestWaitUntilMessageTextPresent('msg-bad', 'Cannot update configuration');
-		$this->zbxTestTextPresent('Incorrect value "0" for "search_limit" field.');
-		$this->zbxTestTextNotPresent('Configuration updated');
-
-		// Check to enter -1 value
-		$this->query('id:page-title-general')->asPopupButton()->one()->select('GUI');
-		$this->zbxTestCheckTitle('Configuration of GUI');
-		$this->zbxTestCheckHeader('GUI');
-		$this->zbxTestInputTypeOverwrite('search_limit', '-1');
-		$this->zbxTestClickWait('update');
-
-		$this->zbxTestTextPresent(['GUI', 'Limit for search and filter results']);
-		$this->zbxTestTextPresent(['Cannot update configuration', 'Incorrect value "-1" for "search_limit" field.']);
-		$this->zbxTestTextNotPresent('Configuration updated');
-
-		$this->assertEquals($old_hash, CDBHelper::getHash($sql_hash));
-	}
-
-	public function testFormAdministrationGeneralGUI_ChangeMaxInTable() {
-		$sql_hash = 'SELECT '.CDBHelper::getTableFields('config', ['max_in_table']).' FROM config ORDER BY configid';
-		$old_hash = CDBHelper::getHash($sql_hash);
-
-		$this->zbxTestLogin('zabbix.php?action=gui.edit');
-		$this->zbxTestInputTypeOverwrite('max_in_table', '1000');
-		$this->zbxTestClickWait('update');
-		$this->zbxTestTextPresent([
-			'Configuration updated',
-			'GUI',
-			'Max count of elements to show inside table cell'
-		]);
-
-		$this->assertEquals(1, CDBHelper::getCount('SELECT NULL FROM config WHERE max_in_table=1000'));
-
-		$this->query('id:page-title-general')->asPopupButton()->one()->select('GUI');
-		$this->zbxTestCheckTitle('Configuration of GUI');
-		$this->zbxTestCheckHeader('GUI');
-		$this->zbxTestInputType('max_in_table', '1');
-		$this->zbxTestClickWait('update');
-		$this->zbxTestTextPresent([
-			'Configuration updated',
-			'GUI',
-			'Max count of elements to show inside table cell'
-		]);
-
-		$this->assertEquals(1, CDBHelper::getCount('SELECT NULL FROM config WHERE max_in_table=1'));
-
-		$this->query('id:page-title-general')->asPopupButton()->one()->select('GUI');
-		$this->zbxTestCheckTitle('Configuration of GUI');
-		$this->zbxTestCheckHeader('GUI');
-		$this->zbxTestInputTypeOverwrite('max_in_table', '99999');
-		$this->zbxTestClickWait('update');
-		$this->zbxTestTextPresent([
-			'Configuration updated',
-			'GUI',
-			'Max count of elements to show inside table cell'
-		]);
-
-		$this->assertEquals(1, CDBHelper::getCount('SELECT NULL FROM config WHERE max_in_table=99999'));
-
-		$this->query('id:page-title-general')->asPopupButton()->one()->select('GUI');
-		$this->zbxTestCheckTitle('Configuration of GUI');
-		$this->zbxTestCheckHeader('GUI');
-		$this->zbxTestInputTypeOverwrite('max_in_table', '-1');
-		$this->zbxTestClickWait('update');
-		$this->zbxTestTextPresent([
-			'Cannot update configuration',
-			'Incorrect value "-1" for "max_in_table" field.',
-			'GUI',
-			'Max count of elements to show inside table cell'
-		]);
-		$this->zbxTestTextNotPresent('Configuration updated');
-
-		$this->assertEquals($old_hash, CDBHelper::getHash($sql_hash));
-	}
-
-	public function testFormAdministrationGeneralGUI_EventCheckInterval() {
-		$this->zbxTestLogin('zabbix.php?action=gui.edit');
-		$sql_hash = 'SELECT '.CDBHelper::getTableFields('config', ['server_check_interval']).' FROM config ORDER BY configid';
-		$old_hash = CDBHelper::getHash($sql_hash);
-
-		$this->zbxTestCheckboxSelect('server_check_interval');
-		$this->zbxTestClickWait('update');
-		$this->zbxTestTextPresent('Configuration updated');
-		$this->zbxTestCheckHeader('GUI');
-		$this->zbxTestTextPresent('Show warning if Zabbix server is down');
-		$this->assertTrue($this->zbxTestCheckboxSelected('server_check_interval'));
-
-		$sql = 'SELECT server_check_interval FROM config WHERE server_check_interval=10';
-		$this->assertEquals(1, CDBHelper::getCount($sql), 'Chuck Norris: Incorrect value in the DB field "server_check_interval"');
-
-		$this->query('id:page-title-general')->asPopupButton()->one()->select('GUI');
-		$this->zbxTestCheckTitle('Configuration of GUI');
-		$this->zbxTestCheckHeader('GUI');
-		$this->zbxTestCheckboxSelect('server_check_interval', false);
-
-		$this->zbxTestClickWait('update');
-		$this->zbxTestTextPresent(['Configuration updated', 'GUI', 'Show warning if Zabbix server is down']);
-		$this->assertFalse($this->zbxTestCheckboxSelected('server_check_interval'));
-
-		$sql = 'SELECT server_check_interval FROM config WHERE server_check_interval=0';
-		$this->assertEquals(1, CDBHelper::getCount($sql), 'Chuck Norris: Incorrect value in the DB field "server_check_interval"');
-
-		$this->assertEquals($old_hash, CDBHelper::getHash($sql_hash));
 	}
 }

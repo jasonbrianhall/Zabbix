@@ -29,6 +29,11 @@ define('TEST_GOOD', 0);
 define('TEST_BAD', 1);
 define('TEST_ERROR', 2);
 
+define('TEST_DROPDOWN',	'd');
+define('TEST_CHECKBOX',	'c');
+define('TEST_INPUT',	'i');
+define('TEST_BUTTON',	'b');
+
 /**
  * Base class for Selenium tests.
  */
@@ -36,7 +41,7 @@ class CWebTest extends CTest {
 
 	// Network throttling emulation modes.
 	const NETWORK_THROTTLING_NONE		= 'none';
-	const NETWORK_THROTTLING_OFFLINE		= 'offline';
+	const NETWORK_THROTTLING_OFFLINE	= 'offline';
 	const NETWORK_THROTTLING_SLOW		= 'slow';
 	const NETWORK_THROTTLING_FAST		= 'fast';
 
