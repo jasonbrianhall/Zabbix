@@ -45,25 +45,12 @@ class testFormAdministrationGeneralGUI extends CWebTest {
 	*/
 	public function testFormAdministrationGeneralGUI_CheckLayout($allValues) {
 		$this->page->login()->open('adm.gui.php');
-
-		$nav_form = $this->query('xpath:.//nav/form')->asForm()->waitUntilVisible()->one();
-
-		$nav_form_elements = [
-			'configDropDown' => [				// id
-					0 => [						// no label
-					TEST_DROPDOWN => [			// type
-						'adm.gui.php' => 'GUI'	// option
-					]
-				]
-			]
-		];
-
-		$this->assertRrightlabeledForm($nav_form, $nav_form_elements, ['configDropDown' => 'adm.gui.php']);
+		$this->query('id:configDropDown')->asDropdown()->one()->select('GUI');
 
 		$form = $this->query('xpath:.//main/form')->asForm()->waitUntilVisible()->one();
 
 		$this->assertPageTitle('Configuration of GUI');
-		$this->assertEquals('GUI', $this->query('tag:h1')->waitUntilVisible()->one()->getText());
+		$this->assertEquals('GUI', $this->query('tag:h1')->one()->getText());
 
 		$labels = [
 			'Default theme' => [					// label
