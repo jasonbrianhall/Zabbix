@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -177,6 +177,23 @@ class CWidgetConfig {
 
 			case WIDGET_SVG_GRAPH:
 				return !CWidgetFormSvgGraph::hasOverrideTime($widget['fields']);
+
+			default:
+				return false;
+		}
+	}
+
+	/**
+	 * Detect if widget dialogue should be sticked to top instead of being centered vertically.
+	 *
+	 * @param string $type  Widget type
+	 *
+	 * @return bool
+	 */
+	public static function getDialogueStickToTop($type) {
+		switch ($type) {
+			case WIDGET_SVG_GRAPH:
+				return true;
 
 			default:
 				return false;

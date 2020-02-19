@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -30,7 +30,7 @@ trait PreprocessingTrait {
 	 *
 	 * @return array
 	 */
-	private static function getPreprocessingFieldDescriptors() {
+	protected static function getPreprocessingFieldDescriptors() {
 		return [
 			[
 				'name'		=> 'type',
@@ -47,6 +47,12 @@ trait PreprocessingTrait {
 			[
 				'name'		=> 'parameter_2',
 				'selector'	=> 'xpath:.//input[contains(@id, "_params_1")]',
+				'value'		=> ['getValue']
+			],
+			[
+				'name'		=> 'parameter_3',
+				'selector'	=> 'xpath:.//input[contains(@id, "_params_2")]',
+				'detect'	=> true,
 				'value'		=> ['getValue']
 			],
 			[
@@ -75,9 +81,9 @@ trait PreprocessingTrait {
 	 * @param Element $container    container element
 	 * @param array   $field        field description
 	 *
-	 * @return Element|null
+	 * @return CElement|CNullElement
 	 */
-	private static function getPreprocessingField($container, $field) {
+	protected static function getPreprocessingField($container, $field) {
 		$query = $container->query($field['selector']);
 
 		if (array_key_exists('class', $field)) {
@@ -85,7 +91,7 @@ trait PreprocessingTrait {
 		}
 
 		$element = $query->one(false);
-		if ($element !== null && array_key_exists('detect', $field) && $field['detect']) {
+		if ($element->isValid() && array_key_exists('detect', $field) && $field['detect']) {
 			$element = $element->detect();
 		}
 
@@ -97,7 +103,7 @@ trait PreprocessingTrait {
 	 *
 	 * @param array $steps    preprocessing step values
 	 */
-	private function addPreprocessingSteps($steps) {
+	protected function addPreprocessingSteps($steps) {
 		$rows = $this->query('class:preprocessing-list-item')->count() + 1;
 		$add = $this->query('id:param_add')->one();
 		$fields = self::getPreprocessingFieldDescriptors();
@@ -124,7 +130,7 @@ trait PreprocessingTrait {
 	 *
 	 * @return array
 	 */
-	private function getPreprocessingSteps($extended = false) {
+	protected function getPreprocessingSteps($extended = false) {
 		$steps = [];
 
 		$fields = self::getPreprocessingFieldDescriptors();
@@ -135,7 +141,7 @@ trait PreprocessingTrait {
 			foreach ($fields as $field) {
 				$key = $field['name'];
 
-				if (isset($preprocessing[$key]) && (!$extended || $preprocessing[$key]['element'] !== null)) {
+				if (isset($preprocessing[$key]) && (!$extended || $preprocessing[$key]['element']->isValid())) {
 					continue;
 				}
 
@@ -155,7 +161,7 @@ trait PreprocessingTrait {
 	 *
 	 * @return array
 	 */
-	private function assertPreprocessingSteps($data) {
+	protected function assertPreprocessingSteps($data) {
 		$steps = $this->getPreprocessingSteps(true);
 		$this->assertEquals(count($data), count($steps), 'Preprocessing step count should match step count in data.');
 
@@ -167,7 +173,7 @@ trait PreprocessingTrait {
 					continue;
 				}
 
-				if ($control['element'] === null) {
+				if (!$control['element']->isValid()) {
 					$this->fail('Field "'.$field['name'].'" is not present.');
 				}
 
@@ -196,14 +202,14 @@ trait PreprocessingTrait {
 	 *
 	 * @return array
 	 */
-	private function listPreprocessingSteps() {
+	protected function listPreprocessingSteps() {
 		$data = [];
 		foreach ($this->getPreprocessingSteps(true) as $i => $step) {
 			$values = [];
 			foreach ($step as $control) {
 				$field = $control['field'];
 
-				if ($control['element'] === null) {
+				if (!$control['element']->isValid()) {
 					continue;
 				}
 

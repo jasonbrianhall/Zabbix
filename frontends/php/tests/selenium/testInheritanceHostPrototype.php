@@ -2,7 +2,7 @@
 
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -20,6 +20,7 @@
 **/
 
 require_once dirname(__FILE__).'/../include/CLegacyWebTest.php';
+require_once dirname(__FILE__).'/traits/MacrosTrait.php';
 
 /**
  * Test the creation of inheritance of new objects on a previously linked template.
@@ -27,6 +28,8 @@ require_once dirname(__FILE__).'/../include/CLegacyWebTest.php';
  * @backup hosts
  */
 class testInheritanceHostPrototype extends CLegacyWebTest {
+
+	use MacrosTrait;
 
 	public static function getLayoutData() {
 		return [
@@ -90,6 +93,29 @@ class testInheritanceHostPrototype extends CLegacyWebTest {
 			$this->zbxTestAssertElementPresentXpath('//input[@id="'.$id.'"][@readonly]');
 		}
 
+		// Check layout at Macros tab.
+		$this->zbxTestTabSwitch('Macros');
+		$this->zbxTestAssertElementPresentXpath('//input[@id="show_inherited_macros_0"]');
+		$this->zbxTestClickXpath('//label[@for="show_inherited_macros_1"]');
+		$this->zbxTestWaitForPageToLoad();
+
+		// Create two macros arrays: from DB and from Frontend form.
+		$macros = [
+			'database' => CDBHelper::getAll('SELECT macro, value FROM globalmacro'),
+			'frontend' => $this->getMacrosTable('Effective value')->getValue()
+		];
+
+		// Sort arrays by Macros.
+		foreach ($macros as &$array) {
+			usort($array, function ($a, $b) {
+				return strcmp($a['macro'], $b['macro']);
+			});
+		}
+		unset($array);
+
+		// Compare macros from DB with macros from Frontend.
+		$this->assertEquals($macros['database'], $macros['frontend']);
+
 		//Check layout at Host Inventory tab.
 		$this->zbxTestTabSwitch('Host inventory');
 		for ($i = 0; $i < 3; $i++) {
@@ -103,37 +129,6 @@ class testInheritanceHostPrototype extends CLegacyWebTest {
 		}
 
 		$this->zbxTestAssertAttribute('//button[@id="delete"]', 'disabled');
-
-		// Macro tab check must be after IPMI tab (this must be changed when ZBX-14609 will CLOSED).
-		// Check layout at Macros tab.
-		$this->zbxTestTabSwitch('Macros');
-		$this->zbxTestAssertElementPresentXpath('//input[@id="show_inherited_macros_0"]');
-		$this->zbxTestClickXpath('//label[@for="show_inherited_macros_1"]');
-		$this->zbxTestWaitForPageToLoad();
-
-		$macros = CDBHelper::getAll('SELECT * FROM globalmacro');
-		foreach ($macros as $macro) {
-			// Macro check and row selection.
-			$element = $this->webDriver->findElement(WebDriverBy::xpath('//input[@class="macro"][@readonly][@value="'.
-					$macro['macro'].'"]/../..')
-			);
-			// Effective value.
-			$this->assertEquals($macro['value'], $element->findElement(
-					WebDriverBy::xpath('./td[3]/input[@type="text"][@readonly]')
-			)->getAttribute('value'));
-
-			// Template value.
-			$this->assertEquals('', $element->findElement(WebDriverBy::xpath('./td[5]/div'))->getText());
-			// Global value.
-			$this->assertEquals('"'.$macro['value'].'"', $element->findElement(
-					WebDriverBy::xpath('./td[7]/div')
-			)->getText());
-		}
-
-		// Total macro count.
-		$this->assertEquals(count($macros), count($this->webDriver->findElements(
-				WebDriverBy::xpath('//input[@class="macro"]')
-		)));
 	}
 
 	public static function getCreateData() {

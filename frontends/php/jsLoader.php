@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -89,8 +89,9 @@ $availableJScripts = [
 	'class.csvggraph.js' => '',
 	'class.ctree.js' => '',
 	'class.curl.js' => '',
+	'class.overlaycollection.js' => '',
 	'class.cverticalaccordion.js' => '',
-	'class.mapWidget.js' => '',
+	'class.mapwidget.js' => '',
 	'class.svg.canvas.js' => 'vector/',
 	'class.svg.map.js' => 'vector/',
 	'class.cviewswitcher.js' => '',
@@ -205,6 +206,7 @@ $tranStrings = [
 		'S_PROBLEM_ON' => _('Problem on'),
 		'S_RESOLVED' => _('Resolved'),
 		'S_MUTE' => _('Mute'),
+		'S_CANNOT_SUPPORT_NOTIFICATION_AUDIO' => _('Cannot support notification audio for this device.'),
 		'S_UNMUTE' => _('Unmute'),
 		'S_CLEAR' => _('Clear'),
 		'S_SNOOZE' => _('Snooze')
@@ -321,6 +323,7 @@ if (empty($_GET['files'])) {
 		'jquery-ui.js',
 		'common.js',
 		'class.cdebug.js',
+		'class.overlaycollection.js',
 		'class.cdate.js',
 		'class.cookie.js',
 		'class.curl.js',

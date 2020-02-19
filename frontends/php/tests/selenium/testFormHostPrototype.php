@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -19,11 +19,14 @@
 **/
 
 require_once dirname(__FILE__).'/../include/CLegacyWebTest.php';
+require_once dirname(__FILE__).'/traits/MacrosTrait.php';
 
 /**
  * @backup hosts
  */
 class testFormHostPrototype extends CLegacyWebTest {
+
+	use MacrosTrait;
 
 	/**
 	 * Discovery rule id used in test.
@@ -65,29 +68,22 @@ class testFormHostPrototype extends CLegacyWebTest {
 		$this->zbxTestClickXpath('//label[@for="show_inherited_macros_1"]');
 		$this->zbxTestWaitForPageToLoad();
 
-		$macros = CDBHelper::getAll('SELECT * FROM globalmacro');
-		foreach ($macros as $macro) {
-			// Macro check and row selection.
-			$element = $this->webDriver->findElement(WebDriverBy::xpath('//input[@class="macro"][@readonly][@value="'.
-							$macro['macro'].'"]/../..')
-			);
-			// Effective value.
-			$this->assertEquals($macro['value'], $element->findElement(
-							WebDriverBy::xpath('./td[3]/input[@type="text"][@readonly]')
-					)->getAttribute('value'));
+		// Create two macros arrays: from DB and from Frontend form.
+		$macros = [
+			'database' => CDBHelper::getAll('SELECT macro, value FROM globalmacro'),
+			'frontend' => $this->getMacrosTable('Effective value')->getValue()
+		];
 
-			// Template value.
-			$this->assertEquals('', $element->findElement(WebDriverBy::xpath('./td[5]/div'))->getText());
-			// Global value.
-			$this->assertEquals('"'.$macro['value'].'"', $element->findElement(
-							WebDriverBy::xpath('./td[7]/div')
-					)->getText());
+		// Sort arrays by Macros.
+		foreach ($macros as &$array) {
+			usort($array, function ($a, $b) {
+				return strcmp($a['macro'], $b['macro']);
+			});
 		}
+		unset($array);
 
-		// Total macro count.
-		$this->assertEquals(count($macros), count($this->webDriver->findElements(
-								WebDriverBy::xpath('//input[@class="macro"]')
-		)));
+		// Compare macros from DB with macros from Frontend.
+		$this->assertEquals($macros['database'], $macros['frontend']);
 
 		// Check layout at Encryption tab.
 		$this->zbxTestTabSwitch('Encryption');

@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@
 #endif
 
 static const char	copyright_message[] =
-	"Copyright (C) 2019 Zabbix SIA\n"
+	"Copyright (C) 2020 Zabbix SIA\n"
 	"License GPLv2+: GNU GPL version 2 or later <http://gnu.org/licenses/gpl.html>.\n"
 	"This is free software: you are free to change and redistribute it according to\n"
 	"the license. There is NO WARRANTY, to the extent permitted by law.";
@@ -1357,14 +1357,6 @@ const char	*zbx_interface_type_string(zbx_interface_type_t type)
 			return "unknown";
 	}
 }
-
-const int	INTERFACE_TYPE_PRIORITY[INTERFACE_TYPE_COUNT] =
-{
-	INTERFACE_TYPE_AGENT,
-	INTERFACE_TYPE_SNMP,
-	INTERFACE_TYPE_JMX,
-	INTERFACE_TYPE_IPMI
-};
 
 const char	*zbx_sysinfo_ret_string(int ret)
 {

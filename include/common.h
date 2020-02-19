@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -932,7 +932,7 @@ char	*string_replace(const char *str, const char *sub_str1, const char *sub_str2
 #define ZBX_FLAG_DOUBLE_PLAIN	0x00
 #define ZBX_FLAG_DOUBLE_SUFFIX	0x01
 int	is_double_suffix(const char *str, unsigned char flags);
-int	is_double(const char *c);
+int	is_double(const char *str, double *value);
 #define ZBX_LENGTH_UNLIMITED	0x7fffffff
 int	is_time_suffix(const char *c, int *value, int length);
 int	is_int_prefix(const char *c);
@@ -1218,6 +1218,15 @@ int	__zbx_open(const char *pathname, int flags);
 typedef struct stat	zbx_stat_t;
 #endif	/* _WINDOWS */
 
+typedef struct
+{
+	zbx_fs_time_t	modification_time;	/* time of last modification */
+	zbx_fs_time_t	access_time;		/* time of last access */
+	zbx_fs_time_t	change_time;		/* time of last status change */
+}
+zbx_file_time_t;
+
+int	zbx_get_file_time(const char *path, zbx_file_time_t *time);
 void	find_cr_lf_szbyte(const char *encoding, const char **cr, const char **lf, size_t *szbyte);
 int	zbx_read(int fd, char *buf, size_t count, const char *encoding);
 int	zbx_is_regular_file(const char *path);

@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -63,21 +63,10 @@ class CMultilineElement extends CElement {
 	 */
 	public function clear() {
 		$dialog = $this->edit();
-		$dialog->query('xpath:.//textarea[@class="multilineinput-textarea"]')->one()->clear();
+		$dialog->query('xpath:.//textarea[contains(@class, "multilineinput-textarea")]')->one()->clear();
 		$dialog->query('button:Apply')->one()->click();
 
 		return $this;
-	}
-
-	/**
-	 * Fill Multiline input element with data.
-	 *
-	 * @param $text    text to be written into the field
-	 *
-	 * @return $this
-	 */
-	public function fill($text) {
-		return $this->overwrite($text);
 	}
 
 	/**
@@ -89,7 +78,7 @@ class CMultilineElement extends CElement {
 	 */
 	public function overwrite($text) {
 		$dialog = $this->edit();
-		$dialog->query('xpath:.//textarea[@class="multilineinput-textarea"]')->one()->overwrite($text);
+		$dialog->query('xpath:.//textarea[contains(@class, "multilineinput-textarea")]')->one()->overwrite($text);
 		$dialog->query('button:Apply')->one()->click();
 		$dialog->waitUntilNotPresent();
 

@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -167,14 +167,25 @@ trait CastableTrait {
 	}
 
 	/**
-	 * Cast object to Range Control element.
+	 * Cast object to CompositeInput element.
 	 *
 	 * @param array $options    additional casting options
 	 *
-	 * @return CRangeControlElement
+	 * @return CCompositeInputElement
 	 */
-	public function asRangeControl($options = []) {
-		return $this->cast(CRangeControlElement::class, $options);
+	public function asCompositeInput($options = []) {
+		return $this->cast(CCompositeInputElement::class, $options);
+	}
+
+	/**
+	 * Cast object to ColorPicker element.
+	 *
+	 * @param array $options    additional casting options
+	 *
+	 * @return CColorPickerElement
+	 */
+	public function asColorPicker($options = []) {
+		return $this->cast(CColorPickerElement::class, $options);
 	}
 
 	/**

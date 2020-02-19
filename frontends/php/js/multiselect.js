@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -217,7 +217,7 @@ jQuery(function($) {
 					'new': t('new'),
 					'Select': t('Select')
 				},
-				data: {},
+				data: [],
 				only_hostid: 0,
 				excludeids: [],
 				addNew: false,
@@ -363,10 +363,12 @@ jQuery(function($) {
 					var search = $input.val();
 
 					if (search !== '') {
+						search = search.trim();
+
 						$('.selected li.selected', $obj).removeClass('selected');
+					}
 
-						search = search.replace(/^\s+|\s+$/g, '');
-
+					if (search !== '') {
 						/*
 						 * Strategy:
 						 * 1. Load the cached result set if such exists for the given term and show the list.
@@ -396,7 +398,7 @@ jQuery(function($) {
 									.then(function(response) {
 										ms.values.searches[search] = response.result;
 
-										if (search === $input.val().replace(/^\s+|\s+$/g, '')) {
+										if (search === $input.val().trim()) {
 											ms.values.search = search;
 											loadAvailable($obj);
 											showAvailable($obj);
@@ -728,7 +730,7 @@ jQuery(function($) {
 		var addNew = false;
 
 		if (ms.options.addNew && ms.values.search.length) {
-			if (data.length || objectLength(ms.values.selected) > 0) {
+			if (data.length || objectSize(ms.values.selected) > 0) {
 				var names = {};
 
 				// Check if value exists among available values.
@@ -743,7 +745,7 @@ jQuery(function($) {
 				}
 
 				// Check if value exists among selected values.
-				if (!addNew && objectLength(ms.values.selected) > 0) {
+				if (!addNew && objectSize(ms.values.selected) > 0) {
 					$.each(ms.values.selected, function(i, item) {
 						if (typeof item.isNew === 'undefined') {
 							names[item.name.toUpperCase()] = true;
@@ -766,7 +768,7 @@ jQuery(function($) {
 		var available_more = false;
 
 		$.each(data, function(i, item) {
-			if (ms.options.limit == 0 || objectLength(ms.values.available) < ms.options.limit) {
+			if (ms.options.limit == 0 || objectSize(ms.values.available) < ms.options.limit) {
 				if (typeof ms.values.available[item.id] === 'undefined'
 						&& typeof ms.values.selected[item.id] === 'undefined'
 						&& ms.options.excludeids.indexOf(item.id) === -1) {
@@ -790,7 +792,7 @@ jQuery(function($) {
 		var found = 0,
 			preselected = '';
 
-		if (objectLength(ms.values.available) == 0) {
+		if (objectSize(ms.values.available) == 0) {
 			var div = $('<div>', {
 					'class': 'multiselect-matches',
 					text: ms.options.labels['No matches found']
@@ -865,6 +867,9 @@ jQuery(function($) {
 		$obj.parents().add(window).one('scroll', hide_handler);
 		$(window).one('resize', hide_handler);
 
+		// For auto-test purposes.
+		$available.attr('data-opener', $obj.attr('id'));
+
 		var obj_offset = $obj.offset(),
 			obj_padding_y = $obj.outerHeight() - $obj.height(),
 			// Subtract 1px for borders of the input and available container to overlap.
@@ -876,7 +881,7 @@ jQuery(function($) {
 				$(window).height() + $(window).scrollTop() - available_top - obj_padding_y - 10
 			));
 
-		if (objectLength(ms.values.available) > 0) {
+		if (objectSize(ms.values.available) > 0) {
 			available_width_min = Math.max(available_width, 300);
 
 			// Prevent less than 15% width difference for the available list and the input field.
@@ -900,7 +905,7 @@ jQuery(function($) {
 
 		$available.scrollTop(0);
 
-		if (objectLength(ms.values.available) != 0) {
+		if (objectSize(ms.values.available) != 0) {
 			// Remove selected item selected state.
 			$('.selected li.selected', $obj).removeClass('selected');
 
@@ -930,7 +935,9 @@ jQuery(function($) {
 		$obj.parents().add(window).off('scroll', hide_handler);
 		$(window).off('resize', hide_handler);
 
-		$available.removeData(['obj', 'hide_handler']);
+		$available
+			.removeData(['obj', 'hide_handler'])
+			.removeAttr('data-opener');
 	}
 
 	function cleanAvailable($obj) {
@@ -1048,19 +1055,7 @@ jQuery(function($) {
 		var ms = $obj.data('multiSelect');
 
 		return (ms.options.limit != 0)
-			? ms.options.limit + objectLength(ms.values.selected) + ms.options.excludeids.length + 1
+			? ms.options.limit + objectSize(ms.values.selected) + ms.options.excludeids.length + 1
 			: null;
-	}
-
-	function objectLength(obj) {
-		var length = 0;
-
-		for (var key in obj) {
-			if (obj.hasOwnProperty(key)) {
-				length++;
-			}
-		}
-
-		return length;
 	}
 });

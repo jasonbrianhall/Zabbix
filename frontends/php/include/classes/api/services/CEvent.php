@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -796,7 +796,7 @@ class CEvent extends CApiService {
 		$data['eventids'] = zbx_toArray($data['eventids']);
 		$data['eventids'] = array_keys(array_flip($data['eventids']));
 
-		// Chack that at least one valid flag is set.
+		// Check that at least one valid flag is set.
 		$action_mask = ZBX_PROBLEM_UPDATE_CLOSE | ZBX_PROBLEM_UPDATE_ACKNOWLEDGE | ZBX_PROBLEM_UPDATE_MESSAGE
 				| ZBX_PROBLEM_UPDATE_SEVERITY;
 

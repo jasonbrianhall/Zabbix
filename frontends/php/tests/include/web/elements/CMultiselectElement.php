@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -30,8 +30,9 @@ class CMultiselectElement extends CElement {
 	/**
 	 * Multiselect fill modes.
 	 */
-	const MODE_SELECT	= 0;
-	const MODE_TYPE		= 1;
+	const MODE_SELECT			= 0;
+	const MODE_SELECT_MULTIPLE	= 1;
+	const MODE_TYPE				= 2;
 
 	protected static $default_mode = self::MODE_TYPE;
 	protected $mode;
@@ -100,9 +101,11 @@ class CMultiselectElement extends CElement {
 	 * @return $this
 	 */
 	public function select($label, $context = null) {
-		$this->edit($context)->query('link:'.$label)->one()->click();
-		$this->query('xpath:.//span[@class="subfilter-enabled"][string()='.CXPathHelper::escapeQuotes($label).']')
-				->waitUntilPresent();
+		if (is_array($label)) {
+			throw new Exception('Select of multiple labels is not supported in single select mode.');
+		}
+
+		$this->edit($context)->query('link:'.$label)->one()->click()->waitUntilNotPresent();
 
 		return $this;
 	}
@@ -126,7 +129,7 @@ class CMultiselectElement extends CElement {
 
 			foreach ($labels as $label) {
 				$row = $table->findRow('Name', $label);
-				if ($row === null) {
+				if (!$row->isValid()) {
 					throw new Exception('Cannot select row with label "'.$label.'" in multiselect element.');
 				}
 
@@ -175,6 +178,22 @@ class CMultiselectElement extends CElement {
 	}
 
 	/**
+	 * Get collection of multiselect controls (buttons).
+	 *
+	 * @return CElement
+	 */
+	public function getControls() {
+		$buttons = [];
+		$xpath = 'xpath:.//button';
+
+		foreach ($this->query($xpath)->all() as $button) {
+			$buttons[$button->getText()] = $button;
+		}
+
+		return new CElementCollection($buttons);
+	}
+
+	/**
 	 * Open selection overlay dialog.
 	 *
 	 * @param mixed $context  overlay dialog context (hostgroup / host)
@@ -182,9 +201,13 @@ class CMultiselectElement extends CElement {
 	 * @return COverlayDialogElement
 	 */
 	public function edit($context = null) {
-		$this->query('xpath:.//div[@class="multiselect-button"]/button')->one()->click();
+		/* TODO: extend the function for composite elements with two buttons,
+		 * Example of such multiselect: [ Input field ] ( Select item ) ( Select prototype )
+		 */
+		$this->getControls()->first()->click();
 
-		return COverlayDialogElement::find()->all()->last()->waitUntilReady()->setDataContext($context);
+		return COverlayDialogElement::find()->waitUntilPresent()
+				->all()->last()->waitUntilReady()->setDataContext($context);
 	}
 
 	/**
@@ -195,7 +218,8 @@ class CMultiselectElement extends CElement {
 			$text = [$text];
 		}
 
-		$input = $this->query('xpath:.//input[not(@type="hidden")]')->one();
+		$input = $this->query('xpath:.//input[not(@type="hidden")]|textarea')->one();
+		$id = CXPathHelper::escapeQuotes($this->query('class:multiselect')->one()->getAttribute('id'));
 		foreach ($text as $value) {
 			$input->overwrite($value)->fireEvent();
 
@@ -204,10 +228,14 @@ class CMultiselectElement extends CElement {
 			}
 
 			$content = CXPathHelper::escapeQuotes($value);
+
 			try {
 				$element = $this->query('xpath', implode('|', [
-					'//ul[@class="multiselect-suggest"]/li[@data-label='.$content.']',
-					'//ul[@class="multiselect-suggest"]/li[contains(@class, "suggest-new")]/span[text()='.$content.']'
+					'//div[@data-opener='.$id.']/ul[@class="multiselect-suggest"]/li[@data-label='.$content.']',
+					'//div[@data-opener='.$id.']/ul[@class="multiselect-suggest"]/li[contains(@data-label,'.$content.')]'.
+							'/span[contains(@class, "suggest-found") and text()='.$content.']',
+					'//div[@data-opener='.$id.']/ul[@class="multiselect-suggest"]/li[contains(@class, "suggest-new")]'.
+							'/span[text()='.$content.']'
 				]))->waitUntilPresent();
 			}
 			catch (NoSuchElementException $exception) {
@@ -237,7 +265,7 @@ class CMultiselectElement extends CElement {
 	 * @return $this
 	 */
 	public function fill($labels, $context = null) {
-		if ($this->mode !== self::MODE_SELECT && $this->mode !== self::MODE_TYPE) {
+		if (!in_array($this->mode, [self::MODE_SELECT, self::MODE_SELECT_MULTIPLE, self::MODE_TYPE])) {
 			throw new Exception('Unknown fill mode is set for multiselect element.');
 		}
 
@@ -259,6 +287,9 @@ class CMultiselectElement extends CElement {
 					}
 
 					if ($this->mode === self::MODE_SELECT) {
+						throw new Exception('Cannot select multiple items in single select mode.');
+					}
+					elseif ($this->mode === self::MODE_SELECT_MULTIPLE) {
 						$this->selectMultiple($label, $context);
 					}
 					else {
@@ -271,6 +302,9 @@ class CMultiselectElement extends CElement {
 		}
 
 		if ($this->mode === self::MODE_SELECT) {
+			return $this->select($labels, $context);
+		}
+		elseif ($this->mode === self::MODE_SELECT_MULTIPLE) {
 			return $this->selectMultiple($labels, $context);
 		}
 
@@ -282,5 +316,28 @@ class CMultiselectElement extends CElement {
 	 */
 	public function getValue() {
 		return $this->getSelected();
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function isEnabled($enabled = true) {
+		$input = $this->query('xpath:.//input[not(@type="hidden")]|textarea')->one(false);
+		if (!$input->isEnabled($enabled)) {
+			return false;
+		}
+
+		$multiselect = $this->query('class:multiselect')->one(false);
+		if ($multiselect->isValid() && ($multiselect->getAttribute('aria-disabled') === 'true') === $enabled) {
+			return false;
+		}
+
+		foreach ($this->getControls() as $control) {
+			if ($control->isEnabled() !== $enabled) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -1574,7 +1574,7 @@ class CApiInputValidator {
 		}
 
 		if ($data !== '' && CHtmlUrlValidator::validate($data, ($flags & API_ALLOW_USER_MACRO)) === false) {
-			$error = _s('Invalid parameter "%1$s": %2$s.', $path, _('unacceptible URL'));
+			$error = _s('Invalid parameter "%1$s": %2$s.', $path, _('unacceptable URL'));
 			return false;
 		}
 

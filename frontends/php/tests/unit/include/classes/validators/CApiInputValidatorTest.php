@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -2814,19 +2814,19 @@ class CApiInputValidatorTest extends PHPUnit_Framework_TestCase {
 				['type' => API_URL],
 				'javascript:alert()',
 				'/1/url',
-				'Invalid parameter "/1/url": unacceptible URL.'
+				'Invalid parameter "/1/url": unacceptable URL.'
 			],
 			[
 				['type' => API_URL],
 				'/chart_bar.php?a=1&b=2',
 				'/1/url',
-				'Invalid parameter "/1/url": unacceptible URL.'
+				'Invalid parameter "/1/url": unacceptable URL.'
 			],
 			[
 				['type' => API_URL],
 				'{$URL}',
 				'/1/url',
-				'Invalid parameter "/1/url": unacceptible URL.'
+				'Invalid parameter "/1/url": unacceptable URL.'
 			],
 			[
 				['type' => API_URL, 'flags' => API_ALLOW_USER_MACRO],

@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -64,9 +64,9 @@ void	zbx_mock_test_entry(void **state)
 			fail_msg("Cannot get expected 'value' parameter from test case data: %s",
 				zbx_mock_error_string(error));
 		}
-		else if (SUCCEED != is_double(tmp))
+		else if (SUCCEED != is_double(tmp, NULL))
 		{
-			fail_msg("func_pos parameter \"%s\" is not double.", tmp);
+			fail_msg("func_pos parameter \"%s\" is not double or is out of range.", tmp);
 		}
 
 		expected_value = str2double(tmp);

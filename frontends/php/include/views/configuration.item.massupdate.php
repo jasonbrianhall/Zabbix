@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -345,7 +345,7 @@ $preprocessing = (new CTable())
 	]);
 
 foreach ($data['preprocessing'] as $i => $step) {
-	// Depeding on preprocessing type, display corresponding params field and placeholders.
+	// Depending on preprocessing type, display corresponding params field and placeholders.
 	$params = [];
 
 	// Use numeric box for multiplier, otherwise use text box.

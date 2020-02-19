@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ class testPageTemplates extends CLegacyWebTest {
 	public $templateName = 'Template OS Linux';
 
 	public static function allTemplates() {
-		return CDBHelper::getDataProvider("select * from hosts where status in (".HOST_STATUS_TEMPLATE.')');
+		return CDBHelper::getRandomizedDataProvider('SELECT * FROM hosts WHERE status IN ('.HOST_STATUS_TEMPLATE.')', 25);
 	}
 
 	public function testPageTemplates_CheckLayout() {
@@ -73,9 +73,14 @@ class testPageTemplates extends CLegacyWebTest {
 		$sqlTriggers = "select triggerid,expression,description,url,status,value,priority,comments,error,templateid,type,state,flags from triggers order by triggerid";
 		$oldHashTriggers = CDBHelper::getHash($sqlTriggers);
 
-		$this->zbxTestLogin('templates.php');
+		$this->zbxTestLogin('templates.php?page=1');
 		$this->zbxTestDropdownSelectWait('groupid', 'all');
 
+		// Check if template name present on page, if not, check on second page.
+		if ($this->query('link', $name)->one(false)->isValid() === false) {
+			$this->query('xpath://div[@class="table-paging"]//span[@class="arrow-right"]/..')->one()->click();
+			$this->zbxTestWaitForPageToLoad();
+		}
 		$this->zbxTestTextPresent($name);
 		$this->zbxTestClickLinkText($name);
 		$this->zbxTestCheckHeader('Templates');
@@ -93,7 +98,7 @@ class testPageTemplates extends CLegacyWebTest {
 	}
 
 	public function testPageTemplates_FilterTemplateByName() {
-		$this->zbxTestLogin('templates.php');
+		$this->zbxTestLogin('templates.php?page=1');
 		$this->zbxTestDropdownSelectWait('groupid', 'Templates');
 		$this->zbxTestInputTypeOverwrite('filter_name', $this->templateName);
 		$this->zbxTestClickButtonText('Apply');

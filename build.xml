@@ -20,9 +20,10 @@
 		<property name="dbhost" value="${DBHOST}"/>
 		<property name="dbname" value="${DBNAME}"/>
 		<property name="dbuser" value="${DBUSER}"/>
-	 	<property name="dbpassword" value="${DBPASSWORD}"/>
-	 	<property name="phpunit_error_log" value="${PHPUNIT_ERROR_LOG}"/>
-	 	<property name="phpunit_port_prefix" value="${PHPUNIT_PORT_PREFIX}"/>
+		<property name="dbpassword" value="${DBPASSWORD}"/>
+		<property name="phpunit_error_log" value="${PHPUNIT_ERROR_LOG}"/>
+		<property name="phpunit_port_prefix" value="${PHPUNIT_PORT_PREFIX}"/>
+		<property name="screenshot_references_dir" value="${SCREENSHOT_REFERENCES_DIR}"/>
 		<property environment="env"/>
 
 		<!-- Create bootstrap.php -->
@@ -36,6 +37,7 @@
 		<replace file="frontends/php/tests/bootstrap.php" token="{CONFIG_DIR}" value="${basedir}/etc/"/>
 		<replace file="frontends/php/tests/bootstrap.php" token="{COMPONENT_DIR}" value="${basedir}/runtime/"/>
 		<replace file="frontends/php/tests/bootstrap.php" token="{PORT_PREFIX}" value="${phpunit_port_prefix}"/>
+		<replace file="frontends/php/tests/bootstrap.php" token="{SCREENSHOT_REFERENCES_DIR}" value="${screenshot_references_dir}"/>
 
 		<!-- Create PHP config file -->
 		<copy overwrite="true" file="frontends/php/tests/templates/zabbix.conf.php" tofile="frontends/php/conf/zabbix.conf.php"/>
@@ -94,7 +96,7 @@
 			<arg line="-h '${dbhost}'"/>
 			<arg line="-U '${dbuser}'"/>
 			<arg line="--set ON_ERROR_STOP=1"/>
-			<arg line="-c 'create database ${dbname}'"/>
+			<arg line="-c 'create database ${dbname} ENCODING = UTF8 TEMPLATE = template0'"/>
 		</exec>
 		<exec executable="psql" input="database/postgresql/schema.sql" failonerror="on">
 			<env key="PGPASSWORD" value="${dbpassword}"/>
@@ -136,7 +138,7 @@
 			<arg line="-h '${dbhost}'"/>
 			<arg line="-U '${dbuser}'"/>
 			<arg line="--set ON_ERROR_STOP=1"/>
-			<arg line="-c 'create database ${dbname}_proxy'"/>
+			<arg line="-c 'create database ${dbname}_proxy ENCODING = UTF8 TEMPLATE = template0'"/>
 		</exec>
 		<exec executable="psql" input="database/postgresql/schema.sql" failonerror="on">
 			<env key="PGPASSWORD" value="${dbpassword}"/>

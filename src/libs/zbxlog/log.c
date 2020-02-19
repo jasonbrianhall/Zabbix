@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -161,7 +161,9 @@ static void	rotate_log(const char *filename)
 		strscpy(filename_old, filename);
 		zbx_strlcat(filename_old, ".old", MAX_STRING_LEN);
 		remove(filename_old);
-
+#ifdef _WINDOWS
+		zbx_redirect_stdio(NULL);
+#endif
 		if (0 != rename(filename, filename_old))
 		{
 			FILE	*log_file = NULL;

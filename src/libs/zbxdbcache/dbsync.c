@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -2302,8 +2302,7 @@ static int	dbsync_compare_action(const zbx_dc_action_t *action, const DB_ROW dbr
  *                                                                            *
  * Purpose: compares actions table with cached configuration data             *
  *                                                                            *
- * Parameter: cache - [IN] the configuration cache                            *
- *            sync  - [OUT] the changeset                                     *
+ * Parameter: sync - [OUT] the changeset                                      *
  *                                                                            *
  * Return value: SUCCEED - the changeset was successfully calculated          *
  *               FAIL    - otherwise                                          *

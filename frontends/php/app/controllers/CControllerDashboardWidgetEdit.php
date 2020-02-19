@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -73,7 +73,10 @@ class CControllerDashboardWidgetEdit extends CController {
 			'dialogue' => [
 				'type' => $type,
 				'name' => $this->getInput('name', ''),
-				'fields' => $form->getFields()
+				'fields' => $form->getFields(),
+				'options' => [
+					'stick_to_top' => CWidgetConfig::getDialogueStickToTop($type)
+				]
 			],
 			'known_widget_types' => $known_widget_types,
 			'captions' => $this->getCaptions($form)

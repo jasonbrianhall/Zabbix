@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -664,13 +664,13 @@ $itemFormList->addRow(
 // Append value type to form list.
 if ($readonly) {
 	$itemForm->addVar('value_type', $data['value_type']);
-	$itemFormList->addRow((new CLabel(_('Type of information'), 'value_type_name'))->setAsteriskMark(),
+	$itemFormList->addRow(new CLabel(_('Type of information'), 'value_type_name'),
 		(new CTextBox('value_type_name', itemValueTypeString($data['value_type']), true))
 			->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
 	);
 }
 else {
-	$itemFormList->addRow((new CLabel(_('Type of information'), 'value_type')),
+	$itemFormList->addRow(new CLabel(_('Type of information'), 'value_type'),
 		(new CComboBox('value_type', $data['value_type'], null, [
 			ITEM_VALUE_TYPE_UINT64 => _('Numeric (unsigned)'),
 			ITEM_VALUE_TYPE_FLOAT => _('Numeric (float)'),
@@ -953,7 +953,7 @@ $preprocessing = (new CTable())
 	]);
 
 foreach ($data['preprocessing'] as $i => $step) {
-	// Depeding on preprocessing type, display corresponding params field and placeholders.
+	// Depending on preprocessing type, display corresponding params field and placeholders.
 	$params = [];
 
 	// Use numeric box for multiplier, otherwise use text box.

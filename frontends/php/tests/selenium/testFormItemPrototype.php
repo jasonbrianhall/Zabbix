@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -2667,7 +2667,7 @@ class testFormItemPrototype extends CLegacyWebTest {
 			[
 				[
 					'expected' => TEST_GOOD,
-					'name' => 'Add item prototype wiht all preprocessing',
+					'name' => 'Add item prototype with all preprocessing',
 					'key' => 'item.prototype.preprocessing',
 					'preprocessing' => [
 						['type' => 'Right trim', 'params' => 'abc'],

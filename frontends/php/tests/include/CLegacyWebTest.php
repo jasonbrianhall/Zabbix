@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -244,8 +244,8 @@ class CLegacyWebTest extends CWebTest {
 		$xpath = 'xpath://div[contains(@class, "multiselect") and @id="'.$id.'"]/input';
 		$this->query($xpath)->one()->overwrite($string);
 		$this->zbxTestClickXpathWait(
-			"//div[contains(@class, 'multiselect') and @id='$id']/div[@class='available']".
-			"/ul[@class='multiselect-suggest']/li[@data-id='$string']"
+			"//div[@class='multiselect-available' and @data-opener='$id']/ul[@class='multiselect-suggest']".
+			"/li[@data-id='$string']"
 		);
 
 		$this->zbxTestMultiselectAssertSelected($id, $string.' (new)');
@@ -322,11 +322,7 @@ class CLegacyWebTest extends CWebTest {
 	}
 
 	public function zbxTestInputTypeOverwrite($id, $str) {
-		$element = $this->query('id:'.$id)->waitUntilVisible()->one();
-
-		$element->click();
-		$this->page->keyPress([WebDriverKeys::CONTROL, 'a', WebDriverKeys::CONTROL]);
-		$element->sendKeys($str);
+		$this->query('id:'.$id)->waitUntilVisible()->one()->overwrite($str);
 	}
 
 	public function zbxTestInputTypeByXpath($xpath, $str, $validate = true) {

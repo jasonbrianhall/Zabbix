@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -20,55 +20,19 @@
 
 require_once 'vendor/autoload.php';
 
-require_once dirname(__FILE__).'/../CElement.php';
+require_once dirname(__FILE__).'/CCompositeInputElement.php';
 
 /**
- * Range control element.
+ * Color picker element.
  */
-class CRangeControlElement extends CElement {
+class CColorPickerElement extends CCompositeInputElement {
 
 	/**
-	 * Get range control input field.
-	 *
-	 * @return type
-	 */
-	public function getInput() {
-		return $this->query('xpath:./input')->waitUntilVisible()->one();
-	}
-
-	/**
-	 * Select range control value.
-	 *
-	 * @inheritdoc
-	 */
-	public function selectValue() {
-		$this->getInput()->selectValue();
-
-		return $this;
-	}
-
-	/**
-	 * Overwrite range control value.
+	 * Overwrite color picker value.
 	 *
 	 * @inheritdoc
 	 */
 	public function overwrite($text) {
-		$this->getInput()->overwrite($text);
-
-		return $this;
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function getValue() {
-		return $this->getInput()->getValue();
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function checkValue($expected, $raise_exception = true) {
-		return $this->getInput()->checkValue($expected, $raise_exception);
+		return parent::overwrite($text)->fireEvent();
 	}
 }

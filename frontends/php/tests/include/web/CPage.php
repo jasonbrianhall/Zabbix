@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -49,17 +49,49 @@ class CPage {
 	protected static $cookie = null;
 
 	/**
+	 * Page height.
+	 *
+	 * @var integer
+	 */
+	protected $height = null;
+
+	/**
+	 * Viewport freeze flag.
+	 *
+	 * @var boolean
+	 */
+	protected $viewportUpdated = false;
+
+	/**
 	 * Web driver and CElementQuery initialization.
 	 */
 	public function __construct() {
-		$options = new ChromeOptions();
-		$options->addArguments(['--no-sandbox', '--window-size='.self::DEFAULT_PAGE_WIDTH.','.self::DEFAULT_PAGE_HEIGHT]);
+		$capabilities = DesiredCapabilities::chrome();
+		if (defined('PHPUNIT_BROWSER_NAME')) {
+			$capabilities->setBrowserName(PHPUNIT_BROWSER_NAME);
+		}
 
-		$this->driver = RemoteWebDriver::create('http://localhost:4444/wd/hub',
-				DesiredCapabilities::chrome()->setCapability(ChromeOptions::CAPABILITY, $options)
+		if (!defined('PHPUNIT_BROWSER_NAME') || PHPUNIT_BROWSER_NAME === 'chrome') {
+			$options = new ChromeOptions();
+			$options->addArguments([
+				'--no-sandbox',
+				'--enable-font-antialiasing=false',
+				'--window-size='.self::DEFAULT_PAGE_WIDTH.','.self::DEFAULT_PAGE_HEIGHT
+			]);
+
+			$capabilities->setCapability(ChromeOptions::CAPABILITY, $options);
+		}
+
+		$this->driver = RemoteWebDriver::create('http://'.
+				(defined('PHPUNIT_DRIVER_ADDRESS') ? PHPUNIT_DRIVER_ADDRESS : 'localhost').
+				':4444/wd/hub', $capabilities
 		);
 
-		CElementQuery::setDriver($this->driver);
+		$this->driver->manage()->window()->setSize(
+				new WebDriverDimension(self::DEFAULT_PAGE_WIDTH, self::DEFAULT_PAGE_HEIGHT)
+		);
+
+		CElementQuery::setPage($this);
 	}
 
 	/**
@@ -67,6 +99,8 @@ class CPage {
 	 * Close all popup windows, switch to the initial window, remove cookies.
 	 */
 	public function cleanup() {
+		$this->resetViewport();
+
 		if (self::$cookie !== null) {
 			$session_id = $this->driver->manage()->getCookieNamed('zbx_sessionid');
 
@@ -79,7 +113,7 @@ class CPage {
 		$this->driver->manage()->deleteAllCookies();
 		try {
 			$this->driver->executeScript('sessionStorage.clear();');
-		} catch (Exception $exeption) {
+		} catch (Exception $exception) {
 			// Code is not missing here.
 		}
 
@@ -200,37 +234,113 @@ class CPage {
 	}
 
 	/**
-	 * Take screenshot of current page.
+	 * Set width and height of viewport.
 	 *
-	 * @return string
+	 * @param int $width
+	 * @param int $height
 	 */
-	public function takeScreenshot() {
+	protected function setViewport($width, $height) {
+		try {
+			CommandExecutor::executeCustom($this->driver, [
+				'cmd' => 'Emulation.setDeviceMetricsOverride',
+				'params' => [
+					'width'				=> $width,
+					'height'			=> $height,
+					'deviceScaleFactor'	=> 1,
+					'mobile'			=> false,
+					'fitWindow'			=> false
+				]
+			]);
+		} catch (Exception $exception) {
+			// Code is not missing here.
+		}
+	}
+
+	/**
+	 * Setting "frozen" viewport size.
+	 */
+	public function updateViewport() {
 		try {
 			if (!$this->driver->executeScript('return !!window.chrome;')) {
 				throw new Exception();
 			}
 		} catch (Exception $exception) {
-			return $this->driver->takeScreenshot();
+			return false;
 		}
 
 		try {
 			// Screenshot is 1px smaller to ensure that scroll is still present.
-			$height = (int)$this->driver->executeScript('return document.documentElement.getHeight();') - 1;
+			$this->height = (int)$this->driver->executeScript(
+					'return window.getComputedStyle(document.documentElement)["height"];'
+			) - 1;
 
-			if ($height > self::DEFAULT_PAGE_HEIGHT) {
-				CommandExecutor::executeCustom($this->driver, [
-					'cmd' => 'Emulation.setVisibleSize',
-					'params' => [
-						'width' => self::DEFAULT_PAGE_WIDTH,
-						'height' => $height
-					]
-				]);
+			if ($this->height > self::DEFAULT_PAGE_HEIGHT) {
+				$this->setViewport(self::DEFAULT_PAGE_WIDTH, $this->height);
+
+				$this->viewportUpdated = true;
 			}
 		} catch (Exception $exception) {
 			// Code is not missing here.
 		}
 
-		return $this->driver->takeScreenshot();
+		return true;
+	}
+
+	/**
+	 * Resetting viewport size to default.
+	 */
+	public function resetViewport() {
+		if ($this->viewportUpdated === false) {
+			return;
+		}
+
+		if (isset($this->height) && $this->height > self::DEFAULT_PAGE_HEIGHT) {
+			try {
+				CommandExecutor::executeCustom($this->driver, [
+					'cmd' => 'Emulation.clearDeviceMetricsOverride',
+					'params' => ['clear' => true]
+				]);
+			} catch (Exception $exception) {
+				// Code is not missing here.
+			}
+
+			$this->height = self::DEFAULT_PAGE_HEIGHT;
+		}
+
+		$this->viewportUpdated = false;
+	}
+
+	/**
+	 * Take screenshot of current page.
+	 *
+	 * @return string
+	 */
+	protected function takePageScreenshot() {
+		if ($this->viewportUpdated === true || !$this->updateViewport()) {
+			return $this->driver->takeScreenshot();
+		}
+
+		$screenshot = $this->driver->takeScreenshot();
+		$this->resetViewport();
+
+		return $screenshot;
+	}
+
+	/**
+	 * Take screenshot of current page or page element.
+	 *
+	 * @param CElement|null $element    page element to get screenshot of
+	 *
+	 * @return string
+	 */
+	public function takeScreenshot($element = null) {
+		$screenshot = $this->takePageScreenshot();
+
+		if ($element !== null) {
+			$screenshot = CImageHelper::getImageRegion($screenshot, $element->getRect());
+		}
+
+		return $screenshot;
 	}
 
 	/**
@@ -324,5 +434,25 @@ class CPage {
 	 */
 	public function query($type, $locator = null) {
 		return new CElementQuery($type, $locator);
+	}
+
+	/**
+	 * Get web driver instance.
+	 *
+	 * @return RemoteWebDriver
+	 */
+	public function getDriver() {
+		return $this->driver;
+	}
+
+	/**
+	 * Remove focus from the element.
+	 */
+	public function removeFocus() {
+		try {
+			$this->driver->executeScript('document.activeElement.blur();');
+		} catch (Exception $ex) {
+			// Code is not missing here.
+		}
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@ require_once 'vendor/autoload.php';
 
 require_once dirname(__FILE__).'/CElement.php';
 require_once dirname(__FILE__).'/CElementCollection.php';
+require_once dirname(__FILE__).'/elements/CNullElement.php';
 require_once dirname(__FILE__).'/elements/CFormElement.php';
 require_once dirname(__FILE__).'/elements/CTableElement.php';
 require_once dirname(__FILE__).'/elements/CTableRowElement.php';
@@ -33,10 +34,11 @@ require_once dirname(__FILE__).'/elements/COverlayDialogElement.php';
 require_once dirname(__FILE__).'/elements/CMessageElement.php';
 require_once dirname(__FILE__).'/elements/CMultiselectElement.php';
 require_once dirname(__FILE__).'/elements/CSegmentedRadioElement.php';
-require_once dirname(__FILE__).'/elements/CRangeControlElement.php';
 require_once dirname(__FILE__).'/elements/CCheckboxListElement.php';
 require_once dirname(__FILE__).'/elements/CMultifieldTableElement.php';
 require_once dirname(__FILE__).'/elements/CMultilineElement.php';
+require_once dirname(__FILE__).'/elements/CColorPickerElement.php';
+require_once dirname(__FILE__).'/elements/CCompositeInputElement.php';
 require_once dirname(__FILE__).'/elements/CPopupMenuElement.php';
 require_once dirname(__FILE__).'/elements/CPopupButtonElement.php';
 
@@ -108,11 +110,11 @@ class CElementQuery implements IWaitable {
 	protected $options = [];
 
 	/**
-	 * Shared web driver instance.
+	 * Shared web page instance.
 	 *
-	 * @var RemoteWebDriver
+	 * @var CPage
 	 */
-	protected static $driver;
+	protected static $page;
 
 	/**
 	 * Initialize element query by specified selector.
@@ -122,7 +124,7 @@ class CElementQuery implements IWaitable {
 	 */
 	public function __construct($type, $locator = null) {
 		$this->class = 'CElement';
-		$this->context = self::$driver;
+		$this->context = static::getDriver();
 
 		if ($type !== null) {
 			$this->by = static::getSelector($type, $locator);
@@ -192,12 +194,12 @@ class CElementQuery implements IWaitable {
 	}
 
 	/**
-	 * Set web driver instance.
+	 * Set web page instance.
 	 *
-	 * @param RemoteWebDriver $driver    web driver instance to be set
+	 * @param CPage $page    web page instance to be set
 	 */
-	public static function setDriver($driver) {
-		self::$driver = $driver;
+	public static function setPage($page) {
+		self::$page = $page;
 	}
 
 	/**
@@ -206,7 +208,20 @@ class CElementQuery implements IWaitable {
 	 * @return RemoteWebDriver
 	 */
 	public static function getDriver() {
-		return self::$driver;
+		if (self::$page === null) {
+			return null;
+		}
+
+		return self::$page->getDriver();
+	}
+
+	/**
+	 * Get web page instance.
+	 *
+	 * @return CPage
+	 */
+	public static function getPage() {
+		return self::$page;
 	}
 
 	/**
@@ -231,7 +246,7 @@ class CElementQuery implements IWaitable {
 	 * @return WebDriverWait
 	 */
 	public static function wait() {
-		return self::$driver->wait(20, self::WAIT_ITERATION);
+		return static::getDriver()->wait(20, self::WAIT_ITERATION);
 	}
 
 	/**
@@ -289,14 +304,14 @@ class CElementQuery implements IWaitable {
 	 */
 	public function one($should_exist = true) {
 		$class = $this->class;
-		$parent = ($this->context !== self::$driver) ? $this->context : null;
+		$parent = ($this->context !== static::getDriver()) ? $this->context : null;
 
 		try {
 			$element = $this->context->findElement($this->by);
 		}
 		catch (NoSuchElementException $exception) {
 			if (!$should_exist) {
-				return null;
+				return new CNullElement(array_merge($this->options, ['parent' => $parent, 'by' => $this->by]));
 			}
 
 			throw $exception;
@@ -367,7 +382,7 @@ class CElementQuery implements IWaitable {
 		$driver = static::getDriver();
 
 		return function () use ($driver) {
-			return $driver->executeScript('return document.readyState;') == 'complete';
+			return $driver->executeScript('return document.readyState === \'complete\' && (window.jQuery||{active:0}).active === 0;');
 		};
 	}
 
@@ -422,12 +437,7 @@ class CElementQuery implements IWaitable {
 		$target = $this;
 
 		return function () use ($target) {
-			$element = $target->one(false);
-			if ($element === null) {
-				return false;
-			}
-
-			return $element->isVisible();
+			return $target->one(false)->isVisible();
 		};
 	}
 
@@ -438,7 +448,7 @@ class CElementQuery implements IWaitable {
 	 * @param string       $prefix    xpath prefix
 	 * @param array|string $class     element classes to look for
 	 *
-	 * @return CElement|null
+	 * @return CElement|CNullElement
 	 */
 	public static function getInputElement($target, $prefix = './', $class = null) {
 		$classes = [
@@ -449,23 +459,27 @@ class CElementQuery implements IWaitable {
 			'CDropdownElement'			=> '/select[@name]',
 			'CCheckboxElement'			=> '/input[@name][@type="checkbox" or @type="radio"]',
 			'CMultiselectElement'		=> [
-				'/div[@class="multiselect-control"]',
-				'/div/div[@class="multiselect-control"]' // TODO: remove after fix DEV-1071.
+				'/div[contains(@class, "multiselect-control")]',
+				'/div/div[contains(@class, "multiselect-control")]' // TODO: remove after fix DEV-1071.
 			],
 			'CSegmentedRadioElement'	=> [
-				'/ul[@class="radio-list-control"]',
-				'/div/ul[@class="radio-list-control"]' // TODO: remove after fix DEV-1071.
+				'/ul[contains(@class, "radio-list-control")]',
+				'/div/ul[contains(@class, "radio-list-control")]' // TODO: remove after fix DEV-1071.
 			],
 			'CCheckboxListElement'		=> [
-				'/ul[@class="checkbox-list col-3"]',
-				'/ul[@class="list-check-radio"]'
+				'/ul[contains(@class, "checkbox-list")]',
+				'/ul[contains(@class, "list-check-radio")]'
 			],
 			'CTableElement'				=> [
 				'/table',
-				'/*[@class="table-forms-separator"]/table'
+				'/*[contains(@class, "table-forms-separator")]/table'
 			],
-			'CRangeControlElement'		=> '/div[@class="range-control"]',
-			'CMultilineElement'			=> '/div[@class="multilineinput-control"]'
+			'CCompositeInputElement'	=> [
+				'/div[contains(@class, "range-control")]',
+				'/div[contains(@class, "calendar-control")]'
+			],
+			'CColorPickerElement'		=> '/div[contains(@class, "input-color-picker")]',
+			'CMultilineElement'			=> '/div[contains(@class, "multilineinput-control")]'
 		];
 
 		if ($class !== null) {
@@ -490,11 +504,12 @@ class CElementQuery implements IWaitable {
 				$xpaths[] = $prefix.$selector;
 			}
 
-			if (($element = $target->query('xpath', implode('|', $xpaths))->cast($class)->one(false)) !== null) {
+			$element = $target->query('xpath', implode('|', $xpaths))->cast($class)->one(false);
+			if ($element->isValid()) {
 				return $element;
 			}
 		}
 
-		return null;
+		return new CNullElement(['locator' => 'input element']);
 	}
 }

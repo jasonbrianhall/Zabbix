@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -51,8 +51,9 @@ class testPageMaps extends CLegacyWebTest {
 	}
 
 	/**
-	* @dataProvider allMaps
-	*/
+	 * @dataProvider allMaps
+	 * @browsers chrome
+	 */
 	public function testPageMaps_SimpleUpdateConstructor($map) {
 		$name = $map['name'];
 		$sysmapid = $map['sysmapid'];
@@ -70,8 +71,20 @@ class testPageMaps extends CLegacyWebTest {
 		$this->zbxTestCheckTitle('Configuration of network maps');
 		$this->zbxTestClickLinkText($name);
 
+		$element = $this->query('xpath://div[@id="flickerfreescreen_mapimg"]/div/*[name()="svg"]')
+				->waitUntilPresent()->one();
+		sleep(2);
+		$this->assertScreenshotExcept($element, [
+			'query'	=> 'class:map-timestamp',
+			'color'	=> '#ffffff'
+		], 'view_'.$sysmapid);
+
 		$this->zbxTestContentControlButtonClickTextWait('Edit map');
 		$this->zbxTestCheckHeader('Network maps');
+
+		sleep(2);
+		$this->assertScreenshot($this->query('id:map-area')->waitUntilPresent()->one(), 'edit_'.$sysmapid);
+
 		$this->zbxTestClickWait('sysmap_update');
 		$this->zbxTestAcceptAlert();
 

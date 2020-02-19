@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -588,7 +588,7 @@ elseif (isset($_REQUEST['form'])) {
 		'hostid' => getRequest('hostid', 0),
 		'expression_action' => $expression_action,
 		'recovery_expression_action' => $recovery_expression_action,
-		'tags' => getRequest('tags', []),
+		'tags' => array_values(getRequest('tags', [])),
 		'correlation_mode' => getRequest('correlation_mode', ZBX_TRIGGER_CORRELATION_NONE),
 		'correlation_tag' => getRequest('correlation_tag', ''),
 		'manual_close' => getRequest('manual_close', ZBX_TRIGGER_MANUAL_CLOSE_NOT_ALLOWED),

@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -557,7 +557,7 @@ class CControllerMenuPopup extends CController {
 			}
 
 			if ($db_trigger['url'] !== '') {
-				$menu_data['url'] = CHtmlUrlValidator::validate($db_trigger['url'])
+				$menu_data['url'] = CHtmlUrlValidator::validate($db_trigger['url'], false)
 					? $db_trigger['url']
 					: 'javascript: alert(\''._s('Provided URL "%1$s" is invalid.', zbx_jsvalue($db_trigger['url'],
 							false, false)).'\');';

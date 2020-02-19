@@ -308,12 +308,12 @@ INSERT INTO maintenances_groups (maintenance_groupid, maintenanceid, groupid) VA
 INSERT INTO timeperiods (timeperiodid, timeperiod_type, every, month, dayofweek, day, start_time, period, start_date) VALUES (1,0,1,0,0,1,43200,184200,1294760340);
 INSERT INTO timeperiods (timeperiodid, timeperiod_type, every, month, dayofweek, day, start_time, period, start_date) VALUES (2,2,2,0,0,1,43200,93780,0);
 INSERT INTO timeperiods (timeperiodid, timeperiod_type, every, month, dayofweek, day, start_time, period, start_date) VALUES (3,3,2,0,85,1,85800,300,0);
-INSERT INTO timeperiods (timeperiodid, timeperiod_type, every, month, dayofweek, day, start_time, period, start_date) VALUES (4,4,0,1365,0,15,37500,183840,0);
+INSERT INTO timeperiods (timeperiodid, timeperiod_type, every, month, dayofweek, day, start_time, period, start_date) VALUES (4,4,1,1365,0,15,37500,183840,0);
 INSERT INTO timeperiods (timeperiodid, timeperiod_type, every, month, dayofweek, day, start_time, period, start_date) VALUES (5,4,1,2730,85,0,84600,1800,0);
 INSERT INTO timeperiods (timeperiodid, timeperiod_type, every, month, dayofweek, day, start_time, period, start_date) VALUES (6,0,1,0,0,1,43200,184200,1294760340);
 INSERT INTO timeperiods (timeperiodid, timeperiod_type, every, month, dayofweek, day, start_time, period, start_date) VALUES (7,2,2,0,0,1,43200,93780,0);
 INSERT INTO timeperiods (timeperiodid, timeperiod_type, every, month, dayofweek, day, start_time, period, start_date) VALUES (8,3,2,0,85,1,85800,300,0);
-INSERT INTO timeperiods (timeperiodid, timeperiod_type, every, month, dayofweek, day, start_time, period, start_date) VALUES (9,4,0,1365,0,15,37500,183840,0);
+INSERT INTO timeperiods (timeperiodid, timeperiod_type, every, month, dayofweek, day, start_time, period, start_date) VALUES (9,4,1,1365,0,15,37500,183840,0);
 INSERT INTO timeperiods (timeperiodid, timeperiod_type, every, month, dayofweek, day, start_time, period, start_date) VALUES (10,4,1,2730,85,0,84600,1800,0);
 INSERT INTO timeperiods (timeperiodid, timeperiod_type, every, month, dayofweek, day, start_time, period, start_date) VALUES (11,0,1,0,0,1,43200,90000,1534950000);
 
@@ -1442,25 +1442,25 @@ UPDATE users SET rows_per_page = 100 WHERE userid = 1;
 
 -- test data for testPageAdministrationGeneralIconMapping and testFormAdministrationGeneralIconMapping
 INSERT INTO icon_map (iconmapid, name, default_iconid) VALUES (100, 'Icon mapping one', 10);
-INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (1, 100, 2, 1, 'expresssion one', 0);
-INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (2, 100, 2, 1, 'expresssion two', 1);
+INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (1, 100, 2, 1, 'expression one', 0);
+INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (2, 100, 2, 1, 'expression two', 1);
 INSERT INTO icon_map (iconmapid, name, default_iconid) VALUES (101, 'Icon mapping for update', 15);
 INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (3, 101, 5, 4, '(1!@#$%^-=2*)', 0);
 INSERT INTO icon_map (iconmapid, name, default_iconid) VALUES (102, 'Icon mapping testForm update expression', 16);
 INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (4, 102, 6, 5, 'one more expression', 0);
 INSERT INTO icon_map (iconmapid, name, default_iconid) VALUES (103, 'Icon mapping to check delete functionality', 10);
-INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (5, 103, 2, 1, 'expresssion 1', 0);
-INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (6, 103, 2, 1, 'expresssion 2', 1);
-INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (7, 103, 2, 1, 'expresssion 3', 2);
-INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (8, 103, 2, 1, 'expresssion 4', 3);
+INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (5, 103, 2, 1, 'expression 1', 0);
+INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (6, 103, 2, 1, 'expression 2', 1);
+INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (7, 103, 2, 1, 'expression 3', 2);
+INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (8, 103, 2, 1, 'expression 4', 3);
 INSERT INTO icon_map (iconmapid, name, default_iconid) VALUES (104, 'used_by_map', 9);
 INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (9, 104, 2, 1, 'This Icon map used by map', 0);
 INSERT INTO sysmaps (sysmapid, name, width, height, backgroundid, label_type, label_location, highlight, expandproblem, markelements, show_unack, iconmapid, userid, private) VALUES (6, 'Map with icon mapping', 800, 600, NULL, 0, 0, 0, 1, 0, 0, 104, 1, 1);
 INSERT INTO icon_map (iconmapid, name, default_iconid) VALUES (105, 'Icon mapping to check clone functionality', 10);
-INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (10, 105, 2, 1, 'expresssion 1 for clone', 0);
-INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (11, 105, 2, 1, 'expresssion 2 for clone', 1);
-INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (12, 105, 2, 1, 'expresssion 3 for clone', 2);
-INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (13, 105, 2, 1, 'expresssion 4 for clone', 3);
+INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (10, 105, 2, 1, 'expression 1 for clone', 0);
+INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (11, 105, 2, 1, 'expression 2 for clone', 1);
+INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (12, 105, 2, 1, 'expression 3 for clone', 2);
+INSERT INTO icon_mapping (iconmappingid, iconmapid, iconid, inventory_link, expression, sortorder) VALUES (13, 105, 2, 1, 'expression 4 for clone', 3);
 
 -- Create two triggers with event
 INSERT INTO triggers (description,expression,recovery_mode,type,url,priority,comments,manual_close,status,correlation_mode,recovery_expression,correlation_tag,triggerid) VALUES ('Test trigger to check tag filter on problem page','{13083}>100','0','0','','3','','1','0','0','','','99250');
@@ -2099,3 +2099,66 @@ INSERT INTO screens (screenid, name, hsize, vsize, templateid, userid, private) 
 INSERT INTO screens_items (screenitemid, screenid, resourcetype, resourceid, width, height, x, y, colspan, rowspan, elements, valign, halign, style, url, dynamic, sort_triggers) VALUES (200021, 200021, 9, 50011, 500, 100, 0, 0, 1, 1, 0, 0, 0, 1, '', 0, 0);
 INSERT INTO screens_items (screenitemid, screenid, resourcetype, resourceid, width, height, x, y, colspan, rowspan, elements, valign, halign, style, url, dynamic, sort_triggers) VALUES (200022, 200021, 16, 50011, 500, 100, 0, 1, 1, 1, 25, 0, 0, 0, '', 0, 0);
 INSERT INTO screens_items (screenitemid, screenid, resourcetype, resourceid, width, height, x, y, colspan, rowspan, elements, valign, halign, style, url, dynamic, sort_triggers) VALUES (200023, 200021, 14, 50011, 500, 100, 0, 2, 1, 1, 25, 0, 0, 0, '', 0, 0);
+
+-- Dashboard for graph widget
+INSERT INTO dashboard (dashboardid, name, userid, private) VALUES (103, 'Dashboard for graph widgets', 1, 1);
+INSERT INTO widget (widgetid, dashboardid, type, name, x, y, width, height) VALUES (104, 103, 'svggraph', 'Test cases for update', 0, 0, 6, 5);
+INSERT INTO widget (widgetid, dashboardid, type, name, x, y, width, height) VALUES (105, 103, 'svggraph', 'Test cases for simple update and deletion', 6, 0, 6, 5);
+-- widget "Test cases for simple update and deletion"
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90000, 105, 0, 'ds.axisy.0', 0, '');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90001, 105, 0, 'ds.fill.0', 3, '');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90002, 105, 0, 'ds.missingdatafunc.0', 0, '');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90003, 105, 0, 'ds.transparency.0', 5, '');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90004, 105, 0, 'ds.type.0', 0, '');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90005, 105, 0, 'ds.width.0', 1, '');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90006, 105, 0, 'righty', 0, '');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90007, 105, 1, 'ds.color.0', 0, 'FF465C');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90008, 105, 1, 'ds.hosts.0.0', 0, 'Host*');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90009, 105, 1, 'ds.items.0.0', 0, 'Available memory');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90010, 105, 1, 'ds.timeshift.0', 0, '');
+-- widget "Test cases for update"
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90011, 104, 0, 'ds.axisy.0', 1, '');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90012, 104, 0, 'ds.pointsize.0', 4, '');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90013, 104, 0, 'ds.transparency.0', 6, '');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90014, 104, 0, 'ds.type.0', 1, '');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90015, 104, 0, 'graph_time', 1, '');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90016, 104, 0, 'lefty', 0, '');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90017, 104, 0, 'legend_lines', 2, '');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90018, 104, 0, 'or.pointsize.0', 1, '');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90019, 104, 0, 'righty_units', 1, '');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90020, 104, 0, 'severities', 0, '');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90021, 104, 0, 'show_problems', 1, '');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90022, 104, 0, 'source', 2, '');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90023, 104, 1, 'ds.color.0', 0, 'FF465C');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90024, 104, 1, 'ds.hosts.0.0', 0, 'update host');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90025, 104, 1, 'ds.items.0.0', 0, 'update item');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90026, 104, 1, 'ds.timeshift.0', 0, '1m');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90027, 104, 1, 'or.hosts.0.0', 0, 'override host');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90028, 104, 1, 'or.items.0.0', 0, 'override item');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90029, 104, 1, 'problemhosts.0', 0, 'ЗАББИКС Сервер');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90030, 104, 1, 'righty_max', 0, '5');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90031, 104, 1, 'righty_min', 0, '-2');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90032, 104, 1, 'righty_static_units', 0, 'KB');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90033, 104, 1, 'time_from', 0, 'now-10m');
+INSERT INTO widget_field (widget_fieldid, widgetid, type, name, value_int, value_str) VALUES (90034, 104, 1, 'time_to', 0, 'now-5m');
+
+-- testProblemsBySeverityWidget
+INSERT INTO dashboard (dashboardid, name, userid, private) VALUES (104, 'Dashboard for Problems by severity', 1, 1);
+INSERT INTO widget (widgetid, dashboardid, type, name, x, y, width, height) VALUES (106, 104, 'problemsbysv', 'Reference widget', 0, 0, 6, 5);
+INSERT INTO widget (widgetid, dashboardid, type, name, x, y, width, height) VALUES (107, 104, 'problemsbysv', 'Reference PBS widget to delete', 6, 0, 6, 5);
+
+-- testHostMacros
+INSERT INTO hostmacro (hostmacroid, hostid, macro, value) VALUES (90100, 20006, '{$MACRO1}', '');
+INSERT INTO hostmacro (hostmacroid, hostid, macro, value) VALUES (90101, 20006, '{$MACRO2}', '');
+
+INSERT INTO hosts (hostid, host, name, status, description) VALUES (30010, 'Host for macros remove', 'Host for macros remove', 0, '');
+INSERT INTO hosts_groups (hostgroupid, hostid, groupid) VALUES (90900, 30010, 4);
+INSERT INTO interface (type, ip, dns, useip, port, main, hostid, interfaceid) VALUES (1, '127.0.0.1', '', '1', '10050', '1', 30010, 20030);
+INSERT INTO hostmacro (hostmacroid, hostid, macro, value) VALUES (90102, 30010, '{$MACRO_FOR_REMOVE1}', '');
+INSERT INTO hostmacro (hostmacroid, hostid, macro, value) VALUES (90103, 30010, '{$MACRO_FOR_REMOVE2}', '');
+
+INSERT INTO hostmacro (hostmacroid, hostid, macro, value) VALUES (90104, 40000, '{$TEMPLATE_MACRO1}', '');
+INSERT INTO hostmacro (hostmacroid, hostid, macro, value) VALUES (90105, 40000, '{$TEMPLATE_MACRO2}', '');
+
+INSERT INTO hostmacro (hostmacroid, hostid, macro, value) VALUES (90106, 99016, '{$TEMPLATE_MACRO_FOR_REMOVE1}', '');
+INSERT INTO hostmacro (hostmacroid, hostid, macro, value) VALUES (90107, 99016, '{$TEMPLATE_MACRO_FOR_REMOVE2}', '');

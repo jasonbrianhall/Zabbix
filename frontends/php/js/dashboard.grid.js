@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -424,7 +424,7 @@
 		});
 
 		/**
-		 * Compact affected widgets removing empty space between them when possible. Additionaly built overlap array
+		 * Compact affected widgets removing empty space between them when possible. Additionally buid overlap array
 		 * which will contain maximal coordinate occupied by widgets on every opposite axis line.
 		 */
 		affected.each(function(box) {
@@ -612,7 +612,7 @@
 
 		/**
 		 * When resize failed to fit affected widgets move them into visible area and decrease size of widget
-		 * which started resize operation, additionaly setting 'overflow' property to widget.
+		 * which started resize operation, additionally setting 'overflow' property to widget.
 		 */
 		if (overlap > 0) {
 			widget.current_pos[size_key] -= overlap;
@@ -996,15 +996,6 @@
 				doWidgetResize($obj, $(event.target), data);
 			},
 			resize: function(event, ui) {
-				// Hack for Safari to manually accept parent container height in pixels on widget resize.
-				if (SF) {
-					$.each(data['widgets'], function() {
-						if (this.type === 'clock' || this.type === 'sysmap') {
-							this.content_body.find(':first').height(this.content_body.height());
-						}
-					});
-				}
-
 				var $div = $(event.target);
 
 				if (ui.position.left < 0) {
@@ -1036,15 +1027,6 @@
 				// Hide resize handles for situation when mouse button was released outside dashboard container area.
 				if (widget['div'].has(event.toElement).length == 0) {
 					widget['div'].find('.ui-resizable-handle').hide();
-				}
-
-				// Hack for Safari to manually accept parent container height in pixels when done widget snapping to grid.
-				if (SF) {
-					$.each(data['widgets'], function() {
-						if (this.type === 'clock' || this.type === 'sysmap') {
-							this.content_body.find(':first').height(this.content_body.height());
-						}
-					});
 				}
 
 				// Invoke onResizeEnd on every affected widget.
@@ -1192,6 +1174,8 @@
 
 		startPreloader(widget);
 
+		$('#dashbrd-save').prop('disabled', true);
+
 		jQuery.ajax({
 			url: url.getUrl(),
 			method: 'POST',
@@ -1242,6 +1226,8 @@
 					widget['update_attempts'] = 0;
 					updateWidgetContent($obj, data, widget);
 				}
+				$('#dashbrd-save').prop('disabled', false);
+
 			}, function() {
 				// TODO: gentle message about failed update of widget content
 				widget['update_attempts'] = 0;
@@ -1275,6 +1261,11 @@
 		updateWidgetContent($obj, data, widget);
 	}
 
+	/**
+	 * @param {object} $obj
+	 * @param {object} data
+	 * @param {object} widget
+	 */
 	function updateWidgetConfig($obj, data, widget) {
 		var	url = new Curl('zabbix.php'),
 			fields = $('form', data.dialogue['body']).serializeJSON(),
@@ -1337,7 +1328,10 @@
 				.appendTo($obj);
 		}
 
-		$.ajax({
+		var $save_btn = data.dialogue.div.find('.dialogue-widget-save');
+		$save_btn.prop('disabled', true);
+
+		overlays_stack.getById('widgetConfg').xhr = $.ajax({
 			url: url.getUrl(),
 			method: 'POST',
 			dataType: 'json',
@@ -1347,6 +1341,7 @@
 					// Error returned. Remove previous errors.
 					$('.msg-bad', data.dialogue['body']).remove();
 					data.dialogue['body'].prepend(resp.errors);
+					$save_btn.prop('disabled', false);
 				}
 				else {
 					// No errors, proceed with update.
@@ -1406,6 +1401,9 @@
 				}
 			}
 		})
+			.fail(function() {
+				$save_btn.prop('disabled', false);
+			})
 			.always(function() {
 				if ($placeholder) {
 					$placeholder.remove();
@@ -1885,7 +1883,7 @@
 
 	function updateWidgetDynamic($obj, data, widget) {
 		// This function may be called for widget that is not in data['widgets'] array yet.
-		if (typeof(widget['fields']['dynamic']) !== 'undefined' && widget['fields']['dynamic'] === '1') {
+		if (typeof(widget['fields']['dynamic']) !== 'undefined' && widget['fields']['dynamic'] == '1') {
 			if (data['dashboard']['dynamic']['has_dynamic_widgets'] === true) {
 				widget['dynamic'] = {
 					'hostid': data['dashboard']['dynamic']['hostid'],
@@ -2413,7 +2411,7 @@
 						 * Set the 'sticked-to-top' class before updating the body for it's mutation handler
 						 * to have actual data for the popup positioning.
 						 */
-						if (data.dialogue['widget_type'] === 'svggraph') {
+						if (resp.options.stick_to_top) {
 							jQuery('[data-dialogueid="widgetConfg"]').addClass('sticked-to-top');
 						}
 

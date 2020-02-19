@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -5197,7 +5197,7 @@ static int	process_lld_macro_token(char **data, zbx_token_t *token, int flags, c
 	c = (*data)[r + 1];
 	(*data)[r + 1] = '\0';
 
-	if (SUCCEED != zbx_json_value_by_name_dyn(jp_row, *data + l, &replace_to, &replace_to_alloc))
+	if (SUCCEED != zbx_json_value_by_name_dyn(jp_row, *data + l, &replace_to, &replace_to_alloc, NULL))
 	{
 		zabbix_log(LOG_LEVEL_DEBUG, "cannot substitute macro \"%s\": not found in value set", *data + l);
 

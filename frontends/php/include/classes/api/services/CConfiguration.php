@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -115,7 +115,8 @@ class CConfiguration extends CApiService {
 					'updateExisting' =>		['type' => API_BOOLEAN, 'default' => false]
 				]],
 				'templateLinkage' =>	['type' => API_OBJECT, 'fields' => [
-					'createMissing' =>		['type' => API_BOOLEAN, 'default' => false]
+					'createMissing' =>		['type' => API_BOOLEAN, 'default' => false],
+					'deleteMissing' =>		['type' => API_BOOLEAN, 'default' => false]
 				]],
 				'templates' =>			['type' => API_OBJECT, 'fields' => [
 					'createMissing' =>		['type' => API_BOOLEAN, 'default' => false],
