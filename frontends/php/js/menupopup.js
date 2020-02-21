@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -1078,7 +1078,7 @@ jQuery(function($) {
 
 				var overlay = removeFromOverlaysStack('menu-popup', return_focus);
 
-				if (overlay !== null && typeof overlay['element'] !== undefined) {
+				if (overlay && typeof overlay['element'] !== undefined) {
 					// Remove expanded attribute of the original opener.
 					$(overlay['element']).removeAttr('data-expanded');
 				}

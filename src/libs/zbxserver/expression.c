@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -5518,6 +5518,14 @@ static int	process_lld_macro_token(char **data, zbx_token_t *token, int flags, c
 		char	*replace_to_esc;
 
 		replace_to_esc = zbx_dyn_escape_string(replace_to, "\\\n\"");
+		zbx_free(replace_to);
+		replace_to = replace_to_esc;
+	}
+	else if (0 != (flags & ZBX_TOKEN_JSONPATH) && ZBX_TOKEN_LLD_MACRO == token->type)
+	{
+		char	*replace_to_esc;
+
+		replace_to_esc = zbx_dyn_escape_string(replace_to, "\\\"");
 		zbx_free(replace_to);
 		replace_to = replace_to_esc;
 	}

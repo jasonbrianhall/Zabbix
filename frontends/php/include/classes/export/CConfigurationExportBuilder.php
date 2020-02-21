@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -86,6 +86,11 @@ class CConfigurationExportBuilder {
 					continue;
 				}
 
+				if (array_key_exists('export', $val)) {
+					$store[$tag] = call_user_func($val['export'], $row);
+					continue;
+				}
+
 				if (($is_indexed_array || $is_array) && $has_data) {
 					$temp_store = $this->build($val, $is_array ? [$value] : $value, $tag);
 					if ($is_required || $temp_store) {
@@ -94,22 +99,17 @@ class CConfigurationExportBuilder {
 					continue;
 				}
 
-				if (array_key_exists('export', $val)) {
-					$store[$tag] = call_user_func($val['export'], $row);
+				if (array_key_exists('in', $val)) {
+					if (!array_key_exists($value, $val['in'])) {
+						throw new Exception(_s('Invalid tag "%1$s": %2$s.', $tag,
+							_s('unexpected constant value "%1$s"', $value)
+						));
+					}
+
+					$store[$tag] = $val['in'][$value];
 				}
 				else {
-					if (array_key_exists('in', $val)) {
-						if (!array_key_exists($value, $val['in'])) {
-							throw new Exception(_s('Invalid tag "%1$s": %2$s.', $tag,
-								_s('unexpected constant value "%1$s"', $value)
-							));
-						}
-
-						$store[$tag] = $val['in'][$value];
-					}
-					else {
-						$store[$tag] = $value;
-					}
+					$store[$tag] = $value;
 				}
 			}
 
@@ -1322,7 +1322,7 @@ class CConfigurationExportBuilder {
 			$link['selementpos1'] = $flipped_selements[$link['selementid1']];
 			$link['selementpos2'] = $flipped_selements[$link['selementid2']];
 
-			// Sort selements positons asc.
+			// Sort selements by position asc.
 			if ($link['selementpos2'] < $link['selementpos1']) {
 				zbx_swap($link['selementpos1'], $link['selementpos2']);
 			}

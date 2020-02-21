@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -1676,7 +1676,7 @@ class testFormAction extends CLegacyWebTest {
 						'value' => 'application',
 					],
 					[
-						'type' => 'Tag',
+						'type' => 'Tag name',
 						'operator' => 'does not contain',
 						'value' => 'Does not contain Tag',
 					],
@@ -1844,7 +1844,7 @@ class testFormAction extends CLegacyWebTest {
 					case 'Host name':
 					case 'Host metadata':
 					case 'Trigger name':
-					case 'Tag':
+					case 'Tag name':
 					case 'Received value':
 						if (array_key_exists('operator', $condition)) {
 							$this->zbxTestDropdownSelectWait('new_condition_operator', $condition['operator']);

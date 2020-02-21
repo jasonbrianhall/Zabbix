@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -24,10 +24,10 @@
 #define ZBX_STR(str)	ZBX_STR2(str)
 
 #define APPLICATION_NAME	"Zabbix Agent"
-#define ZABBIX_REVDATE		"25 November 2019"
+#define ZABBIX_REVDATE		"21 February 2020"
 #define ZABBIX_VERSION_MAJOR	4
 #define ZABBIX_VERSION_MINOR	4
-#define ZABBIX_VERSION_PATCH	3
+#define ZABBIX_VERSION_PATCH	6
 #define ZABBIX_VERSION_REVISION	{ZABBIX_REVISION}
 #ifdef _WINDOWS
 #	define ZABBIX_VERSION_RC_NUM	{ZABBIX_RC_NUM}

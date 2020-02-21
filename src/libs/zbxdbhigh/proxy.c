@@ -1,6 +1,6 @@
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -488,22 +488,21 @@ zbx_proxy_item_config_t;
  *                                                                            *
  ******************************************************************************/
 static int	get_proxyconfig_table_items(zbx_uint64_t proxy_hostid, struct zbx_json *j, const ZBX_TABLE *table,
-		zbx_vector_uint64_t *itemids)
+		zbx_hashset_t *itemids)
 {
 	char			*sql = NULL;
 	size_t			sql_alloc = 4 * ZBX_KIBIBYTE, sql_offset = 0;
 	int			f, fld, fld_type = -1, fld_key = -1, fld_master = -1, ret = SUCCEED;
 	DB_RESULT		result;
 	DB_ROW			row;
-	zbx_hashset_t		proxy_items, itemids_added;
+	zbx_hashset_t		proxy_items;
 	struct zbx_json		*jrow;
 	zbx_vector_ptr_t	items;
-	zbx_uint64_t		itemid, *pitemid;
+	zbx_uint64_t		itemid;
 	zbx_hashset_iter_t	iter;
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s() proxy_hostid:" ZBX_FS_UI64, __func__, proxy_hostid);
 
-	zbx_hashset_create(&itemids_added, 100, ZBX_DEFAULT_UINT64_HASH_FUNC, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
 	zbx_json_addobject(j, table->table);
 	zbx_json_addarray(j, "fields");
 
@@ -585,7 +584,7 @@ static int	get_proxyconfig_table_items(zbx_uint64_t proxy_hostid, struct zbx_jso
 		else
 		{
 			ZBX_STR2UINT64(itemid, row[0]);
-			zbx_hashset_insert(&itemids_added, &itemid, sizeof(itemid));
+			zbx_hashset_insert(itemids, &itemid, sizeof(itemid));
 			zbx_json_addarray(j, NULL);
 			jrow = j;
 		}
@@ -619,9 +618,9 @@ static int	get_proxyconfig_table_items(zbx_uint64_t proxy_hostid, struct zbx_jso
 		for (i = 0; i < items.values_num; i++)
 		{
 			proxy_item = (zbx_proxy_item_config_t *)items.values[i];
-			if (NULL != zbx_hashset_search(&itemids_added, &proxy_item->master_itemid))
+			if (NULL != zbx_hashset_search(itemids, &proxy_item->master_itemid))
 			{
-				zbx_hashset_insert(&itemids_added, &proxy_item->itemid, sizeof(itemid));
+				zbx_hashset_insert(itemids, &proxy_item->itemid, sizeof(itemid));
 				zbx_json_addraw(j, NULL, proxy_item->data.buffer);
 			}
 			zbx_json_free(&proxy_item->data);
@@ -635,23 +634,16 @@ static int	get_proxyconfig_table_items(zbx_uint64_t proxy_hostid, struct zbx_jso
 
 	DBfree_result(result);
 
-	zbx_hashset_iter_reset(&itemids_added, &iter);
-	while (NULL != (pitemid = (zbx_uint64_t *)zbx_hashset_iter_next(&iter)))
-		zbx_vector_uint64_append(itemids, *pitemid);
-	zbx_vector_uint64_sort(itemids, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
 skip_data:
 	zbx_free(sql);
 
 	zbx_json_close(j);	/* data */
 	zbx_json_close(j);	/* table->table */
-	zbx_hashset_destroy(&itemids_added);
 
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s():%s", __func__, zbx_result_string(ret));
 
 	return ret;
 }
-
-#define ZBX_MAX_IDS_PER_SELECT 10000
 
 /******************************************************************************
  *                                                                            *
@@ -660,12 +652,12 @@ skip_data:
  * Purpose: prepare items table proxy configuration data                      *
  *                                                                            *
  ******************************************************************************/
-static int	get_proxyconfig_table_items_ext(const zbx_vector_uint64_t *itemids, struct zbx_json *j,
-		const ZBX_TABLE *table)
+static int	get_proxyconfig_table_items_ext(zbx_uint64_t proxy_hostid, const zbx_hashset_t *itemids,
+		struct zbx_json *j, const ZBX_TABLE *table)
 {
 	char		*sql = NULL;
-	size_t		sql_alloc = 4 * ZBX_KIBIBYTE, sql_offset = 0, filter_offset;
-	int		f, ret = SUCCEED, i;
+	size_t		sql_alloc = 4 * ZBX_KIBIBYTE, sql_offset = 0;
+	int		f, ret = SUCCEED, index = 1, itemid_index = 0;
 	DB_RESULT	result;
 	DB_ROW		row;
 
@@ -685,38 +677,48 @@ static int	get_proxyconfig_table_items_ext(const zbx_vector_uint64_t *itemids, s
 		if (0 == (table->fields[f].flags & ZBX_PROXY))
 			continue;
 
+		/* either the table uses itemid as primary key, then it will be stored in the */
+		/* first (0) column as record id, or it will have reference to items table    */
+		/* through itemid field                                                       */
+		if (0 == strcmp(table->fields[f].name, "itemid"))
+			itemid_index = index;
+
 		zbx_strcpy_alloc(&sql, &sql_alloc, &sql_offset, ",t.");
 		zbx_strcpy_alloc(&sql, &sql_alloc, &sql_offset, table->fields[f].name);
 		zbx_json_addstring(j, NULL, table->fields[f].name, ZBX_JSON_TYPE_STRING);
+		index++;
 	}
 
 	zbx_json_close(j);	/* fields */
 
 	zbx_json_addarray(j, "data");
 
-	zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset, " from %s t where", table->table);
-	filter_offset = sql_offset;
-	for (i = 0; i < itemids->values_num; i += ZBX_MAX_IDS_PER_SELECT)
+	zbx_snprintf_alloc(&sql, &sql_alloc, &sql_offset,
+			" from %s t,items i,hosts h"
+			" where t.itemid=i.itemid"
+				" and i.hostid=h.hostid"
+				" and h.proxy_hostid=" ZBX_FS_UI64,
+				table->table, proxy_hostid);
+
+	if (NULL == (result = DBselect("%s", sql)))
 	{
-		int	values_num;
-		values_num = MIN(i + ZBX_MAX_IDS_PER_SELECT, itemids->values_num) - i;
-		DBadd_condition_alloc(&sql, &sql_alloc, &sql_offset, "t.itemid", itemids->values + i, values_num);
+		ret = FAIL;
+		goto skip_data;
+	}
 
-		if (NULL == (result = DBselect("%s", sql)))
-		{
-			ret = FAIL;
-			goto skip_data;
-		}
+	while (NULL != (row = DBfetch(result)))
+	{
+		zbx_uint64_t	itemid;
 
-		while (NULL != (row = DBfetch(result)))
+		ZBX_STR2UINT64(itemid, row[itemid_index]);
+		if (NULL != zbx_hashset_search((zbx_hashset_t *)itemids, &itemid))
 		{
 			zbx_json_addarray(j, NULL);
 			proxyconfig_add_row(j, row, table);
 			zbx_json_close(j);
 		}
-		DBfree_result(result);
-		sql_offset = filter_offset;
 	}
+	DBfree_result(result);
 skip_data:
 	zbx_free(sql);
 
@@ -969,11 +971,11 @@ int	get_proxyconfig_data(zbx_uint64_t proxy_hostid, struct zbx_json *j, char **e
 	int			i, ret = FAIL;
 	const ZBX_TABLE		*table;
 	zbx_vector_uint64_t	hosts, httptests;
-	zbx_vector_uint64_t	itemids;
+	zbx_hashset_t		itemids;
 
 	zabbix_log(LOG_LEVEL_DEBUG, "In %s() proxy_hostid:" ZBX_FS_UI64, __func__, proxy_hostid);
 
-	zbx_vector_uint64_create(&itemids);
+	zbx_hashset_create(&itemids, 1000, ZBX_DEFAULT_UINT64_HASH_FUNC, ZBX_DEFAULT_UINT64_COMPARE_FUNC);
 	zbx_vector_uint64_create(&hosts);
 	zbx_vector_uint64_create(&httptests);
 
@@ -991,8 +993,8 @@ int	get_proxyconfig_data(zbx_uint64_t proxy_hostid, struct zbx_json *j, char **e
 		}
 		else if (0 == strcmp(proxytable[i], "item_preproc") || 0 == strcmp(proxytable[i], "item_rtdata"))
 		{
-			if (0 != itemids.values_num)
-				ret = get_proxyconfig_table_items_ext(&itemids, j, table);
+			if (0 != itemids.num_data)
+				ret = get_proxyconfig_table_items_ext(proxy_hostid, &itemids, j, table);
 		}
 		else
 			ret = get_proxyconfig_table(proxy_hostid, j, table, &hosts, &httptests);
@@ -1009,7 +1011,7 @@ out:
 	DBcommit();
 	zbx_vector_uint64_destroy(&httptests);
 	zbx_vector_uint64_destroy(&hosts);
-	zbx_vector_uint64_destroy(&itemids);
+	zbx_hashset_destroy(&itemids);
 
 	zabbix_log(LOG_LEVEL_DEBUG, "End of %s():%s", __func__, zbx_result_string(ret));
 
@@ -3204,16 +3206,13 @@ static int	parse_history_data_row_hostkey(const struct zbx_json_parse *jp_row, z
  *             parsed_num   - [OUT] the number of values parsed               *
  *             unique_shift - [IN/OUT] auto increment nanoseconds to ensure   *
  *                                     unique value of timestamps             *
- *             info         - [OUT] address of a pointer to the info          *
- *                                  string (should be freed by the caller)    *
  *                                                                            *
  * Return value:  SUCCEED - values were parsed successfully                   *
  *                FAIL    - an error occurred                                 *
  *                                                                            *
  ******************************************************************************/
 static int	parse_history_data(struct zbx_json_parse *jp_data, const char **pnext, zbx_agent_value_t *values,
-		zbx_host_key_t *hostkeys, int *values_num, int *parsed_num, zbx_timespec_t *unique_shift,
-		char **error)
+		zbx_host_key_t *hostkeys, int *values_num, int *parsed_num, zbx_timespec_t *unique_shift)
 {
 	struct zbx_json_parse	jp_row;
 	int			ret = FAIL;
@@ -3237,7 +3236,7 @@ static int	parse_history_data(struct zbx_json_parse *jp_data, const char **pnext
 	{
 		if (FAIL == zbx_json_brackets_open(*pnext, &jp_row))
 		{
-			*error = zbx_strdup(*error, zbx_json_strerror());
+			zabbix_log(LOG_LEVEL_WARNING, "%s", zbx_json_strerror());
 			goto out;
 		}
 
@@ -3580,10 +3579,10 @@ static int	sender_item_validator(DC_ITEM *item, zbx_socket_t *sock, void *args, 
 	return rights->value;
 }
 
-static int	process_history_data_by_keys(zbx_socket_t *sock, zbx_client_item_validator_t validator_func,
+static void	process_history_data_by_keys(zbx_socket_t *sock, zbx_client_item_validator_t validator_func,
 		void *validator_args, char **info, struct zbx_json_parse *jp_data, const char *token)
 {
-	int			ret, values_num, read_num, processed_num = 0, total_num = 0, i;
+	int			values_num, read_num, processed_num = 0, total_num = 0, i;
 	zbx_timespec_t		unique_shift = {0, 0};
 	const char		*pnext = NULL;
 	char			*error = NULL;
@@ -3602,7 +3601,7 @@ static int	process_history_data_by_keys(zbx_socket_t *sock, zbx_client_item_vali
 	memset(hostkeys, 0, sizeof(zbx_host_key_t) * ZBX_HISTORY_VALUES_MAX);
 
 	while (SUCCEED == parse_history_data(jp_data, &pnext, values, hostkeys, &values_num, &read_num,
-			&unique_shift, &error) && 0 != values_num)
+			&unique_shift) && 0 != values_num)
 	{
 		DCconfig_get_items_by_keys(items, hostkeys, errcodes, values_num);
 
@@ -3662,19 +3661,8 @@ static int	process_history_data_by_keys(zbx_socket_t *sock, zbx_client_item_vali
 	zbx_free(hostkeys);
 	zbx_free(items);
 
-	if (NULL == error)
-	{
-		ret = SUCCEED;
-		*info = zbx_dsprintf(*info, "processed: %d; failed: %d; total: %d; seconds spent: " ZBX_FS_DBL,
-				processed_num, total_num - processed_num, total_num, zbx_time() - sec);
-	}
-	else
-	{
-		zbx_free(*info);
-		*info = error;
-	}
-
-	return ret;
+	*info = zbx_dsprintf(*info, "processed: %d; failed: %d; total: %d; seconds spent: " ZBX_FS_DBL,
+			processed_num, total_num - processed_num, total_num, zbx_time() - sec);
 }
 
 /******************************************************************************
@@ -3759,7 +3747,7 @@ static int	process_client_history_data(zbx_socket_t *sock, struct zbx_json_parse
 		}
 	}
 	else
-		ret = process_history_data_by_keys(sock, validator_func, validator_args, info, &jp_data, token);
+		process_history_data_by_keys(sock, validator_func, validator_args, info, &jp_data, token);
 out:
 	zbx_free(token);
 

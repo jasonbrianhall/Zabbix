@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -88,7 +88,11 @@ class testFormAdministrationGeneralAutoRegistration extends CWebTest {
 						'Resource' => 'Auto registration',
 						'Action' => 'Updated',
 						'ID' => 1,
-						'Details' => "config.tls_accept: 1 => 2\nconfig.tls_psk_identity: ******** => ********\nconfig.tls_psk: ******** => ********"
+						'Details' => [
+							'config.tls_accept: 1 => 2',
+							'config.tls_psk_identity: ******** => ********',
+							'config.tls_psk: ******** => ********'
+						]
 					]
 				]
 			],
@@ -103,7 +107,7 @@ class testFormAdministrationGeneralAutoRegistration extends CWebTest {
 						'Resource' => 'Auto registration',
 						'Action' => 'Updated',
 						'ID' => 1,
-						'Details' => 'config.tls_accept: 2 => 3'
+						'Details' => ['config.tls_accept: 2 => 3']
 					]
 				]
 			],
@@ -118,7 +122,11 @@ class testFormAdministrationGeneralAutoRegistration extends CWebTest {
 						'Resource' => 'Auto registration',
 						'Action' => 'Updated',
 						'ID' => 1,
-						'Details' => "config.tls_accept: 3 => 1\nconfig.tls_psk_identity: ******** => ********\nconfig.tls_psk: ******** => ********"
+						'Details' => [
+							'config.tls_accept: 3 => 1',
+							'config.tls_psk_identity: ******** => ********',
+							'config.tls_psk: ******** => ********'
+						]
 					]
 				]
 			]
@@ -147,7 +155,12 @@ class testFormAdministrationGeneralAutoRegistration extends CWebTest {
 		// Get first row data.
 		$row = $rows->get(0);
 		foreach ($data['audit'] as $column => $value) {
-			$text = $row->getColumnData($column, $value);
+			$text = $row->getColumn($column)->getText();
+			if (is_array($value)) {
+				$text = explode("\n", $text);
+				sort($text);
+				sort($value);
+			}
 			$this->assertEquals($value, $text);
 		}
 	}
@@ -323,7 +336,7 @@ class testFormAdministrationGeneralAutoRegistration extends CWebTest {
 		if (in_array('No encryption', $data['fields']['Encryption level']) && count($data['fields']['Encryption level']) === 1) {
 			$this->assertFalse($form->query('id:tls_psk_identity')->one()->isDisplayed());
 			$this->assertFalse($form->query('id:tls_psk')->one()->isDisplayed());
-			$this->assertTrue($form->query('button:Change PSK')->one(false) === null);
+			$this->assertFalse($form->query('button:Change PSK')->one(false)->isValid());
 
 			// Check encryption level and empty PSK values in DB.
 			$this->assertEquals(HOST_ENCRYPTION_NONE, CDBHelper::getValue('SELECT autoreg_tls_accept FROM config'));
@@ -334,8 +347,8 @@ class testFormAdministrationGeneralAutoRegistration extends CWebTest {
 		// Check the results, if selected PSK.
 		else {
 			$this->assertTrue($form->query('button:Change PSK')->one()->isDisplayed());
-			$this->assertTrue($form->query('id:tls_psk_identity')->one(false) === null);
-			$this->assertTrue($form->query('id:tls_psk')->one(false) === null);
+			$this->assertFalse($form->query('id:tls_psk_identity')->one(false)->isValid());
+			$this->assertFalse($form->query('id:tls_psk')->one(false)->isValid());
 
 			// Check encryption level in DB.
 			if (count($data['fields']['Encryption level']) === 1) {

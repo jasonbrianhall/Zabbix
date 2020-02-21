@@ -1,7 +1,7 @@
 <?php
 /*
 ** Zabbix
-** Copyright (C) 2001-2019 Zabbix SIA
+** Copyright (C) 2001-2020 Zabbix SIA
 **
 ** This program is free software; you can redistribute it and/or modify
 ** it under the terms of the GNU General Public License as published by
@@ -316,7 +316,9 @@ class C44XmlValidator {
 					'ipmi_username' =>			['type' => XML_STRING, 'default' => ''],
 					'ipmi_password' =>			['type' => XML_STRING, 'default' => ''],
 					'tls_connect' =>			['type' => XML_STRING, 'default' => CXmlConstantValue::NO_ENCRYPTION, 'in' => [CXmlConstantValue::NO_ENCRYPTION => CXmlConstantName::NO_ENCRYPTION, CXmlConstantValue::TLS_PSK => CXmlConstantName::TLS_PSK, CXmlConstantValue::TLS_CERTIFICATE => CXmlConstantName::TLS_CERTIFICATE]],
-					'tls_accept' =>				['type' => XML_STRING, 'default' => CXmlConstantValue::NO_ENCRYPTION, 'preprocessor' => [$this, 'tlsAcceptConstantPreprocessor'], 'export' => [$this, 'hostTlsAcceptExport']],
+					'tls_accept' =>				['type' => XML_INDEXED_ARRAY, 'prefix' => 'option', 'default' => CXmlConstantValue::NO_ENCRYPTION, 'export' => [$this, 'hostTlsAcceptExport'], 'rules' => [
+						'option' => ['type' => XML_STRING, 'in' => [CXmlConstantValue::NO_ENCRYPTION => CXmlConstantName::NO_ENCRYPTION, CXmlConstantValue::TLS_PSK => CXmlConstantName::TLS_PSK, CXmlConstantValue::TLS_CERTIFICATE => CXmlConstantName::TLS_CERTIFICATE]]
+					]],
 					'tls_issuer' =>				['type' => XML_STRING, 'default' => ''],
 					'tls_subject' =>			['type' => XML_STRING, 'default' => ''],
 					'tls_psk_identity' =>		['type' => XML_STRING, 'default' => ''],
@@ -1702,7 +1704,7 @@ class C44XmlValidator {
 					'script' => 				['type' => XML_STRING, 'default' => ''],
 					'timeout' => 				['type' => XML_STRING, 'default' => '30s'],
 					'process_tags' => 			['type' => XML_STRING, 'default' => CXmlConstantValue::NO, 'in' => [CXmlConstantValue::NO => CXmlConstantName::NO, CXmlConstantValue::YES => CXmlConstantName::YES]],
-					'show_event_menu' => 		['type' => XML_STRING, 'default' => CXmlConstantValue::YES, 'in' => [CXmlConstantValue::NO => CXmlConstantName::NO, CXmlConstantValue::YES => CXmlConstantName::YES]],
+					'show_event_menu' => 		['type' => XML_STRING, 'default' => CXmlConstantValue::NO, 'in' => [CXmlConstantValue::NO => CXmlConstantName::NO, CXmlConstantValue::YES => CXmlConstantName::YES]],
 					'event_menu_url' => 		['type' => XML_STRING, 'default' => ''],
 					'event_menu_name' => 		['type' => XML_STRING, 'default' => ''],
 					'description' => 			['type' => XML_STRING, 'default' => '']
@@ -2128,30 +2130,6 @@ class C44XmlValidator {
 			default:
 				return ['type' => XML_STRING, 'default' => ''];
 		}
-	}
-
-	/**
-	 * Convert tls_accept tag to normal value.
-	 * Used in CXmlValidGeneral.
-	 *
-	 * @param array $data         Import data.
-	 * @param array $parent_data  Data's parent array.
-	 *
-	 * @return string
-	 */
-	public function tlsAcceptConstantPreprocessor(array $data, array $parent_data = null) {
-		$result = 0;
-		$rules = [
-			CXmlConstantName::NO_ENCRYPTION => CXmlConstantValue::NO_ENCRYPTION,
-			CXmlConstantName::TLS_PSK => CXmlConstantValue::TLS_PSK,
-			CXmlConstantName::TLS_CERTIFICATE => CXmlConstantValue::TLS_CERTIFICATE
-		];
-
-		foreach ($data as $const) {
-			$result += $rules[$const];
-		}
-
-		return (string) $result;
 	}
 
 	/**
