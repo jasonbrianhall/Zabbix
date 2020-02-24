@@ -39,6 +39,10 @@ class CButtonCancel extends CButton {
 		$uri = new CUrl($url);
 		$url = $uri->getUrl();
 		$this->onClick("javascript: return redirect('".$url."');");
+		
+		if ($uri->getArgument('hostid')) {
+			zbx_add_post_js('chkbxRange.prefix = '.CJs::encodeJson($uri->getArgument('hostid')).';');
+		}
 		return $this;
 	}
 }

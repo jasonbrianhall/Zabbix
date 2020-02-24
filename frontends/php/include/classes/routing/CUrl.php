@@ -123,6 +123,17 @@ class CUrl {
 		return $this;
 	}
 
+	/**
+	 * Return query argument value if exist.
+	 *
+	 * @param string $key  Argument name.
+	 *
+	 * @return string
+	 */
+	public function getArgument($key) {
+		return array_key_exists($key, $this->arguments) ? $this->arguments[$key] : null;
+	}
+
 	public function setArgumentSID() {
 		$this->arguments['sid'] = substr($_COOKIE[ZBX_SESSION_NAME], 16, 16);
 
