@@ -38,9 +38,7 @@ var chkbxRange = {
 		this.chkboxes = {};
 		this.startbox = null;
 
-		if (this.pageGoName != null) {
-			this.resetOtherPage();
-		}
+		this.resetOtherPage();
 
 		// initialize checkboxes
 		var chkboxes = jQuery('.list-table tbody input[type=checkbox]:not(:disabled)');

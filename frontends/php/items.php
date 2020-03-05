@@ -1580,6 +1580,8 @@ if (isset($_REQUEST['form']) && str_in_array($_REQUEST['form'], ['create', 'upda
 		$data['inventory_link'] = $item['inventory_link'];
 	}
 
+	$data['checkbox_hash'] = $checkbox_hash;
+
 	// render view
 	if (!$has_errors) {
 		$itemView = new CView('configuration.item.edit', $data);
@@ -1794,6 +1796,8 @@ elseif (((hasRequest('action') && getRequest('action') === 'item.massupdateform'
 		$data['trends_mode'] = getRequest('trends_mode', ITEM_STORAGE_CUSTOM);
 	}
 
+	$data['checkbox_hash'] = $checkbox_hash;
+
 	// render view
 	$itemView = new CView('configuration.item.massupdate', $data);
 	$itemView->render();
@@ -1802,6 +1806,8 @@ elseif (((hasRequest('action') && getRequest('action') === 'item.massupdateform'
 elseif (hasRequest('action') && getRequest('action') === 'item.masscopyto' && hasRequest('group_itemid')) {
 	$data = getCopyElementsFormData('group_itemid', _('Items'));
 	$data['action'] = 'item.masscopyto';
+	
+	$data['checkbox_hash'] = $checkbox_hash;
 
 	// render view
 	$itemView = new CView('configuration.copy.elements', $data);

@@ -34,6 +34,7 @@ class CRedirectButton extends CSimpleButton {
 		parent::__construct($caption);
 
 		$this->setUrl($url, $confirmation);
+		$this->setJsScript($url);
 	}
 
 	/**
@@ -52,5 +53,21 @@ class CRedirectButton extends CSimpleButton {
 			$this->setAttribute('data-confirmation', $confirmation);
 		}
 		return $this;
+	}
+
+	/**
+	 * Register the "parent" controller by extracting its name from the back url.
+	 *
+	 * @param string|CUrl $url  Back url.
+	 */
+	private function setJsScript($url) {
+		if ($url !== null) {
+			$parsed = is_object($url) ? parse_url($url->getUrl()) : parse_url($url);
+			if (array_key_exists('query', $parsed)
+					&& preg_match('/action=(.*|problem)\.(list|view)/', $parsed['query'], $matches)) {
+				zbx_add_post_js('chkbxRange.prefix = '.CJs::encodeJson($matches[1]).';');
+
+			}
+		}
 	}
 }

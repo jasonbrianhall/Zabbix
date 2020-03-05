@@ -720,6 +720,8 @@ $config = select_config();
 if ((getRequest('action') === 'trigger.massupdateform' || hasRequest('massupdate')) && hasRequest('g_triggerid')) {
 	$data = getTriggerMassupdateFormData();
 	$data['action'] = 'trigger.massupdate';
+	$data['checkbox_hash'] = $checkbox_hash;
+
 	$triggersView = new CView('configuration.triggers.massupdate', $data);
 	$triggersView->render();
 	$triggersView->show();
@@ -757,7 +759,8 @@ elseif (isset($_REQUEST['form'])) {
 		'show_inherited_tags' => getRequest('show_inherited_tags', 0),
 		'correlation_mode' => getRequest('correlation_mode', ZBX_TRIGGER_CORRELATION_NONE),
 		'correlation_tag' => getRequest('correlation_tag', ''),
-		'manual_close' => getRequest('manual_close', ZBX_TRIGGER_MANUAL_CLOSE_NOT_ALLOWED)
+		'manual_close' => getRequest('manual_close', ZBX_TRIGGER_MANUAL_CLOSE_NOT_ALLOWED),
+	    'checkbox_hash' => $checkbox_hash
 	];
 
 	$triggersView = new CView('configuration.triggers.edit', getTriggerFormData($data));
@@ -767,6 +770,7 @@ elseif (isset($_REQUEST['form'])) {
 elseif (hasRequest('action') && getRequest('action') === 'trigger.masscopyto' && hasRequest('g_triggerid')) {
 	$data = getCopyElementsFormData('g_triggerid', _('Triggers'));
 	$data['action'] = 'trigger.masscopyto';
+	$data['checkbox_hash'] = $checkbox_hash;
 
 	// render view
 	$triggersView = new CView('configuration.copy.elements', $data);
