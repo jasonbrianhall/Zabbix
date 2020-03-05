@@ -760,7 +760,7 @@ elseif (isset($_REQUEST['form'])) {
 		'correlation_mode' => getRequest('correlation_mode', ZBX_TRIGGER_CORRELATION_NONE),
 		'correlation_tag' => getRequest('correlation_tag', ''),
 		'manual_close' => getRequest('manual_close', ZBX_TRIGGER_MANUAL_CLOSE_NOT_ALLOWED),
-	    'checkbox_hash' => $checkbox_hash
+		'checkbox_hash' => $checkbox_hash
 	];
 
 	$triggersView = new CView('configuration.triggers.edit', getTriggerFormData($data));

@@ -1806,7 +1806,7 @@ elseif (((hasRequest('action') && getRequest('action') === 'item.massupdateform'
 elseif (hasRequest('action') && getRequest('action') === 'item.masscopyto' && hasRequest('group_itemid')) {
 	$data = getCopyElementsFormData('group_itemid', _('Items'));
 	$data['action'] = 'item.masscopyto';
-	
+
 	$data['checkbox_hash'] = $checkbox_hash;
 
 	// render view
