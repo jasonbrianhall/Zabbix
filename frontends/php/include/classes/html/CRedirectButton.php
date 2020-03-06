@@ -66,7 +66,6 @@ class CRedirectButton extends CSimpleButton {
 			if (array_key_exists('query', $parsed)
 					&& preg_match('/action=(.*|problem)\.(list|view)/', $parsed['query'], $matches)) {
 				zbx_add_post_js('chkbxRange.prefix = '.CJs::encodeJson($matches[1]).';');
-
 			}
 		}
 	}
