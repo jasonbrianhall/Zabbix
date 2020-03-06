@@ -112,6 +112,7 @@ class CView {
 	public function __construct($view, $data = []) {
 		$this->assign($view);
 		$this->data = $data;
+		self::setParentPrefix($data);
 	}
 
 	/**
@@ -137,6 +138,30 @@ class CView {
 
 		if ($found == false) {
 			throw new Exception(_s('File provided to a view does not exist. Tried to find "%s".', $this->filePath));
+		}
+	}
+
+	/**
+	 * Registers the "parent" controller prefix.
+	 *
+	 * @param array $data  View data.
+	 *
+	 */
+	private static function setParentPrefix($data) {
+		$prefix = null;
+
+		if (array_key_exists('parent_discoveryid', $data) && $data['parent_discoveryid']) {
+			$prefix = $data['parent_discoveryid'];
+		}
+		elseif (array_key_exists('hostid', $data)
+				&& ((array_key_exists('form', $data) && $data['form'] === 'update')
+					|| (array_key_exists('action', $data)
+						&& (strpos($data['action'], 'massupdate') || strpos($data['action'], 'masscopyto'))))) {
+			$prefix = $data['hostid'];
+		}
+
+		if ($prefix) {
+			zbx_add_post_js('chkbxRange.prefix = '.CJs::encodeJson($prefix).';');
 		}
 	}
 
