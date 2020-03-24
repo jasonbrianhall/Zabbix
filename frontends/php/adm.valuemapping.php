@@ -81,6 +81,7 @@ if (hasRequest('add') || hasRequest('update')) {
 	}
 
 	if ($result) {
+		uncheckTableRows();
 		unset($_REQUEST['form']);
 	}
 }

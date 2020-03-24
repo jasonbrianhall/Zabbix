@@ -153,7 +153,7 @@ class CView {
 		if (array_key_exists('checkbox_hash', $data)) {
 			$prefix = $data['checkbox_hash'];
 		}
-		elseif (array_key_exists('parent_discoveryid', $data)) {
+		elseif (array_key_exists('parent_discoveryid', $data) && $data['parent_discoveryid']) {
 			$prefix = $data['parent_discoveryid'];
 		}
 		elseif (array_key_exists('hostid', $data)

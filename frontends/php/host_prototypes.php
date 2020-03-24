@@ -400,6 +400,8 @@ if (hasRequest('form')) {
 		'add_templates' => array_map('strval', array_keys($data['host_prototype']['add_templates']))
 	];
 
+	$data['parent_discoveryid'] = getRequest('parent_discoveryid');
+
 	// render view
 	$itemView = new CView('configuration.host.prototype.edit', $data);
 	$itemView->render();
