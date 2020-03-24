@@ -154,7 +154,7 @@ class CView {
 			$prefix = $data['parent_discoveryid'];
 		}
 		elseif (array_key_exists('hostid', $data)
-				&& ((array_key_exists('form', $data) && $data['form'] === 'update')
+				&& ((array_key_exists('form', $data) && ($data['form'] === 'update' || $data['form'] === 'create'))
 					|| (array_key_exists('action', $data)
 						&& (strpos($data['action'], 'massupdate') || strpos($data['action'], 'masscopyto'))))) {
 			$prefix = $data['hostid'];
