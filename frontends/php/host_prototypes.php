@@ -383,6 +383,8 @@ if (hasRequest('form')) {
 	// order linked templates
 	CArrayHelper::sort($data['host_prototype']['templates'], ['name']);
 
+	$data['parent_discoveryid'] = getRequest('parent_discoveryid');
+
 	// render view
 	$itemView = new CView('configuration.host.prototype.edit', $data);
 	$itemView->render();
