@@ -855,4 +855,6 @@ else {
 $frmHost->addItem($divTabs);
 $widget->addItem($frmHost);
 
+zbx_add_post_js('chkbxRange.prefix = '.CJs::encodeJson(null).';');
+
 return $widget;
