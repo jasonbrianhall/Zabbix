@@ -25,16 +25,22 @@
 class CRedirectButton extends CSimpleButton {
 
 	/**
-	 * @param string $caption
-	 * @param string $url			URL to redirect to
-	 * @param string $confirmation	confirmation message text
-	 * @param string $class
+	 * Parsed URL to redirect to.
+	 *
+	 * @var array
+	 */
+	private $url;
+
+	/**
+	 * @param string      $caption
+	 * @param string|CUrl $url           URL to redirect to
+	 * @param string      $confirmation  confirmation message text
+	 * @param string      $class
 	 */
 	public function __construct($caption, $url, $confirmation = null) {
 		parent::__construct($caption);
 
 		$this->setUrl($url, $confirmation);
-		$this->setJsScript($url);
 	}
 
 	/**
@@ -52,21 +58,24 @@ class CRedirectButton extends CSimpleButton {
 		if ($confirmation !== null) {
 			$this->setAttribute('data-confirmation', $confirmation);
 		}
+
+		$this->url = ($url instanceof CUrl) ? parse_url($url->getUrl()) : parse_url($url);
+
 		return $this;
 	}
 
-	/**
-	 * Register the "parent" controller by extracting its name from the back url.
+	/*
+	 * @param bool $destroy
 	 *
-	 * @param string|CUrl $url  Back url.
+	 * @return string
 	 */
-	private function setJsScript($url) {
-		if ($url !== null) {
-			$parsed = is_object($url) ? parse_url($url->getUrl()) : parse_url($url);
-			if (array_key_exists('query', $parsed)
-					&& preg_match('/action=(.*|problem)\.(list|view)/', $parsed['query'], $matches)) {
-				zbx_add_post_js('chkbxRange.prefix = '.CJs::encodeJson($matches[1]).';');
-			}
+	public function toString($destroy = true) {
+		// Register the "parent" controller by extracting its name from the back URL.
+		if (array_key_exists('query', $this->url)
+				&& preg_match('/action=(.*|problem)\.(list|view)/', $this->url['query'], $matches)) {
+			zbx_add_post_js('chkbxRange.prefix = '.CJs::encodeJson($matches[1]).';');
 		}
+
+		return parent::toString($destroy);
 	}
 }

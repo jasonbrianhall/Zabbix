@@ -112,7 +112,7 @@ class CView {
 	public function __construct($view, $data = []) {
 		$this->assign($view);
 		$this->data = $data;
-		self::setParentPrefix($data);
+		$this->setParentPrefix();
 	}
 
 	/**
@@ -144,23 +144,23 @@ class CView {
 	/**
 	 * Registers the "parent" controller prefix.
 	 *
-	 * @param array $data  View data.
-	 *
 	 */
-	private static function setParentPrefix($data) {
-		$prefix = null;
+	private function setParentPrefix() {
+		$prefix = false;
 
-		if (array_key_exists('checkbox_hash', $data)) {
-			$prefix = $data['checkbox_hash'];
+		if (array_key_exists('checkbox_hash', $this->data)) {
+			$prefix = $this->data['checkbox_hash'];
 		}
-		elseif (array_key_exists('parent_discoveryid', $data) && $data['parent_discoveryid']) {
-			$prefix = $data['parent_discoveryid'];
+		elseif (array_key_exists('parent_discoveryid', $this->data) && $this->data['parent_discoveryid']) {
+			$prefix = $this->data['parent_discoveryid'];
 		}
-		elseif (array_key_exists('hostid', $data)
-				&& ((array_key_exists('form', $data) && ($data['form'] === 'update' || $data['form'] === 'create'))
-					|| (array_key_exists('action', $data)
-						&& (strpos($data['action'], 'massupdate') || strpos($data['action'], 'masscopyto'))))) {
-			$prefix = $data['hostid'];
+		elseif (array_key_exists('hostid', $this->data)
+				&& ((array_key_exists('form', $this->data)
+					&& ($this->data['form'] === 'update' || $this->data['form'] === 'create'))
+					|| (array_key_exists('action', $this->data)
+						&& (strpos($this->data['action'], 'massupdate')
+							|| strpos($this->data['action'], 'masscopyto'))))) {
+			$prefix = $this->data['hostid'];
 		}
 
 		if ($prefix) {

@@ -94,8 +94,7 @@ var chkbxRange = {
 		addListener(obj, 'click', this.handleClick.bindAsEventListener(this), false);
 
 		if (objName == this.pageGoName) {
-			var objId = jQuery(obj).val();
-			obj.checked = isset(objId, this.selectedIds);
+			obj.checked = isset(jQuery(obj).val(), this.selectedIds);
 		}
 	},
 
