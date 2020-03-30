@@ -102,6 +102,34 @@ class CView {
 
 		$this->name = $name;
 		$this->data = $data;
+		$this->setParentPrefix();
+	}
+
+	/**
+	 * Registers the "parent" controller prefix.
+	 *
+	 */
+	private function setParentPrefix() {
+		$prefix = false;
+
+		if (array_key_exists('checkbox_hash', $this->data)) {
+			$prefix = $this->data['checkbox_hash'];
+		}
+		elseif (array_key_exists('parent_discoveryid', $this->data) && $this->data['parent_discoveryid']) {
+			$prefix = $this->data['parent_discoveryid'];
+		}
+		elseif (array_key_exists('hostid', $this->data)
+				&& ((array_key_exists('form', $this->data)
+					&& ($this->data['form'] === 'update' || $this->data['form'] === 'create'))
+					|| (array_key_exists('action', $this->data)
+						&& (strpos($this->data['action'], 'massupdate')
+							|| strpos($this->data['action'], 'masscopyto'))))) {
+			$prefix = $this->data['hostid'];
+		}
+
+		if ($prefix) {
+			zbx_add_post_js('chkbxRange.prefix = '.json_encode($prefix).';');
+		}
 	}
 
 	/**

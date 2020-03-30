@@ -24,7 +24,7 @@
  */
 
 if ($data['uncheck']) {
-	uncheckTableRows();
+	uncheckTableRows('valuemap');
 }
 
 $widget = (new CWidget())
@@ -97,7 +97,7 @@ $form->addItem([
 				->getUrl()
 		],
 		'valuemap.delete' => ['name' => _('Delete'), 'confirm' => _('Delete selected value maps?')]
-	])
+	], 'valuemap')
 ]);
 
 $widget->addItem($form)->show();

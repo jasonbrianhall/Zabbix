@@ -25,6 +25,13 @@
 class CRedirectButton extends CSimpleButton {
 
 	/**
+	 * Parsed URL to redirect to.
+	 *
+	 * @var array
+	 */
+	private $url;
+
+	/**
 	 * @param string      $caption
 	 * @param string|CUrl $url           URL to redirect to
 	 * @param string      $confirmation  confirmation message text
@@ -46,15 +53,29 @@ class CRedirectButton extends CSimpleButton {
 	 * @return CRedirectButton
 	 */
 	public function setUrl($url, $confirmation = null) {
-		if ($url instanceof CUrl) {
-			$url = $url->getUrl();
-		}
-
+		$url = ($url instanceof CUrl) ? $url->getUrl() : $url;
+		$this->url = parse_url($url);
 		$this->setAttribute('data-url', $url);
 
 		if ($confirmation !== null) {
 			$this->setAttribute('data-confirmation', $confirmation);
 		}
+
 		return $this;
+	}
+
+	/*
+	 * @param bool $destroy
+	 *
+	 * @return string
+	 */
+	public function toString($destroy = true) {
+		// Register the "parent" controller by extracting its name from the back URL.
+		if (array_key_exists('query', $this->url)
+				&& preg_match('/action=(.*)\.list/', $this->url['query'], $matches)) {
+			zbx_add_post_js('chkbxRange.prefix = '.json_encode($matches[1]).';');
+		}
+
+		return parent::toString($destroy);
 	}
 }

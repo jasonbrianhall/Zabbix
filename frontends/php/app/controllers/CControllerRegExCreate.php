@@ -82,6 +82,7 @@ class CControllerRegExCreate extends CController {
 
 		if ($result) {
 			$response = new CControllerResponseRedirect((new CUrl('zabbix.php'))->setArgument('action', 'regex.list'));
+			$response->setFormData(['uncheck' => '1']);
 			$response->setMessageOk(_('Regular expression added'));
 		}
 		else {

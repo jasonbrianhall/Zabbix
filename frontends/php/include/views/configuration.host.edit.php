@@ -771,4 +771,6 @@ else {
 $frmHost->addItem($divTabs);
 $widget->addItem($frmHost);
 
+zbx_add_post_js('chkbxRange.prefix = '.json_encode(null).';');
+
 $widget->show();
