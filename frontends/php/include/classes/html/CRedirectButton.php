@@ -35,7 +35,6 @@ class CRedirectButton extends CSimpleButton {
 	 * @param string      $caption
 	 * @param string|CUrl $url           URL to redirect to
 	 * @param string      $confirmation  confirmation message text
-	 * @param string      $class
 	 */
 	public function __construct($caption, $url, $confirmation = null) {
 		parent::__construct($caption);
@@ -48,18 +47,19 @@ class CRedirectButton extends CSimpleButton {
 	 *
 	 * If the confirmation is set, a confirmation pop up will appear before redirecting to the URL.
 	 *
-	 * @param string $url
+	 * @param string|CUrl $url
 	 * @param string|null $confirmation
 	 *
+	 * @return CRedirectButton
 	 */
 	public function setUrl($url, $confirmation = null) {
+		$url = ($url instanceof CUrl) ? $url->getUrl() : $url;
+		$this->url = parse_url($url);
 		$this->setAttribute('data-url', $url);
 
 		if ($confirmation !== null) {
 			$this->setAttribute('data-confirmation', $confirmation);
 		}
-
-		$this->url = ($url instanceof CUrl) ? parse_url($url->getUrl()) : parse_url($url);
 
 		return $this;
 	}
