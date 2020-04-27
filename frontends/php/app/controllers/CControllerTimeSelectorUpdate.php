@@ -197,7 +197,7 @@ class CControllerTimeSelectorUpdate extends CController {
 			'to_date' => $date->setTimestamp($ts['to'])->format(ZBX_FULL_DATE_TIME),
 			'can_zoomout' => ($ts['to'] - $ts['from'] + 1 < ZBX_MAX_PERIOD),
 			'can_decrement' => ($ts['from'] > 0),
-			'can_increment' => ($ts['to'] < $ts['now'])
+			'can_increment' => ($ts['to'] < $ts['now'] - ZBX_MIN_PERIOD)
 		])]));
 	}
 
@@ -234,12 +234,12 @@ class CControllerTimeSelectorUpdate extends CController {
 
 		if ($period < ZBX_MIN_PERIOD) {
 			$this->data['error']['from'] = _n('Minimum time period to display is %1$s minute.',
-				'Minimum time period to display is %1$s minutes.', (int) ZBX_MIN_PERIOD / SEC_PER_MIN
+				'Minimum time period to display is %1$s minutes.', (int) (ZBX_MIN_PERIOD / SEC_PER_MIN)
 			);
 		}
 		elseif ($period > ZBX_MAX_PERIOD) {
 			$this->data['error']['from'] = _n('Maximum time period to display is %1$s day.',
-				'Maximum time period to display is %1$s days.', (int) ZBX_MAX_PERIOD / SEC_PER_DAY
+				'Maximum time period to display is %1$s days.', (int) (ZBX_MAX_PERIOD / SEC_PER_DAY)
 			);
 		}
 

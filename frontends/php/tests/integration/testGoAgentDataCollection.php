@@ -237,7 +237,7 @@ class testGoAgentDataCollection extends CIntegrationTest {
 			'key' => 'vfs.dev.write[,operations]',
 			'type' => ITEM_TYPE_ZABBIX,
 			'valueType' => ITEM_VALUE_TYPE_UINT64,
-			'treshold' => 10
+			'treshold' => 20
 		],
 		[
 			'key' => 'proc.cpu.util[,,,,avg1]',
@@ -476,10 +476,11 @@ class testGoAgentDataCollection extends CIntegrationTest {
 			$values = [];
 			foreach ($itemids as $type => $ids) {
 				$result = $this->call('history.get', [
-					'output' => ['itemid', 'value'],
+					'output' => ['itemid', 'value', 'clock', 'ns'],
 					'itemids' => $ids,
 					'history' => $type
 				]);
+				CTestArrayHelper::sort($result['result'], ['itemid', 'clock', 'ns']);
 
 				foreach ($result['result'] as $item) {
 					$values[$item['itemid']][] = $item['value'];
@@ -524,18 +525,11 @@ class testGoAgentDataCollection extends CIntegrationTest {
 		switch ($item['valueType']) {
 			case ITEM_VALUE_TYPE_LOG:
 				$count = min([count($values[self::COMPONENT_AGENT]), count($values[self::COMPONENT_AGENT2])]);
-				for ($i = 0; $i < $count; $i++) {
-					$a = $values[self::COMPONENT_AGENT][$i];
-					$b = $values[self::COMPONENT_AGENT2][$i];
 
-					if (array_key_exists('treshold', $item) && $item['treshold'] !== 0) {
-						$a = substr($a, 0, $item['treshold']);
-						$b = substr($b, 0, $item['treshold']);
-					}
+				$values_a = array_slice($values[self::COMPONENT_AGENT], 0, $count);
+				$values_b = array_slice($values[self::COMPONENT_AGENT2], 0, $count);
 
-					$this->assertEquals($a, $b, 'Strings do not match for '.$item['key']);
-				}
-
+				$this->assertSame($values_a, $values_b, 'Strings do not match for '.$item['key']);
 				break;
 
 			case ITEM_VALUE_TYPE_TEXT:
