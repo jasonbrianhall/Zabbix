@@ -99,31 +99,36 @@ if (!$data['is_profile']) {
 // append password to form list
 if ($data['userid'] == 0 || $data['change_password']) {
 	$userForm->disablePasswordAutofill();
-	$password_box = new CPassBox('password1', $data['password1']);
+
+	$password1 = (new CPassBox('password1', $data['password1']))
+		->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+		->setAriaRequired()
+		->setAttribute('autocomplete', 'off');
 
 	if (!$form_autofocus) {
 		$form_autofocus = true;
-		$password_box->setAttribute('autofocus', 'autofocus');
+		$password1->setAttribute('autofocus', 'autofocus');
 	}
 
-	$userFormList->addRow(
-		(new CLabel(_('Password'), 'password1'))->setAsteriskMark(),
-		$password_box
-			->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
-			->setAriaRequired()
-	);
-	$userFormList->addRow(
-		(new CLabel(_('Password (once again)'), 'password2'))->setAsteriskMark(),
-		(new CPassBox('password2', $data['password2']))
-			->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
-			->setAriaRequired()
-	);
+	$userFormList
+		->addRow((new CLabel(_('Password'), 'password1'))->setAsteriskMark(), [
+			// Hidden dummy login field for protection against chrome error when password autocomplete.
+			(new CInput('text', null, null))
+				->setAttribute('tabindex', '-1')
+				->addStyle('position: absolute; left: -100vw;'),
+			$password1
+		])
+		->addRow((new CLabel(_('Password (once again)'), 'password2'))->setAsteriskMark(),
+			(new CPassBox('password2', $data['password2']))
+				->setWidth(ZBX_TEXTAREA_SMALL_WIDTH)
+				->setAriaRequired()
+				->setAttribute('autocomplete', 'off')
+		)
+		->addRow('', _('Password is not mandatory for non internal authentication type.'));
 
 	if ($data['change_password']) {
 		$userForm->addVar('change_password', $data['change_password']);
 	}
-
-	$userFormList->addRow('', _('Password is not mandatory for non internal authentication type.'));
 }
 else {
 	$passwdButton = (new CSimpleButton(_('Change password')))

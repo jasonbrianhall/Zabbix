@@ -1122,12 +1122,10 @@ static int	check_number_of_parameters(unsigned char flags, const AGENT_REQUEST *
 		return FAIL;
 	}
 
-	if (0 != (ZBX_METRIC_FLAG_LOG_LOG & flags) && 0 != (ZBX_METRIC_FLAG_LOG_COUNT & flags))	/* log.count */
-		max_parameter_num = 6;
-	else if (0 != (ZBX_METRIC_FLAG_LOG_LOGRT & flags) && 0 == (ZBX_METRIC_FLAG_LOG_COUNT & flags))	/* logrt */
-		max_parameter_num = 8;
+	if (0 != (ZBX_METRIC_FLAG_LOG_COUNT & flags))
+		max_parameter_num = 7;	/* log.count or logrt.count */
 	else
-		max_parameter_num = 7;	/* log or logrt.count */
+		max_parameter_num = 8;	/* log or logrt */
 
 	if (max_parameter_num < parameter_num)
 	{
@@ -1195,50 +1193,69 @@ static int	init_max_delay(int is_count_item, const AGENT_REQUEST *request, float
 	return SUCCEED;
 }
 
-static int	init_rotation_type(unsigned char flags, const AGENT_REQUEST *request, int *rotation_type, char **error)
+static int	init_rotation_type(unsigned char flags, const AGENT_REQUEST *request,
+		zbx_log_rotation_options_t *rotation_type, char **error)
 {
-	if (0 != (ZBX_METRIC_FLAG_LOG_LOGRT & flags))
+	char	*options;
+	int	options_par_nr;
+
+	if (0 == (ZBX_METRIC_FLAG_LOG_COUNT & flags))	/* log, logrt */
+		options_par_nr = 7;
+	else						/* log.count, logrt.count */
+		options_par_nr = 6;
+
+	options = get_rparam(request, options_par_nr);
+
+	if (NULL == options || '\0' == *options)	/* default options */
 	{
-		char	*options;
-		int	options_par_nr;
-
-		if (0 == (ZBX_METRIC_FLAG_LOG_COUNT & flags))	/* logrt */
-			options_par_nr = 7;
-		else						/* logrt.count */
-			options_par_nr = 6;
-
-		if (NULL != (options = get_rparam(request, options_par_nr)) && '\0' != *options)
+		if (0 != (ZBX_METRIC_FLAG_LOG_LOGRT & flags))
+			*rotation_type = ZBX_LOG_ROTATION_LOGRT;
+		else
+			*rotation_type = ZBX_LOG_ROTATION_REREAD;
+	}
+	else
+	{
+		if (0 != (ZBX_METRIC_FLAG_LOG_LOGRT & flags))	/* logrt, logrt.count */
 		{
 			if (0 == strcmp(options, "copytruncate"))
-			{
 				*rotation_type = ZBX_LOG_ROTATION_LOGCPT;
-				return SUCCEED;
-			}
-
-			if (0 != strcmp(options, "rotate"))
-			{
-				*error = zbx_dsprintf(*error, "Invalid %s parameter.", (6 == options_par_nr) ?
-						"seventh" : "eighth");
-				return FAIL;
-			}
+			else if (0 == strcmp(options, "rotate") || 0 == strcmp(options, "mtime-reread"))
+				*rotation_type = ZBX_LOG_ROTATION_LOGRT;
+			else if (0 == strcmp(options, "mtime-noreread"))
+				*rotation_type = ZBX_LOG_ROTATION_NO_REREAD;
+			else
+				goto err;
+		}
+		else	/* log, log.count */
+		{
+			if (0 == strcmp(options, "mtime-reread"))
+				*rotation_type = ZBX_LOG_ROTATION_REREAD;
+			else if (0 == strcmp(options, "mtime-noreread"))
+				*rotation_type = ZBX_LOG_ROTATION_NO_REREAD;
+			else
+				goto err;
 		}
 	}
 
-	*rotation_type = ZBX_LOG_ROTATION_LOGRT;	/* default */
 	return SUCCEED;
+err:
+	*error = zbx_strdup(*error, "Invalid parameter \"options\".");
+
+	return FAIL;
 }
 
 static int	process_log_check(char *server, unsigned short port, ZBX_ACTIVE_METRIC *metric,
 		zbx_uint64_t *lastlogsize_sent, int *mtime_sent, char **error)
 {
-	AGENT_REQUEST		request;
-	const char		*filename, *regexp, *encoding, *skip, *output_template;
-	char			*encoding_uc = NULL;
-	int			max_lines_per_sec, ret = FAIL, s_count, p_count, s_count_orig, is_count_item,
-				mtime_orig, big_rec_orig, logfiles_num_new = 0, jumped = 0, rotation_type;
-	zbx_uint64_t		lastlogsize_orig;
-	float			max_delay;
-	struct st_logfile	*logfiles_new = NULL;
+	AGENT_REQUEST			request;
+	const char			*filename, *regexp, *encoding, *skip, *output_template;
+	char				*encoding_uc = NULL;
+	int				max_lines_per_sec, ret = FAIL, s_count, p_count, s_count_orig, is_count_item,
+					mtime_orig, big_rec_orig, logfiles_num_new = 0, jumped = 0;
+	zbx_log_rotation_options_t	rotation_type;
+	zbx_uint64_t			lastlogsize_orig;
+	float				max_delay;
+	struct st_logfile		*logfiles_new = NULL;
 
 	if (0 != (ZBX_METRIC_FLAG_LOG_COUNT & metric->flags))
 		is_count_item = 1;
@@ -1248,8 +1265,8 @@ static int	process_log_check(char *server, unsigned short port, ZBX_ACTIVE_METRI
 	init_request(&request);
 
 	/* Expected parameters by item: */
-	/* log        [file,       <regexp>,<encoding>,<maxlines>,    <mode>,<output>,<maxdelay>]            7 params */
-	/* log.count  [file,       <regexp>,<encoding>,<maxproclines>,<mode>,         <maxdelay>]            6 params */
+	/* log        [file,       <regexp>,<encoding>,<maxlines>,    <mode>,<output>,<maxdelay>, <options>] 8 params */
+	/* log.count  [file,       <regexp>,<encoding>,<maxproclines>,<mode>,         <maxdelay>, <options>] 7 params */
 	/* logrt      [file_regexp,<regexp>,<encoding>,<maxlines>,    <mode>,<output>,<maxdelay>, <options>] 8 params */
 	/* logrt.count[file_regexp,<regexp>,<encoding>,<maxproclines>,<mode>,         <maxdelay>, <options>] 7 params */
 

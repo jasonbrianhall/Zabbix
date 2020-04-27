@@ -356,7 +356,7 @@ class testFormUser extends CWebTest {
 					'error_details' => 'Invalid parameter "/1/autologout": cannot be empty.'
 				]
 			],
-			// URL with a space in the middle.
+			// URL unacceptable.
 			[
 				[
 					'expected' => TEST_BAD,
@@ -365,35 +365,7 @@ class testFormUser extends CWebTest {
 						'Groups' => 'Zabbix administrators',
 						'Password' => 'zabbix',
 						'Password (once again)' => 'zabbix',
-						'URL (after login)' => 'www.zab bix.com'
-					],
-					'error_details' => 'Invalid parameter "/1/url": unacceptable URL.'
-				]
-			],
-			// External URL without protocol.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Alias' => 'Negative_Test17',
-						'Groups' => 'Zabbix administrators',
-						'Password' => 'zabbix',
-						'Password (once again)' => 'zabbix',
-						'URL (after login)' => 'zabbix.com'
-					],
-					'error_details' => 'Invalid parameter "/1/url": unacceptable URL.'
-				]
-			],
-			// Internal URL without extension.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'Alias' => 'Negative_Test18',
-						'Groups' => 'Zabbix administrators',
-						'Password' => 'zabbix',
-						'Password (once again)' => 'zabbix',
-						'URL (after login)' => 'sysmaps'
+						'URL (after login)' => 'javascript:alert(123);'
 					],
 					'error_details' => 'Invalid parameter "/1/url": unacceptable URL.'
 				]
@@ -574,16 +546,18 @@ class testFormUser extends CWebTest {
 			$db_theme = CDBHelper::getValue('SELECT theme FROM users WHERE alias ='.zbx_dbstr($data['fields']['Alias']));
 			$color = $this->query('tag:body')->one()->getCSSValue('background-color');
 			$stylesheet = $this->query('xpath://link[@rel="stylesheet"]')->one();
-			$file = explode('/', $stylesheet->getAttribute('href'));
+			$parts = explode('/', $stylesheet->getAttribute('href'));
+			$file_time = explode('?', end($parts));
+			$file = $file_time[0];
 
 			if ($data['fields']['Theme'] === 'Dark') {
 				$this->assertEquals('dark-theme', $db_theme);
-				$this->assertEquals('dark-theme.css', end($file));
+				$this->assertEquals('dark-theme.css', $file);
 				$this->assertEquals('rgba(14, 16, 18, 1)', $color);
 			}
 			else if ($data['fields']['Theme'] === 'High-contrast light') {
 				$this->assertEquals('hc-light', $db_theme);
-				$this->assertEquals('hc-light.css', end($file));
+				$this->assertEquals('hc-light.css', $file);
 				$this->assertEquals('rgba(255, 255, 255, 1)', $color);
 			}
 
@@ -804,32 +778,12 @@ class testFormUser extends CWebTest {
 					'error_details' => 'Invalid parameter "/1/autologout": cannot be empty.'
 				]
 			],
-			// URL with a space in the middle.
+			// URL unacceptable.
 			[
 				[
 					'expected' => TEST_BAD,
 					'fields' => [
-						'URL (after login)' => 'www.zab bix.com'
-					],
-					'error_details' => 'Invalid parameter "/1/url": unacceptable URL.'
-				]
-			],
-			// External URL without protocol.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'URL (after login)' => 'zabbix.com'
-					],
-					'error_details' => 'Invalid parameter "/1/url": unacceptable URL.'
-				]
-			],
-			// Internal URL without extension.
-			[
-				[
-					'expected' => TEST_BAD,
-					'fields' => [
-						'URL (after login)' => 'sysmaps'
+						'URL (after login)' => 'javascript:alert(123);'
 					],
 					'error_details' => 'Invalid parameter "/1/url": unacceptable URL.'
 				]

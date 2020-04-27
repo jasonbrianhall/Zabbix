@@ -26,18 +26,23 @@ $historyWidget = (new CWidget())->setWebLayoutMode($web_layout_mode);
 $header = [
 	'left' => _n('%1$s item', '%1$s items', count($data['items'])),
 	'right' => (new CForm('get'))
-		->addVar('itemids', getRequest('itemids'))
+		->addVar('itemids', $data['itemids'])
 		->addVar('page', 1)
 ];
 $header_row = [];
-$first_item = reset($data['items']);
-$host_name = $first_item['hosts'][0]['name'];
+
 $same_host = true;
 $items_numeric = true;
+$host_name = '';
 
-foreach ($data['items'] as $item) {
-	$same_host = ($same_host && $host_name === $item['hosts'][0]['name']);
-	$items_numeric = ($items_numeric && array_key_exists($item['value_type'], $data['iv_numeric']));
+if ($data['items']) {
+	$first_item = reset($data['items']);
+	$host_name = $first_item['hosts'][0]['name'];
+
+	foreach ($data['items'] as $item) {
+		$same_host = ($same_host && $host_name === $item['hosts'][0]['name']);
+		$items_numeric = ($items_numeric && array_key_exists($item['value_type'], $data['iv_numeric']));
+	}
 }
 
 if ((count($data['items']) == 1 || $same_host) && $data['itemids']) {
@@ -53,10 +58,10 @@ else {
 }
 
 if (hasRequest('filter_task')) {
-	$header['right']->addVar('filter_task', getRequest('filter_task'));
+	$header['right']->addVar('filter_task', $data['filter_task']);
 }
 if (hasRequest('filter')) {
-	$header['right']->addVar('filter', getRequest('filter'));
+	$header['right']->addVar('filter', $data['filter']);
 }
 if (hasRequest('mark_color')) {
 	$header['right']->addVar('mark_color', getRequest('mark_color'));
@@ -79,7 +84,9 @@ $action_list = (new CList())
 	->addItem([
 		new CLabel(_('View as')),
 		(new CDiv())->addClass(ZBX_STYLE_FORM_INPUT_MARGIN),
-		(new CComboBox('action', $data['action'], 'submit()', $actions))->setEnabled((bool) $data['items']),
+		(new CComboBox('action', $data['action'], 'submit()', $actions))
+			->setEnabled((bool) $data['items'])
+			->removeId(),
 	]);
 
 if ($data['action'] !== HISTORY_GRAPH && $data['action'] !== HISTORY_BATCH_GRAPH) {
@@ -143,19 +150,17 @@ if ($data['action'] == HISTORY_LATEST || $data['action'] == HISTORY_VALUES) {
 					]))->setWidth(ZBX_TEXTAREA_STANDARD_WIDTH)
 				)
 				->addRow(_('Value'),
-					(new CTextBox('filter', getRequest('filter', '')))->setWidth(ZBX_TEXTAREA_FILTER_SMALL_WIDTH)
+					(new CTextBox('filter', $data['filter']))->setWidth(ZBX_TEXTAREA_FILTER_SMALL_WIDTH)
 				);
 
-			$filterTask = getRequest('filter_task', 0);
-
-			$tasks = [new CComboBox('filter_task', $filterTask, 'submit()', [
+			$tasks = [new CComboBox('filter_task', $data['filter_task'], 'submit()', [
 				FILTER_TASK_SHOW => _('Show selected'),
 				FILTER_TASK_HIDE => _('Hide selected'),
 				FILTER_TASK_MARK => _('Mark selected'),
 				FILTER_TASK_INVERT_MARK => _('Mark others')
 			])];
 
-			if (str_in_array($filterTask, [FILTER_TASK_MARK, FILTER_TASK_INVERT_MARK])) {
+			if (str_in_array($data['filter_task'], [FILTER_TASK_MARK, FILTER_TASK_INVERT_MARK])) {
 				$tasks[] = ' ';
 				$tasks[] = new CComboBox('mark_color', getRequest('mark_color', 0), null, [
 					MARK_COLOR_RED => _('as Red'),
@@ -180,8 +185,8 @@ if ($data['itemids']) {
 		'profileIdx2' => $data['profileIdx2'],
 		'from' => $data['from'],
 		'to' => $data['to'],
-		'filter' => getRequest('filter'),
-		'filter_task' => getRequest('filter_task'),
+		'filter' => $data['filter'],
+		'filter_task' => $data['filter_task'],
 		'mark_color' => getRequest('mark_color'),
 		'plaintext' => $data['plaintext'],
 		'graphtype' => $data['graphtype']

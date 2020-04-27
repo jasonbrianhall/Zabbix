@@ -748,6 +748,9 @@ class CUserMacro extends CApiService {
 			$count = API::Host()->get([
 				'countOutput' => true,
 				'hostids' => $hostids,
+				'filter' => [
+					'flags' => ZBX_FLAG_DISCOVERY_NORMAL
+				],
 				'editable' => true
 			]);
 
@@ -758,6 +761,9 @@ class CUserMacro extends CApiService {
 			$count += API::Template()->get([
 				'countOutput' => true,
 				'templateids' => $hostids,
+				'filter' => [
+					'flags' => ZBX_FLAG_DISCOVERY_NORMAL
+				],
 				'editable' => true
 			]);
 

@@ -140,7 +140,6 @@ class CConfigurationImport {
 		$this->deleteMissingTriggers();
 		$this->deleteMissingGraphs();
 		$this->deleteMissingItems();
-		$this->deleteMissingApplications();
 
 		// import objects
 		$this->processApplications();
@@ -154,6 +153,9 @@ class CConfigurationImport {
 		$this->processMaps();
 		$this->processTemplateScreens();
 		$this->processScreens();
+
+		// Missing applications should be deleted after new application changes are done to all inherited items.
+		$this->deleteMissingApplications();
 
 		return true;
 	}

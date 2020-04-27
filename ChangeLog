@@ -1,3 +1,71 @@
+Changes for 4.0.20
+
+4.0.20rc1 was released as 4.0.20 without any changes
+
+--------------------------------------------------------------------------------
+Changes for 4.0.20rc1
+
+New features:
+..F....... [ZBXNEXT-4829] changed web setup wizard to not create and drop tables for DB connectivity test purposes (Ivo)
+
+Bug fixes:
+..F....... [ZBX-17524] fixed time selector button state (rlataria)
+A......... [ZBX-17496] fixed UserMacro API validation (miks)
+..F....... [ZBX-17532] added css files and sprites versioning by query strings (rlataria)
+..F....... [ZBX-17501] fixed overlapping multiselect suggest with browser autocomplete (vasilijs)
+..F....... [ZBX-17402] fixed search field accidentally transform value to lowercase (rlataria)
+...G...... [ZBX-17505] fixed crash inside a fork when calling vfs.fs.inode (mabele)
+........S. [ZBX-16959] fixed return code check of curl_easy_setopt (atumilovics)
+..F....... [ZBX-17423] fixed "reset" button in history page (talbergs)
+..F....... [ZBX-17395] fixed deletion of templated applications that were linked to items when importing templates (Ivo)
+A......... [ZBX-17359] fixed "sortorder": "DESC" option with multiple sortfields (Sasha)
+.......PS. [ZBX-17336] fixed wrong error message when fping fails (mabele)
+..F....... [ZBX-17427] fixed top busiest triggers filter (miks)
+...G...... [ZBX-17523] fixed agent compilation on Windows is broken (akozlovs)
+..F....... [ZBX-17508] fixed error in oracle database encoding check (gcalenko)
+...G...... [ZBX-17442] fixed web.page.get to time out when there is no response (vso)
+..F....... [ZBX-17429] fixed trigger expression condition popup to display negative numbers upon opening existing expression (Ivo)
+A.F....... [ZBX-17012] fixed URL validator to also accept relative URLs (Ivo)
+..F....... [ZBX-17507] fixed oracle query interpreted as a multisatement (talbergs)
+........S. [ZBX-9387] fixed incorrect maintenance calculations when DST changed to summer time (akozlovs)
+..F....... [ZBX-17390] fixed validation of the maximum selected period (Sasha)
+
+--------------------------------------------------------------------------------
+Changes for 4.0.19
+
+4.0.19rc1 was released as 4.0.19 without any changes
+
+--------------------------------------------------------------------------------
+Changes for 4.0.19rc1
+
+New features:
+.......PS. [ZBXNEXT-5649] added name referencing support ('~' suffix) to jsonpath (wiper)
+...G...PS. [ZBXNEXT-3604] added support of user configurable ciphers for communication between Zabbix components (Andris)
+
+Bug fixes:
+....I..... [ZBX-17173] improved windows agent build scripts (yurii)
+A......... [ZBX-17425] fixed template.massupdate API macros update (rlataria)
+..F....... [ZBX-17344] fixed PHP 7.4 errors in Latest data->History page for text and log items having an empty filter (Ivo)
+.......PS. [ZBX-17330] fixed error reading vmware events with keys over 2^31 (MVekslers)
+..F....... [ZBX-17288] fixed undefined indexes in Administration->Regular expressions->Test tab (averza, Ivo)
+..F....... [ZBX-17350] fixed displaying of multiple value types in Latest data->History page (Ivo)
+..FG...... [ZBX-16802] added mtime-reread/mtime-noreread options parameter to log* keys (atumilovics)
+..F....... [ZBX-17390] fixed validation of the maximum selected period (Sasha)
+..F....... [ZBX-17185] fixed non-disappearing messages of failed login attempts (Ivo)
+........S. [ZBX-17322] fixed deadlock between server and frontend when updating multiple hosts (vso)
+..F.I..... [ZBX-9057] fixed duplicate entries being written into in profiles table (talbergs)
+..F....... [ZBX-17159] fixed overlay dialogue instantiation (talbergs)
+.......PS. [ZBX-17108] improved process utilization calculation (mabele)
+..F....... [ZBX-17269] fixed undefined indexes in history page (Ivo)
+........S. [ZBX-17342] dump memory statistics and items with most values when value cache is fully used (vso)
+.......PS. [ZBX-16926] fix INT_MAX error when compiling on SunOS/Joyent/Solaris (arimdjonoks)
+
+--------------------------------------------------------------------------------
+Changes for 4.0.18
+
+4.0.18rc1 was released as 4.0.18 without any changes
+
+--------------------------------------------------------------------------------
 Changes for 4.0.18rc1
 
 New features:
@@ -121,7 +189,7 @@ A......... [ZBX-16679] fixed username and password fields resetting and saving f
 ..F....... [ZBX-16809] fixed undefined offset error in action operation condition form (miks)
 ...G...... [ZBX-16595] optimized active logs checks monitoring when buffer flushing fails (arimdjonoks)
 ..F....... [ZBX-16682] fixed wrong element label update in map constructor (rlataria)
-..F....... [ZBX-16815] fixed widget form positioing when changing widget type from Graph to any other type (averza)
+..F....... [ZBX-16815] fixed widget form positioning when changing widget type from Graph to any other type (averza)
 ..F....... [ZBX-16706] fixed unneeded padding for dashboard URL widget (averza)
 ..F....... [ZBX-16784] fixed Oracle performance by using "between" operator in SQL queries (averza)
 ..F....... [ZBX-16579] fixed long text wrapping in the latest data history (averza)
@@ -2777,6 +2845,22 @@ A......... [ZBX-10030] fixed API action update method request with only "actioni
 A......... [ZBX-10049] fixed optional field validation in drule.update API method (Gunars)
 ..F....PS. [ZBX-10076] fixed text information containing non-ASCII characters being saved incorrectly to IBM DB2 database in case of system locale misconfiguration (gleb, Oleg)
 ..F....... [ZBX-9989] optimized SQL queries for graphs building (Gunars, Sasha)
+
+--------------------------------------------------------------------------------
+Changes for 3.0.31
+
+3.0.31rc1 was released as 3.0.31 without any changes
+
+--------------------------------------------------------------------------------
+Changes for 3.0.31rc1
+
+Bug fixes:
+...G...PS. [ZBX-17600] fixed security vulnerability CVE-2020-11800 (remote code execution) (Andris)
+
+--------------------------------------------------------------------------------
+Changes for 3.0.30
+
+3.0.30rc1 was released as 3.0.30 without any changes
 
 --------------------------------------------------------------------------------
 Changes for 3.0.30rc1

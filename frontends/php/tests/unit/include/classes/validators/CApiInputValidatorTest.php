@@ -2714,6 +2714,91 @@ class CApiInputValidatorTest extends PHPUnit_Framework_TestCase {
 				'Invalid parameter "/output/3": value (name) already exists.'
 			],
 			[
+				['type' => API_SORTORDER],
+				null,
+				'/sortorder',
+				'Invalid parameter "/sortorder": an array or a character string is expected.'
+			],
+			[
+				['type' => API_SORTORDER],
+				[],
+				'/sortorder',
+				[]
+			],
+			[
+				['type' => API_SORTORDER],
+				'DESC',
+				'/sortorder',
+				'DESC'
+			],
+			[
+				['type' => API_SORTORDER],
+				'ASC',
+				'/sortorder',
+				'ASC'
+			],
+			[
+				['type' => API_SORTORDER],
+				['ASC'],
+				'/sortorder',
+				['ASC']
+			],
+			[
+				['type' => API_SORTORDER],
+				['DESC'],
+				'count',
+				['DESC']
+			],
+			[
+				['type' => API_SORTORDER],
+				['ASC', 'ASC', 'DESC', 'DESC'],
+				'/sortorder',
+				['ASC', 'ASC', 'DESC', 'DESC']
+			],
+			[
+				['type' => API_SORTORDER],
+				'',
+				'/sortorder',
+				'Invalid parameter "/sortorder": value must be one of ASC, DESC.'
+			],
+			[
+				['type' => API_SORTORDER],
+				['asc'],
+				'/sortorder',
+				'Invalid parameter "/sortorder/1": value must be one of ASC, DESC.'
+			],
+			[
+				['type' => API_SORTORDER],
+				true,
+				'/sortorder',
+				'Invalid parameter "/sortorder": an array or a character string is expected.'
+			],
+			[
+				['type' => API_SORTORDER],
+				123,
+				'/sortorder',
+				'Invalid parameter "/sortorder": an array or a character string is expected.'
+			],
+			[
+				['type' => API_SORTORDER],
+				123.5,
+				'/sortorder',
+				'Invalid parameter "/sortorder": an array or a character string is expected.'
+			],
+			[
+				['type' => API_SORTORDER],
+				['DESC', []],
+				'/sortorder',
+				'Invalid parameter "/sortorder/2": a character string is expected.'
+			],
+			[
+				['type' => API_SORTORDER],
+				// broken UTF-8 byte sequence
+				'abc'."\xd1".'e',
+				'/sortorder',
+				'Invalid parameter "/sortorder": invalid byte sequence in UTF-8.'
+			],
+			[
 				['type' => API_URL],
 				'',
 				'/1/url',
@@ -2820,13 +2905,7 @@ class CApiInputValidatorTest extends PHPUnit_Framework_TestCase {
 				['type' => API_URL],
 				'/chart_bar.php?a=1&b=2',
 				'/1/url',
-				'Invalid parameter "/1/url": unacceptable URL.'
-			],
-			[
-				['type' => API_URL],
-				'{$URL}',
-				'/1/url',
-				'Invalid parameter "/1/url": unacceptable URL.'
+				'/chart_bar.php?a=1&b=2'
 			],
 			[
 				['type' => API_URL, 'flags' => API_ALLOW_USER_MACRO],

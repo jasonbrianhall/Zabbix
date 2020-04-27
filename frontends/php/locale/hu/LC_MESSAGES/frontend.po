@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Zabbix 4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-17 12:01+0200\n"
+"POT-Creation-Date: 2020-04-19 14:11+0300\n"
 "PO-Revision-Date: 2020-02-08 23:45+0300\n"
 "Last-Translator: Anonymous Pootle User\n"
 "Language-Team: Zabbix <info@zabbix.com>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-POOTLE-MTIME: 1581198320.000000\n"
 
 #: include/classes/db/MysqlDbBackend.php:67
-#: include/classes/db/OracleDbBackend.php:87
+#: include/classes/db/OracleDbBackend.php:86
 #: include/classes/db/PostgresqlDbBackend.php:76
 #, c-format
 msgid "\"%1$s\" instead \"%2$s\""
@@ -282,7 +282,7 @@ msgstr "5 perc"
 msgid "5 seconds"
 msgstr "5 másodperc"
 
-#: include/views/monitoring.history.php:68
+#: include/views/monitoring.history.php:73
 msgid "500 latest values"
 msgstr "500 legfrissebb érték"
 
@@ -294,7 +294,7 @@ msgstr ""
 msgid "<sub-menu/sub-menu/...>script"
 msgstr ""
 
-#: include/classes/widgets/CWidgetHelper.php:686
+#: include/classes/widgets/CWidgetHelper.php:685
 msgid "ADD OVERRIDE"
 msgstr ""
 
@@ -302,7 +302,7 @@ msgstr ""
 #: include/views/configuration.item.edit.php:564
 #: include/views/configuration.item.edit.php:571
 #: include/views/configuration.item.massupdate.php:248
-#: include/views/configuration.item.prototype.edit.php:516
+#: include/views/configuration.item.prototype.edit.php:518
 #: include/views/js/configuration.discovery.edit.js.php:110
 msgid "AES"
 msgstr ""
@@ -376,7 +376,7 @@ msgstr ""
 #: include/views/administration.general.regularexpressions.edit.php:53
 #: include/views/administration.general.valuemapping.edit.php:55
 #: include/views/administration.usergroups.edit.php:184
-#: include/views/administration.users.edit.php:244
+#: include/views/administration.users.edit.php:249
 #: include/views/configuration.action.edit.php:51
 #: include/views/configuration.action.edit.php:435
 #: include/views/configuration.action.edit.php:439
@@ -405,8 +405,8 @@ msgstr ""
 #: include/views/configuration.item.edit.php:952
 #: include/views/configuration.item.massupdate.php:344
 #: include/views/configuration.item.massupdate.php:458
-#: include/views/configuration.item.prototype.edit.php:627
-#: include/views/configuration.item.prototype.edit.php:779
+#: include/views/configuration.item.prototype.edit.php:629
+#: include/views/configuration.item.prototype.edit.php:781
 #: include/views/configuration.maintenance.edit.php:77
 #: include/views/configuration.services.edit.php:117
 #: include/views/configuration.services.edit.php:170
@@ -421,9 +421,9 @@ msgstr ""
 #: include/views/configuration.triggers.massupdate.php:59
 #: include/views/js/monitoring.sysmaps.js.php:146
 #: include/views/js/monitoring.sysmaps.js.php:254
-#: include/views/js/monitoring.sysmaps.js.php:658
-#: include/views/js/monitoring.sysmaps.js.php:669
-#: include/views/js/monitoring.sysmaps.js.php:707
+#: include/views/js/monitoring.sysmaps.js.php:662
+#: include/views/js/monitoring.sysmaps.js.php:673
+#: include/views/js/monitoring.sysmaps.js.php:711
 #: include/views/monitoring.screen.edit.php:124
 #: include/views/monitoring.screen.edit.php:160
 #: include/views/monitoring.slideconf.edit.php:115
@@ -555,8 +555,8 @@ msgstr "Aktív eddig"
 #: include/views/administration.usergroups.edit.php:165
 #: include/views/administration.usergroups.edit.php:255
 #: include/views/administration.usergroups.edit.php:287
-#: include/views/administration.users.edit.php:325
-#: include/views/administration.users.edit.php:532
+#: include/views/administration.users.edit.php:330
+#: include/views/administration.users.edit.php:537
 #: include/views/common.filter.trigger.php:116
 #: include/views/configuration.action.edit.php:393
 #: include/views/configuration.action.edit.php:678
@@ -606,9 +606,9 @@ msgstr "Aktív eddig"
 #: include/views/configuration.item.massupdate.php:496
 #: include/views/configuration.item.prototype.edit.php:134
 #: include/views/configuration.item.prototype.edit.php:229
-#: include/views/configuration.item.prototype.edit.php:663
-#: include/views/configuration.item.prototype.edit.php:882
-#: include/views/configuration.item.prototype.edit.php:915
+#: include/views/configuration.item.prototype.edit.php:665
+#: include/views/configuration.item.prototype.edit.php:884
+#: include/views/configuration.item.prototype.edit.php:917
 #: include/views/configuration.maintenance.edit.php:137
 #: include/views/configuration.maintenance.edit.php:224
 #: include/views/configuration.maintenance.edit.php:295
@@ -638,18 +638,18 @@ msgstr "Aktív eddig"
 #: include/views/configuration.triggers.massupdate.php:139
 #: include/views/hostmacros.php:169
 #: include/views/js/administration.general.valuemapping.edit.js.php:26
-#: include/views/js/adm.regexprs.edit.js.php:193
+#: include/views/js/adm.regexprs.edit.js.php:198
 #: include/views/js/configuration.action.edit.js.php:268
 #: include/views/js/configuration.action.edit.js.php:654
 #: include/views/js/configuration.correlation.edit.js.php:47
 #: include/views/js/configuration.discovery.edit.js.php:123
-#: include/views/js/configuration.discovery.edit.js.php:704
+#: include/views/js/configuration.discovery.edit.js.php:710
 #: include/views/js/monitoring.screen.edit.js.php:83
 #: include/views/js/monitoring.slideconf.edit.js.php:99
 #: include/views/js/monitoring.sysmap.edit.js.php:101
 #: include/views/js/monitoring.sysmaps.js.php:174
 #: include/views/js/monitoring.sysmaps.js.php:257
-#: include/views/js/monitoring.sysmaps.js.php:710
+#: include/views/js/monitoring.sysmaps.js.php:714
 #: include/views/monitoring.screen.constructor.edit.php:943
 #: include/views/monitoring.screen.edit.php:127
 #: include/views/monitoring.screen.edit.php:163
@@ -689,7 +689,7 @@ msgstr "Új hoszt"
 msgid "Add multiple maps"
 msgstr ""
 
-#: include/classes/widgets/CWidgetHelper.php:1092
+#: include/classes/widgets/CWidgetHelper.php:1093
 msgid "Add new data set"
 msgstr ""
 
@@ -701,7 +701,7 @@ msgstr ""
 msgid "Add new or existing host groups"
 msgstr ""
 
-#: include/classes/widgets/CWidgetHelper.php:641
+#: include/classes/widgets/CWidgetHelper.php:640
 msgid "Add new override"
 msgstr ""
 
@@ -843,8 +843,8 @@ msgid "All dashboards"
 msgstr ""
 
 #: include/views/administration.usergroups.edit.php:109
-#: include/views/administration.users.edit.php:482
-#: include/views/administration.users.edit.php:488
+#: include/views/administration.users.edit.php:487
+#: include/views/administration.users.edit.php:493
 msgid "All groups"
 msgstr ""
 
@@ -897,7 +897,7 @@ msgstr ""
 #: include/views/configuration.host.discovery.edit.php:574
 #: include/views/configuration.item.edit.php:867
 #: include/views/configuration.item.massupdate.php:597
-#: include/views/configuration.item.prototype.edit.php:730
+#: include/views/configuration.item.prototype.edit.php:732
 msgid "Allowed hosts"
 msgstr "Engedélyezett hosztok"
 
@@ -943,7 +943,7 @@ msgstr ""
 msgid "Any"
 msgstr "Bármely"
 
-#: include/regexp.inc.php:223 include/views/js/adm.regexprs.edit.js.php:137
+#: include/regexp.inc.php:223 include/views/js/adm.regexprs.edit.js.php:140
 msgid "Any character string included"
 msgstr "Bármely szót tartalmaz"
 
@@ -957,7 +957,7 @@ msgstr "Bármely szót tartalmaz"
 #: include/views/configuration.httpconf.edit.php:64
 #: include/views/configuration.httpconf.edit.php:69
 #: include/views/configuration.httpconf.list.php:94
-#: include/views/inventory.host.view.php:164
+#: include/views/inventory.host.view.php:171
 #: include/views/js/monitoring.sysmaps.js.php:204
 #: include/views/monitoring.overview.items.php:83
 #: include/views/monitoring.screen.constructor.edit.php:647 latest.php:354
@@ -984,7 +984,7 @@ msgstr[1] "Alkalmazás törölve"
 msgid "Application error."
 msgstr "Alkalmazás hiba."
 
-#: include/views/configuration.item.prototype.edit.php:760
+#: include/views/configuration.item.prototype.edit.php:762
 msgid "Application prototypes"
 msgstr ""
 
@@ -1011,12 +1011,12 @@ msgstr ""
 #: include/views/configuration.host.list.php:333
 #: include/views/configuration.item.edit.php:902
 #: include/views/configuration.item.list.php:70
-#: include/views/configuration.item.prototype.edit.php:745
+#: include/views/configuration.item.prototype.edit.php:747
 #: include/views/configuration.item.prototype.list.php:58
 #: include/views/configuration.template.edit.php:130
 #: include/views/configuration.template.list.php:86
 #: include/views/configuration.template.list.php:184
-#: include/views/conf.import.php:33 include/views/inventory.host.view.php:151
+#: include/views/conf.import.php:33 include/views/inventory.host.view.php:158
 #: search.php:133 search.php:160 search.php:189 search.php:408 search.php:433
 #: search.php:465
 msgid "Applications"
@@ -1025,10 +1025,10 @@ msgstr "Alkalmazások"
 #: app/views/dashboard.properties.edit.php:65
 #: include/classes/html/CFilter.php:207 include/classes/html/CFilter.php:298
 #: include/views/js/monitoring.sysmaps.js.php:267
-#: include/views/js/monitoring.sysmaps.js.php:415
-#: include/views/js/monitoring.sysmaps.js.php:535
-#: include/views/js/monitoring.sysmaps.js.php:630
-#: include/views/js/monitoring.sysmaps.js.php:730 jsLoader.php:114
+#: include/views/js/monitoring.sysmaps.js.php:419
+#: include/views/js/monitoring.sysmaps.js.php:539
+#: include/views/js/monitoring.sysmaps.js.php:634
+#: include/views/js/monitoring.sysmaps.js.php:734 jsLoader.php:114
 #: jsLoader.php:299
 msgid "Apply"
 msgstr "Alkalmaz"
@@ -1079,12 +1079,12 @@ msgstr ""
 #: include/views/configuration.item.edit.php:837
 #: include/views/configuration.item.edit.php:843
 #: include/views/configuration.item.massupdate.php:573
-#: include/views/configuration.item.prototype.edit.php:710
-#: include/views/configuration.item.prototype.edit.php:716
+#: include/views/configuration.item.prototype.edit.php:712
+#: include/views/configuration.item.prototype.edit.php:718
 msgid "As is"
 msgstr "Ahogy van"
 
-#: include/views/monitoring.history.php:86
+#: include/views/monitoring.history.php:93
 msgid "As plain text"
 msgstr "Szövegként"
 
@@ -1226,18 +1226,18 @@ msgstr ""
 #: include/views/configuration.host.discovery.edit.php:462
 #: include/views/configuration.item.edit.php:610
 #: include/views/configuration.item.massupdate.php:296
-#: include/views/configuration.item.prototype.edit.php:541
+#: include/views/configuration.item.prototype.edit.php:543
 msgid "Authentication method"
 msgstr "Autentikációs mód"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:238
+#: app/controllers/CControllerAuthenticationUpdate.php:241
 msgid "Authentication method changed"
 msgstr ""
 
 #: include/views/configuration.host.discovery.edit.php:429
 #: include/views/configuration.item.edit.php:553
 #: include/views/configuration.item.massupdate.php:234
-#: include/views/configuration.item.prototype.edit.php:508
+#: include/views/configuration.item.prototype.edit.php:510
 #: include/views/js/configuration.discovery.edit.js.php:100
 msgid "Authentication passphrase"
 msgstr ""
@@ -1245,12 +1245,12 @@ msgstr ""
 #: include/views/configuration.host.discovery.edit.php:422
 #: include/views/configuration.item.edit.php:547
 #: include/views/configuration.item.massupdate.php:221
-#: include/views/configuration.item.prototype.edit.php:501
+#: include/views/configuration.item.prototype.edit.php:503
 #: include/views/js/configuration.discovery.edit.js.php:92
 msgid "Authentication protocol"
 msgstr ""
 
-#: app/controllers/CControllerAuthenticationUpdate.php:237
+#: app/controllers/CControllerAuthenticationUpdate.php:240
 msgid "Authentication settings updated"
 msgstr ""
 
@@ -1265,7 +1265,7 @@ msgstr ""
 msgid "Auto registration"
 msgstr "Automatikus regisztráció"
 
-#: include/views/administration.users.edit.php:212
+#: include/views/administration.users.edit.php:217
 msgid "Auto-login"
 msgstr "Automatikus belépés"
 
@@ -1273,7 +1273,7 @@ msgstr "Automatikus belépés"
 msgid "Auto-login and auto-logout options cannot be enabled together."
 msgstr ""
 
-#: include/views/administration.users.edit.php:213 profile.php:49 users.php:59
+#: include/views/administration.users.edit.php:218 profile.php:49 users.php:59
 msgid "Auto-logout"
 msgstr ""
 
@@ -1304,7 +1304,7 @@ msgid "Automatic icon mapping"
 msgstr ""
 
 #: include/views/js/monitoring.sysmaps.js.php:213
-#: include/views/js/monitoring.sysmaps.js.php:599
+#: include/views/js/monitoring.sysmaps.js.php:603
 msgid "Automatic icon selection"
 msgstr ""
 
@@ -1340,7 +1340,7 @@ msgstr ""
 msgid "Background"
 msgstr "Háttér"
 
-#: include/views/js/monitoring.sysmaps.js.php:498
+#: include/views/js/monitoring.sysmaps.js.php:502
 msgid "Background colour"
 msgstr ""
 
@@ -1352,8 +1352,8 @@ msgstr "Háttérkép"
 msgid "Base DN"
 msgstr "Base DN"
 
-#: include/classes/widgets/CWidgetHelper.php:688
-#: include/classes/widgets/CWidgetHelper.php:958
+#: include/classes/widgets/CWidgetHelper.php:687
+#: include/classes/widgets/CWidgetHelper.php:959
 msgid "Base colour"
 msgstr ""
 
@@ -1397,8 +1397,8 @@ msgstr ""
 msgid "Body and headers"
 msgstr ""
 
-#: include/graphs.inc.php:59 include/views/js/monitoring.sysmaps.js.php:696
-#: include/views/js/monitoring.sysmaps.js.php:784
+#: include/graphs.inc.php:59 include/views/js/monitoring.sysmaps.js.php:700
+#: include/views/js/monitoring.sysmaps.js.php:788
 msgid "Bold line"
 msgstr "Vastag vonal"
 
@@ -1410,21 +1410,21 @@ msgstr ""
 msgid "Border"
 msgstr ""
 
-#: include/views/js/monitoring.sysmaps.js.php:527
+#: include/views/js/monitoring.sysmaps.js.php:531
 msgid "Border colour"
 msgstr ""
 
-#: include/views/js/monitoring.sysmaps.js.php:507
+#: include/views/js/monitoring.sysmaps.js.php:511
 msgid "Border type"
 msgstr ""
 
-#: include/views/js/monitoring.sysmaps.js.php:517
+#: include/views/js/monitoring.sysmaps.js.php:521
 msgid "Border width"
 msgstr ""
 
 #: include/views/js/monitoring.sysmaps.js.php:18
 #: include/views/js/monitoring.sysmaps.js.php:119
-#: include/views/js/monitoring.sysmaps.js.php:590
+#: include/views/js/monitoring.sysmaps.js.php:594
 #: include/views/monitoring.screen.constructor.edit.php:899
 #: include/views/monitoring.sysmap.edit.php:203
 msgid "Bottom"
@@ -1527,9 +1527,9 @@ msgstr "Kanada (136 karakter)"
 #: include/views/js/administration.general.trigseverity.js.php:13
 #: include/views/js/configuration.action.edit.js.php:76
 #: include/views/js/configuration.discovery.edit.js.php:124
-#: include/views/js/configuration.discovery.edit.js.php:566
-#: include/views/js/configuration.discovery.edit.js.php:637
-#: include/views/js/configuration.discovery.edit.js.php:667
+#: include/views/js/configuration.discovery.edit.js.php:572
+#: include/views/js/configuration.discovery.edit.js.php:643
+#: include/views/js/configuration.discovery.edit.js.php:673
 #: include/views/js/conf.import.js.php:16
 #: include/views/monitoring.slideconf.edit.php:277 jsLoader.php:117
 #: jsLoader.php:131 jsLoader.php:301 jsLoader.php:313
@@ -1673,7 +1673,7 @@ msgstr ""
 msgid "Cannot add proxy"
 msgstr "Proxy létrehozása sikertelen"
 
-#: adm.regexps.php:153
+#: adm.regexps.php:147
 msgid "Cannot add regular expression"
 msgstr "Reguláris kifejezés hozzáadása nem sikerült"
 
@@ -1997,7 +1997,7 @@ msgid_plural "Cannot delete proxies"
 msgstr[0] "Proxy törlése sikertelen"
 msgstr[1] "Proxy törlése sikertelen"
 
-#: adm.regexps.php:203
+#: adm.regexps.php:197
 #, fuzzy
 msgid "Cannot delete regular expression"
 msgid_plural "Cannot delete regular expressions"
@@ -2268,7 +2268,7 @@ msgstr ""
 msgid "Cannot find host \"%1$s\" used in screen \"%2$s\"."
 msgstr ""
 
-#: include/classes/import/CConfigurationImport.php:1123
+#: include/classes/import/CConfigurationImport.php:1125
 #, c-format
 msgid "Cannot find host group \"%1$s\" for host prototype \"%2$s\" of discovery rule \"%3$s\" on \"%4$s\"."
 msgstr ""
@@ -2291,32 +2291,32 @@ msgstr ""
 msgid "Cannot find icon map \"%1$s\" used in map \"%2$s\"."
 msgstr ""
 
-#: include/classes/import/CConfigurationImport.php:1507
+#: include/classes/import/CConfigurationImport.php:1509
 #, c-format
 msgid "Cannot find item \"%1$s\" on \"%2$s\" used as the Y axis MAX value for graph \"%3$s\"."
 msgstr ""
 
-#: include/classes/import/CConfigurationImport.php:1276
+#: include/classes/import/CConfigurationImport.php:1278
 #, c-format
 msgid "Cannot find item \"%1$s\" on \"%2$s\" used as the Y axis MAX value for graph prototype \"%3$s\" of discovery rule \"%4$s\" on \"%5$s\"."
 msgstr ""
 
-#: include/classes/import/CConfigurationImport.php:1491
+#: include/classes/import/CConfigurationImport.php:1493
 #, c-format
 msgid "Cannot find item \"%1$s\" on \"%2$s\" used as the Y axis MIN value for graph \"%3$s\"."
 msgstr ""
 
-#: include/classes/import/CConfigurationImport.php:1256
+#: include/classes/import/CConfigurationImport.php:1258
 #, c-format
 msgid "Cannot find item \"%1$s\" on \"%2$s\" used as the Y axis MIN value for graph prototype \"%3$s\" of discovery rule \"%4$s\" on \"%5$s\"."
 msgstr ""
 
-#: include/classes/import/CConfigurationImport.php:1526
+#: include/classes/import/CConfigurationImport.php:1528
 #, c-format
 msgid "Cannot find item \"%1$s\" on \"%2$s\" used in graph \"%3$s\"."
 msgstr ""
 
-#: include/classes/import/CConfigurationImport.php:1296
+#: include/classes/import/CConfigurationImport.php:1298
 #, c-format
 msgid "Cannot find item \"%1$s\" on \"%2$s\" used in graph prototype \"%3$s\" of discovery rule \"%4$s\" on \"%5$s\"."
 msgstr ""
@@ -2341,7 +2341,7 @@ msgstr ""
 msgid "Cannot find screen \"%1$s\" used in screen \"%2$s\"."
 msgstr ""
 
-#: include/classes/import/CConfigurationImport.php:1146
+#: include/classes/import/CConfigurationImport.php:1148
 #, c-format
 msgid "Cannot find template \"%1$s\" for host prototype \"%2$s\" of discovery rule \"%3$s\" on \"%4$s\"."
 msgstr ""
@@ -2352,12 +2352,12 @@ msgstr ""
 msgid "Cannot find trigger \"%1$s\" used in map \"%2$s\"."
 msgstr ""
 
-#: include/classes/import/CConfigurationImport.php:749
+#: include/classes/import/CConfigurationImport.php:751
 #, c-format
 msgid "Cannot find value map \"%1$s\" used for item \"%2$s\" on \"%3$s\"."
 msgstr ""
 
-#: include/classes/import/CConfigurationImport.php:1051
+#: include/classes/import/CConfigurationImport.php:1053
 #, c-format
 msgid "Cannot find value map \"%1$s\" used for item prototype \"%2$s\" of discovery rule \"%3$s\" on \"%4$s\"."
 msgstr ""
@@ -2398,7 +2398,7 @@ msgstr ""
 msgid "Cannot include view file \"%s\"."
 msgstr ""
 
-#: app/controllers/CControllerPopupTriggerExpr.php:691
+#: app/controllers/CControllerPopupTriggerExpr.php:698
 msgid "Cannot insert trigger expression"
 msgstr ""
 
@@ -2692,7 +2692,7 @@ msgstr "Az eljárást nem lehet frissíteni"
 msgid "Cannot update application"
 msgstr "Alkalmazás frissítése sikertelen"
 
-#: app/controllers/CControllerAuthenticationUpdate.php:242
+#: app/controllers/CControllerAuthenticationUpdate.php:245
 msgid "Cannot update authentication"
 msgstr ""
 
@@ -2826,7 +2826,7 @@ msgstr "Proxy frissítése sikertelen"
 msgid "Cannot update proxy for discovered host \"%1$s\"."
 msgstr ""
 
-#: adm.regexps.php:147
+#: adm.regexps.php:141
 msgid "Cannot update regular expression"
 msgstr "Reguláris kifejezés frissítése nem sikerült"
 
@@ -2908,7 +2908,7 @@ msgstr "Nem lehet frissíteni az érték-hozzárendelést"
 msgid "Cannot update web scenario"
 msgstr ""
 
-#: include/views/js/configuration.discovery.edit.js.php:633
+#: include/views/js/configuration.discovery.edit.js.php:639
 msgid "Cannot validate discovery check: invalid request or connection to Zabbix server failed."
 msgstr ""
 
@@ -2965,7 +2965,7 @@ msgstr ""
 
 #: app/views/administration.authentication.edit.php:72
 #: app/views/administration.mediatype.edit.php:139
-#: include/views/administration.users.edit.php:129
+#: include/views/administration.users.edit.php:134
 msgid "Change password"
 msgstr "Jelszó módosítása"
 
@@ -2980,15 +2980,15 @@ msgstr ""
 #: include/forms.inc.php:353 include/items.inc.php:131
 #: include/views/configuration.item.edit.php:677
 #: include/views/configuration.item.massupdate.php:279
-#: include/views/configuration.item.prototype.edit.php:605
+#: include/views/configuration.item.prototype.edit.php:607
 msgid "Character"
 msgstr "Betű"
 
-#: include/regexp.inc.php:222 include/views/js/adm.regexprs.edit.js.php:133
+#: include/regexp.inc.php:222 include/views/js/adm.regexprs.edit.js.php:136
 msgid "Character string included"
 msgstr "Tartalmazza a következő szót"
 
-#: include/regexp.inc.php:224 include/views/js/adm.regexprs.edit.js.php:141
+#: include/regexp.inc.php:224 include/views/js/adm.regexprs.edit.js.php:144
 msgid "Character string not included"
 msgstr "Nem tartalmazza a következő szót"
 
@@ -3001,7 +3001,7 @@ msgstr ""
 msgid "Chassis information. Returns string"
 msgstr ""
 
-#: include/views/js/configuration.discovery.edit.js.php:563
+#: include/views/js/configuration.discovery.edit.js.php:569
 msgid "Check already exists."
 msgstr ""
 
@@ -3160,7 +3160,7 @@ msgstr "Óra"
 #: include/views/configuration.host.prototype.edit.php:437
 #: include/views/configuration.httpconf.edit.php:237
 #: include/views/configuration.item.edit.php:1076
-#: include/views/configuration.item.prototype.edit.php:905
+#: include/views/configuration.item.prototype.edit.php:907
 #: include/views/configuration.maintenance.edit.php:287
 #: include/views/configuration.template.edit.php:445
 #: include/views/configuration.trigger.prototype.edit.php:636
@@ -3172,10 +3172,10 @@ msgid "Clone"
 msgstr "Klón"
 
 #: include/func.inc.php:1944 include/views/js/monitoring.sysmaps.js.php:274
-#: include/views/js/monitoring.sysmaps.js.php:422
-#: include/views/js/monitoring.sysmaps.js.php:542
-#: include/views/js/monitoring.sysmaps.js.php:637
-#: include/views/js/monitoring.sysmaps.js.php:734 jsLoader.php:132
+#: include/views/js/monitoring.sysmaps.js.php:426
+#: include/views/js/monitoring.sysmaps.js.php:546
+#: include/views/js/monitoring.sysmaps.js.php:641
+#: include/views/js/monitoring.sysmaps.js.php:738 jsLoader.php:132
 #: jsLoader.php:228 jsLoader.php:306
 msgid "Close"
 msgstr "Bezár"
@@ -3200,7 +3200,7 @@ msgid "Close problem"
 msgstr ""
 
 #: include/classes/html/CCollapsibleUiWidget.php:54
-#: include/classes/widgets/CWidgetHelper.php:892 jsLoader.php:222
+#: include/classes/widgets/CWidgetHelper.php:891 jsLoader.php:222
 #: jsLoader.php:227
 msgid "Collapse"
 msgstr ""
@@ -3209,7 +3209,7 @@ msgstr ""
 #: include/views/js/monitoring.sysmaps.js.php:321
 #: include/views/js/monitoring.sysmaps.js.php:342
 #: include/views/js/monitoring.sysmaps.js.php:361
-#: include/views/js/monitoring.sysmaps.js.php:707
+#: include/views/js/monitoring.sysmaps.js.php:711
 msgid "Colour"
 msgstr "Szín"
 
@@ -3219,7 +3219,7 @@ msgstr "Szín"
 msgid "Colour \"%1$s\" is not correct: expecting hexadecimal colour code (6 symbols)."
 msgstr ""
 
-#: include/views/js/monitoring.sysmaps.js.php:701
+#: include/views/js/monitoring.sysmaps.js.php:705
 msgid "Colour (OK)"
 msgstr "Szín (OK)"
 
@@ -3280,7 +3280,7 @@ msgstr ""
 msgid "Concurrent sessions"
 msgstr ""
 
-#: app/controllers/CControllerPopupTriggerExpr.php:714
+#: app/controllers/CControllerPopupTriggerExpr.php:721
 msgid "Condition"
 msgstr "Feltétel"
 
@@ -3327,7 +3327,7 @@ msgstr "Feltételek"
 msgid "Conditions duplicates for correlation \"%1$s\"."
 msgstr ""
 
-#: include/menu.inc.php:175 include/views/inventory.host.view.php:172
+#: include/menu.inc.php:175 include/views/inventory.host.view.php:179
 #: jsLoader.php:249
 msgid "Configuration"
 msgstr "Konfiguráció"
@@ -3516,13 +3516,13 @@ msgstr ""
 #: include/views/configuration.host.edit.php:193
 #: include/views/configuration.host.prototype.edit.php:85
 #: include/views/inventory.host.view.php:75
-#: include/views/js/monitoring.sysmaps.js.php:692
+#: include/views/js/monitoring.sysmaps.js.php:696
 msgid "Connect to"
 msgstr "Kapcsolódva"
 
-#: include/classes/widgets/CWidgetHelper.php:668
-#: include/classes/widgets/CWidgetHelper.php:742
-#: include/classes/widgets/CWidgetHelper.php:1015
+#: include/classes/widgets/CWidgetHelper.php:667
+#: include/classes/widgets/CWidgetHelper.php:741
+#: include/classes/widgets/CWidgetHelper.php:1016
 msgctxt "missing data function"
 msgid "Connected"
 msgstr ""
@@ -3652,7 +3652,7 @@ msgstr ""
 #: include/views/configuration.trigger.prototype.list.php:31
 #: include/views/configuration.triggers.list.php:142
 #: include/views/monitoring.charts.php:58
-#: include/views/monitoring.history.php:209
+#: include/views/monitoring.history.php:214
 #: include/views/monitoring.hostscreen.php:63
 #: include/views/monitoring.overview.items.php:73
 #: include/views/monitoring.overview.triggers.php:110
@@ -3672,7 +3672,7 @@ msgstr ""
 #: include/views/configuration.host.discovery.edit.php:398
 #: include/views/configuration.item.edit.php:494
 #: include/views/configuration.item.massupdate.php:193
-#: include/views/configuration.item.prototype.edit.php:477
+#: include/views/configuration.item.prototype.edit.php:479
 #: include/views/js/configuration.discovery.edit.js.php:70
 msgid "Context name"
 msgstr ""
@@ -3815,7 +3815,7 @@ msgstr ""
 #: include/views/configuration.host.prototype.edit.php:164
 #: include/views/configuration.host.prototype.list.php:55
 #: include/views/configuration.host.prototype.list.php:152
-#: include/views/configuration.item.prototype.edit.php:770
+#: include/views/configuration.item.prototype.edit.php:772
 #: include/views/configuration.item.prototype.list.php:59
 #: include/views/configuration.item.prototype.list.php:166
 #: include/views/configuration.trigger.prototype.edit.php:539
@@ -3993,7 +3993,7 @@ msgstr "Egyéni grafikonok"
 #: include/views/configuration.host.discovery.edit.php:557
 #: include/views/configuration.item.edit.php:753
 #: include/views/configuration.item.massupdate.php:502
-#: include/views/configuration.item.prototype.edit.php:667
+#: include/views/configuration.item.prototype.edit.php:669
 msgid "Custom intervals"
 msgstr ""
 
@@ -4046,7 +4046,7 @@ msgstr ""
 #: include/views/configuration.item.edit.php:563
 #: include/views/configuration.item.edit.php:570
 #: include/views/configuration.item.massupdate.php:247
-#: include/views/configuration.item.prototype.edit.php:515
+#: include/views/configuration.item.prototype.edit.php:517
 #: include/views/js/configuration.discovery.edit.js.php:109
 msgid "DES"
 msgstr ""
@@ -4057,7 +4057,7 @@ msgstr "LETILTVA"
 
 #: app/views/administration.proxy.edit.php:50
 #: include/views/configuration.host.list.php:107
-#: include/views/inventory.host.view.php:85
+#: include/views/inventory.host.view.php:89
 #: include/views/js/configuration.host.edit.js.php:30 search.php:127
 msgid "DNS"
 msgstr "DNS"
@@ -4127,8 +4127,8 @@ msgstr ""
 msgid "Dashboards"
 msgstr ""
 
-#: include/graphs.inc.php:63 include/views/js/monitoring.sysmaps.js.php:698
-#: include/views/js/monitoring.sysmaps.js.php:786
+#: include/graphs.inc.php:63 include/views/js/monitoring.sysmaps.js.php:702
+#: include/views/js/monitoring.sysmaps.js.php:790
 msgid "Dashed line"
 msgstr "Szaggatott vonal"
 
@@ -4284,7 +4284,7 @@ msgstr "December"
 #: include/views/inventory.host.view.php:75
 #: include/views/js/monitoring.sysmaps.js.php:118
 #: include/views/js/monitoring.sysmaps.js.php:220
-#: include/views/js/monitoring.sysmaps.js.php:589 jsLoader.php:184
+#: include/views/js/monitoring.sysmaps.js.php:593 jsLoader.php:184
 msgid "Default"
 msgstr "Alapértelmezett"
 
@@ -4450,7 +4450,7 @@ msgstr ""
 msgid "Delete icon map?"
 msgstr ""
 
-#: include/views/configuration.item.prototype.edit.php:906
+#: include/views/configuration.item.prototype.edit.php:908
 msgid "Delete item prototype?"
 msgstr ""
 
@@ -4616,7 +4616,7 @@ msgstr ""
 msgid "Delete selected triggers?"
 msgstr "Törli a kijelölt triggereket?"
 
-#: include/views/administration.users.edit.php:520
+#: include/views/administration.users.edit.php:525
 msgid "Delete selected user?"
 msgstr "Törli a kiválasztott felhasználót?"
 
@@ -4736,13 +4736,13 @@ msgstr ""
 #: include/views/configuration.host.massupdate.php:161
 #: include/views/configuration.item.edit.php:934
 #: include/views/configuration.item.massupdate.php:733
-#: include/views/configuration.item.prototype.edit.php:763
+#: include/views/configuration.item.prototype.edit.php:765
 #: include/views/configuration.maintenance.edit.php:67
 #: include/views/configuration.maintenance.list.php:75
 #: include/views/configuration.template.edit.php:108
 #: include/views/configuration.trigger.prototype.edit.php:536
 #: include/views/configuration.triggers.edit.php:570
-#: include/views/inventory.host.view.php:116 jsLoader.php:256
+#: include/views/inventory.host.view.php:123 jsLoader.php:256
 msgid "Description"
 msgstr "Leírás"
 
@@ -4758,7 +4758,7 @@ msgstr ""
 #: include/views/configuration.action.edit.php:1273
 #: include/views/configuration.action.edit.php:1869
 #: include/views/configuration.correlation.edit.php:218
-#: include/views/inventory.host.view.php:208 queue.php:75
+#: include/views/inventory.host.view.php:215 queue.php:75
 msgid "Details"
 msgstr "Részletek"
 
@@ -4885,7 +4885,7 @@ msgstr ""
 #: include/views/administration.usergroups.list.php:75
 #: include/views/administration.usergroups.list.php:100
 #: include/views/administration.usergroups.list.php:109
-#: include/views/administration.users.edit.php:254
+#: include/views/administration.users.edit.php:259
 #: include/views/administration.users.list.php:178
 #: include/views/administration.users.list.php:180
 #: include/views/configuration.action.list.php:56
@@ -4932,8 +4932,8 @@ msgstr ""
 #: include/views/configuration.host.list.php:349
 #: include/views/configuration.template.list.php:91
 #: include/views/configuration.template.list.php:204
-#: include/views/inventory.host.view.php:157
-#: include/views/inventory.host.view.php:168 search.php:137 search.php:176
+#: include/views/inventory.host.view.php:164
+#: include/views/inventory.host.view.php:175 search.php:137 search.php:176
 #: search.php:205 search.php:413 search.php:453 search.php:470
 msgid "Discovery"
 msgstr "Felderítés"
@@ -4946,9 +4946,9 @@ msgstr "Felderítés proxy-n keresztül"
 msgid "Discovery check"
 msgstr "Felderítés"
 
-#: include/views/js/configuration.discovery.edit.js.php:562
-#: include/views/js/configuration.discovery.edit.js.php:631
-#: include/views/js/configuration.discovery.edit.js.php:663
+#: include/views/js/configuration.discovery.edit.js.php:568
+#: include/views/js/configuration.discovery.edit.js.php:637
+#: include/views/js/configuration.discovery.edit.js.php:669
 msgid "Discovery check error"
 msgstr ""
 
@@ -5093,13 +5093,13 @@ msgstr "Ne számoljon"
 
 #: include/views/configuration.item.edit.php:781
 #: include/views/configuration.item.massupdate.php:522
-#: include/views/configuration.item.prototype.edit.php:677
+#: include/views/configuration.item.prototype.edit.php:679
 msgid "Do not keep history"
 msgstr ""
 
 #: include/views/configuration.item.edit.php:815
 #: include/views/configuration.item.massupdate.php:539
-#: include/views/configuration.item.prototype.edit.php:690
+#: include/views/configuration.item.prototype.edit.php:692
 msgid "Do not keep trends"
 msgstr ""
 
@@ -5107,8 +5107,8 @@ msgstr ""
 msgid "Do you wish to replace the conditional expression?"
 msgstr ""
 
-#: include/graphs.inc.php:61 include/views/js/monitoring.sysmaps.js.php:697
-#: include/views/js/monitoring.sysmaps.js.php:785
+#: include/graphs.inc.php:61 include/views/js/monitoring.sysmaps.js.php:701
+#: include/views/js/monitoring.sysmaps.js.php:789
 msgid "Dot"
 msgstr "Pontozott vonal"
 
@@ -5134,11 +5134,11 @@ msgstr ""
 msgid "Downtime"
 msgstr "Kiesés"
 
-#: include/classes/widgets/CWidgetHelper.php:659
+#: include/classes/widgets/CWidgetHelper.php:658
+#: include/classes/widgets/CWidgetHelper.php:701
 #: include/classes/widgets/CWidgetHelper.php:702
 #: include/classes/widgets/CWidgetHelper.php:703
-#: include/classes/widgets/CWidgetHelper.php:704
-#: include/classes/widgets/CWidgetHelper.php:962
+#: include/classes/widgets/CWidgetHelper.php:963
 msgid "Draw"
 msgstr ""
 
@@ -5283,7 +5283,7 @@ msgid "Each URL should have a unique name. Please make sure there is only one UR
 msgstr ""
 
 #: app/views/popup.trigdesc.view.php:109
-#: include/views/administration.users.edit.php:310
+#: include/views/administration.users.edit.php:315
 #: include/views/configuration.action.edit.php:506
 #: include/views/configuration.action.edit.php:527
 #: include/views/configuration.action.edit.php:1306
@@ -5294,8 +5294,8 @@ msgstr ""
 #: include/views/configuration.triggers.edit.php:124
 #: include/views/configuration.triggers.edit.php:323
 #: include/views/js/configuration.discovery.edit.js.php:7
-#: include/views/js/monitoring.sysmaps.js.php:751
-#: include/views/js/monitoring.sysmaps.js.php:766 jsLoader.php:116
+#: include/views/js/monitoring.sysmaps.js.php:755
+#: include/views/js/monitoring.sysmaps.js.php:770 jsLoader.php:116
 #: jsLoader.php:295
 msgid "Edit"
 msgstr "Szerkesztés"
@@ -5349,12 +5349,12 @@ msgstr ""
 msgid "Element"
 msgstr "Elem"
 
-#: include/maps.inc.php:47 include/views/js/monitoring.sysmaps.js.php:658
+#: include/maps.inc.php:47 include/views/js/monitoring.sysmaps.js.php:662
 msgid "Element name"
 msgstr "Elem név"
 
 #: include/views/js/monitoring.sysmaps.js.php:301
-#: include/views/js/monitoring.sysmaps.js.php:450
+#: include/views/js/monitoring.sysmaps.js.php:454
 msgid "Ellipse"
 msgstr ""
 
@@ -5602,7 +5602,7 @@ msgstr ""
 #: include/views/configuration.host.discovery.edit.php:569
 #: include/views/configuration.item.edit.php:858
 #: include/views/configuration.item.massupdate.php:590
-#: include/views/configuration.item.prototype.edit.php:725
+#: include/views/configuration.item.prototype.edit.php:727
 msgid "Enable trapping"
 msgstr ""
 
@@ -5621,7 +5621,7 @@ msgstr ""
 #: include/views/administration.usergroups.list.php:71
 #: include/views/administration.usergroups.list.php:96
 #: include/views/administration.usergroups.list.php:108
-#: include/views/administration.users.edit.php:248
+#: include/views/administration.users.edit.php:253
 #: include/views/administration.users.list.php:177
 #: include/views/administration.users.list.php:181
 #: include/views/configuration.action.edit.php:402
@@ -5694,7 +5694,7 @@ msgstr ""
 msgid "Event"
 msgstr "Esemény"
 
-#: include/classes/screens/CScreenHistory.php:261
+#: include/classes/screens/CScreenHistory.php:278
 msgid "Event ID"
 msgstr "Esemény azonosító"
 
@@ -5800,7 +5800,7 @@ msgstr ""
 #: include/items.inc.php:1667
 #: include/views/configuration.host.discovery.edit.php:492
 #: include/views/configuration.item.edit.php:640
-#: include/views/configuration.item.prototype.edit.php:571
+#: include/views/configuration.item.prototype.edit.php:573
 msgid "Executed script"
 msgstr "Végrehajtott szkript"
 
@@ -5809,7 +5809,7 @@ msgid "Execution confirmation"
 msgstr ""
 
 #: include/classes/html/CCollapsibleUiWidget.php:59
-#: include/classes/widgets/CWidgetHelper.php:892 jsLoader.php:223
+#: include/classes/widgets/CWidgetHelper.php:891 jsLoader.php:223
 #: jsLoader.php:226
 msgid "Expand"
 msgstr ""
@@ -5916,8 +5916,8 @@ msgctxt "Friday short"
 msgid "F"
 msgstr ""
 
-#: include/views/js/adm.regexprs.edit.js.php:128
-#: include/views/js/adm.regexprs.edit.js.php:173
+#: include/views/js/adm.regexprs.edit.js.php:131
+#: include/views/js/adm.regexprs.edit.js.php:178
 msgid "FALSE"
 msgstr "HAMIS"
 
@@ -6088,7 +6088,8 @@ msgstr ""
 msgid "File time information. Returns integer (Unix timestamp)"
 msgstr ""
 
-#: include/classes/widgets/CWidgetHelper.php:664
+#: include/classes/widgets/CWidgetHelper.php:663
+#: include/classes/widgets/CWidgetHelper.php:717
 #: include/classes/widgets/CWidgetHelper.php:718
 #: include/classes/widgets/CWidgetHelper.php:719
 #: include/classes/widgets/CWidgetHelper.php:720
@@ -6099,8 +6100,7 @@ msgstr ""
 #: include/classes/widgets/CWidgetHelper.php:725
 #: include/classes/widgets/CWidgetHelper.php:726
 #: include/classes/widgets/CWidgetHelper.php:727
-#: include/classes/widgets/CWidgetHelper.php:728
-#: include/classes/widgets/CWidgetHelper.php:995
+#: include/classes/widgets/CWidgetHelper.php:996
 msgid "Fill"
 msgstr ""
 
@@ -6131,7 +6131,7 @@ msgstr "Kitöltés"
 #: include/views/configuration.template.list.php:25
 #: include/views/configuration.triggers.list.php:114
 #: include/views/inventory.host.list.php:48
-#: include/views/monitoring.history.php:237
+#: include/views/monitoring.history.php:242
 #: include/views/monitoring.overview.items.php:81
 #: include/views/monitoring.screen.list.php:58
 #: include/views/monitoring.slideconf.list.php:45
@@ -6191,7 +6191,7 @@ msgstr "Fix"
 #: include/views/configuration.item.edit.php:706
 #: include/views/configuration.item.edit.php:713
 #: include/views/configuration.item.massupdate.php:465
-#: include/views/configuration.item.prototype.edit.php:632
+#: include/views/configuration.item.prototype.edit.php:634
 #: include/views/js/common.item.edit.js.php:7
 #: include/views/js/configuration.item.massupdate.js.php:7
 msgid "Flexible"
@@ -6205,16 +6205,16 @@ msgid "Follow redirects"
 msgstr ""
 
 #: include/views/js/monitoring.sysmaps.js.php:313
-#: include/views/js/monitoring.sysmaps.js.php:464
+#: include/views/js/monitoring.sysmaps.js.php:468
 msgid "Font"
 msgstr ""
 
-#: include/views/js/monitoring.sysmaps.js.php:476
+#: include/views/js/monitoring.sysmaps.js.php:480
 msgid "Font colour"
 msgstr ""
 
 #: include/views/js/monitoring.sysmaps.js.php:317
-#: include/views/js/monitoring.sysmaps.js.php:470
+#: include/views/js/monitoring.sysmaps.js.php:474
 msgid "Font size"
 msgstr ""
 
@@ -6227,7 +6227,7 @@ msgid "Form data"
 msgstr ""
 
 #: include/items.inc.php:1671 include/views/configuration.item.edit.php:656
-#: include/views/configuration.item.prototype.edit.php:585
+#: include/views/configuration.item.prototype.edit.php:587
 msgid "Formula"
 msgstr ""
 
@@ -6248,7 +6248,7 @@ msgstr "Péntek"
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:86
 #: include/views/configuration.services.edit.php:245
 #: include/views/configuration.services.edit.php:291
-#: include/views/js/monitoring.sysmaps.js.php:669 report4.php:199
+#: include/views/js/monitoring.sysmaps.js.php:673 report4.php:199
 #: services.php:47 services.php:182
 msgid "From"
 msgstr "-tól"
@@ -6264,7 +6264,7 @@ msgstr ""
 msgid "Frontend access updated"
 msgstr ""
 
-#: include/views/administration.users.edit.php:348
+#: include/views/administration.users.edit.php:353
 msgid "Frontend messaging"
 msgstr ""
 
@@ -6284,7 +6284,7 @@ msgstr "Teljes klón"
 msgid "Fullscreen"
 msgstr "Teljes képernyő"
 
-#: app/views/popup.triggerexpr.php:94
+#: app/views/popup.triggerexpr.php:97
 #: include/views/configuration.graph.edit.php:336
 msgid "Function"
 msgstr "Funkció"
@@ -6386,7 +6386,7 @@ msgstr "Meredek vonal"
 #: include/classes/widgets/forms/CWidgetFormGraph.php:62
 #: include/screens.inc.php:30 include/views/configuration.graph.edit.php:435
 #: include/views/monitoring.charts.php:38
-#: include/views/monitoring.history.php:66
+#: include/views/monitoring.history.php:71
 #: include/views/monitoring.screen.constructor.edit.php:156 latest.php:539
 #: latest.php:691 report2.php:455
 msgid "Graph"
@@ -6526,7 +6526,7 @@ msgstr "Összesített grafikon"
 #: app/controllers/CControllerPopupGeneric.php:248
 #: include/views/configuration.graph.edit.php:94
 #: include/views/configuration.graph.list.php:90
-#: include/views/monitoring.history.php:222
+#: include/views/monitoring.history.php:227
 msgid "Graph type"
 msgstr "Grafikon típusa"
 
@@ -6562,9 +6562,9 @@ msgstr ""
 #: include/views/configuration.template.edit.php:196
 #: include/views/configuration.template.list.php:89
 #: include/views/configuration.template.list.php:196
-#: include/views/conf.import.php:37 include/views/inventory.host.view.php:141
-#: include/views/inventory.host.view.php:156
-#: include/views/inventory.host.view.php:167
+#: include/views/conf.import.php:37 include/views/inventory.host.view.php:148
+#: include/views/inventory.host.view.php:163
+#: include/views/inventory.host.view.php:174
 #: include/views/monitoring.charts.php:63 jsLoader.php:264 search.php:130
 #: search.php:136 search.php:172 search.php:201 search.php:239 search.php:291
 #: search.php:345 search.php:411 search.php:445 search.php:468
@@ -6769,7 +6769,7 @@ msgstr ""
 #: graphs.php:46 include/views/configuration.graph.edit.php:89
 #: include/views/configuration.graph.list.php:89
 #: include/views/js/monitoring.sysmaps.js.php:98
-#: include/views/js/monitoring.sysmaps.js.php:404
+#: include/views/js/monitoring.sysmaps.js.php:408
 #: include/views/monitoring.screen.constructor.edit.php:863
 #: include/views/monitoring.sysmap.edit.php:100
 #: include/views/monitoring.sysmap.list.php:60 screenedit.php:70
@@ -6798,7 +6798,7 @@ msgstr ""
 msgid "Hide groups without problems"
 msgstr ""
 
-#: include/views/monitoring.history.php:153
+#: include/views/monitoring.history.php:158
 msgid "Hide selected"
 msgstr "Választottak elrejtése"
 
@@ -6868,7 +6868,7 @@ msgstr "Események előzményei"
 
 #: disc_prototypes.php:158 include/views/configuration.item.edit.php:778
 #: include/views/configuration.item.massupdate.php:518
-#: include/views/configuration.item.prototype.edit.php:674 items.php:59
+#: include/views/configuration.item.prototype.edit.php:676 items.php:59
 msgid "History storage period"
 msgstr ""
 
@@ -6877,7 +6877,7 @@ msgid "Horizontal"
 msgstr "Vízszintes"
 
 #: include/views/js/monitoring.sysmaps.js.php:325
-#: include/views/js/monitoring.sysmaps.js.php:482
+#: include/views/js/monitoring.sysmaps.js.php:486
 #: include/views/monitoring.screen.constructor.edit.php:883
 msgid "Horizontal align"
 msgstr "Vízszintes igazítás"
@@ -6915,8 +6915,8 @@ msgstr "Vízszintes igazítás"
 #: include/views/configuration.triggers.list.php:129
 #: include/views/configuration.triggers.list.php:168
 #: include/views/inventory.host.list.php:64
-#: include/views/inventory.host.view.php:150
-#: include/views/inventory.host.view.php:163
+#: include/views/inventory.host.view.php:157
+#: include/views/inventory.host.view.php:170
 #: include/views/js/configuration.action.edit.js.php:66
 #: include/views/js/configuration.action.edit.js.php:212
 #: include/views/js/monitoring.sysmaps.js.php:68
@@ -7003,7 +7003,7 @@ msgstr[1] ""
 #: include/forms.inc.php:329 include/maps.inc.php:25
 #: include/views/administration.usergroups.edit.php:103
 #: include/views/administration.usergroups.edit.php:184
-#: include/views/administration.users.edit.php:479
+#: include/views/administration.users.edit.php:484
 #: include/views/configuration.hostgroups.edit.php:47
 #: include/views/js/configuration.action.edit.js.php:67
 #: include/views/js/configuration.action.edit.js.php:200
@@ -7076,7 +7076,7 @@ msgstr "Hoszt info"
 #: include/views/configuration.item.edit.php:434
 #: include/views/configuration.item.edit.php:478
 #: include/views/configuration.item.massupdate.php:85
-#: include/views/configuration.item.prototype.edit.php:464
+#: include/views/configuration.item.prototype.edit.php:466
 msgid "Host interface"
 msgstr ""
 
@@ -7085,7 +7085,7 @@ msgstr ""
 #: include/views/configuration.host.edit.php:753
 #: include/views/configuration.host.prototype.edit.php:373
 #: include/views/inventory.host.list.php:23
-#: include/views/inventory.host.view.php:214 jsLoader.php:266
+#: include/views/inventory.host.view.php:221 jsLoader.php:266
 msgid "Host inventory"
 msgstr ""
 
@@ -7298,7 +7298,7 @@ msgstr "IMAP"
 #: app/views/administration.proxy.edit.php:49
 #: include/views/administration.auditlogs.list.php:72
 #: include/views/configuration.host.list.php:110
-#: include/views/inventory.host.view.php:84
+#: include/views/inventory.host.view.php:88
 #: include/views/js/configuration.host.edit.js.php:29 search.php:126
 msgid "IP"
 msgstr "IP"
@@ -7368,7 +7368,7 @@ msgstr ""
 #: disc_prototypes.php:135 host_discovery.php:136
 #: include/views/configuration.host.discovery.edit.php:450
 #: include/views/configuration.item.edit.php:590
-#: include/views/configuration.item.prototype.edit.php:529 items.php:118
+#: include/views/configuration.item.prototype.edit.php:531 items.php:118
 msgid "IPMI sensor"
 msgstr "IPMI szenzor"
 
@@ -7382,19 +7382,19 @@ msgstr "IPMI felhasználónév"
 msgid "Icon"
 msgstr "Ikon"
 
-#: include/views/js/monitoring.sysmaps.js.php:606
+#: include/views/js/monitoring.sysmaps.js.php:610
 msgid "Icon (default)"
 msgstr "Ikon (alapértelmezett)"
 
-#: include/views/js/monitoring.sysmaps.js.php:624
+#: include/views/js/monitoring.sysmaps.js.php:628
 msgid "Icon (disabled)"
 msgstr "Ikon (letiltva)"
 
-#: include/views/js/monitoring.sysmaps.js.php:618
+#: include/views/js/monitoring.sysmaps.js.php:622
 msgid "Icon (maintenance)"
 msgstr "Ikon (karbantartás)"
 
-#: include/views/js/monitoring.sysmaps.js.php:612
+#: include/views/js/monitoring.sysmaps.js.php:616
 msgid "Icon (problem)"
 msgstr "Ikon (hiba)"
 
@@ -7681,12 +7681,12 @@ msgid "Incorrect API \"%1$s\"."
 msgstr ""
 
 #: include/classes/api/services/CDRule.php:543
-#: include/views/js/configuration.discovery.edit.js.php:600
+#: include/views/js/configuration.discovery.edit.js.php:606
 msgid "Incorrect SNMP OID."
 msgstr ""
 
 #: include/classes/api/services/CDRule.php:537
-#: include/views/js/configuration.discovery.edit.js.php:596
+#: include/views/js/configuration.discovery.edit.js.php:602
 msgid "Incorrect SNMP community."
 msgstr ""
 
@@ -8189,7 +8189,7 @@ msgstr ""
 msgid "Incorrect object value."
 msgstr ""
 
-#: include/classes/db/OracleDbBackend.php:86
+#: include/classes/db/OracleDbBackend.php:85
 #, c-format
 msgid "Incorrect parameter \"%1$s\" value: %2$s."
 msgstr ""
@@ -8235,7 +8235,7 @@ msgstr ""
 msgid "Incorrect privacy protocol for item \"%1$s\"."
 msgstr ""
 
-#: adm.regexps.php:68 include/regexp.inc.php:120
+#: include/regexp.inc.php:120
 #, c-format
 msgid "Incorrect regular expression \"%1$s\": \"%2$s\""
 msgstr ""
@@ -8427,7 +8427,7 @@ msgstr ""
 msgid "Incorrect value \"%1$s\" for \"%2$s\" field."
 msgstr ""
 
-#: app/controllers/CControllerAuthenticationUpdate.php:134
+#: app/controllers/CControllerAuthenticationUpdate.php:127
 #: include/classes/api/services/CAction.php:1782
 #: include/classes/api/services/CScreenItem.php:576
 #: include/validate.inc.php:351
@@ -8494,7 +8494,7 @@ msgstr ""
 msgid "Incorrect value for \"%1$s\" field."
 msgstr ""
 
-#: app/controllers/CControllerAuthenticationUpdate.php:95
+#: app/controllers/CControllerAuthenticationUpdate.php:88
 #: app/controllers/CControllerPopupHttpStep.php:94
 #: app/controllers/CControllerPopupMedia.php:94
 #: app/controllers/CControllerPopupMedia.php:105 correlation.php:227
@@ -8639,14 +8639,14 @@ msgstr ""
 #: include/classes/graphdraw/CPieGraphDraw.php:213
 #: include/classes/helpers/CSvgGraphHelper.php:235
 #: include/classes/helpers/CSvgGraphHelper.php:247
-#: include/classes/import/CConfigurationImport.php:840
-#: include/classes/import/CConfigurationImport.php:878
-#: include/classes/import/CConfigurationImport.php:2507
-#: include/classes/import/CConfigurationImport.php:2611
-#: include/classes/import/CConfigurationImport.php:2621
-#: include/classes/import/CConfigurationImport.php:2657
-#: include/classes/import/CConfigurationImport.php:2666
-#: include/classes/import/CConfigurationImport.php:2672
+#: include/classes/import/CConfigurationImport.php:842
+#: include/classes/import/CConfigurationImport.php:880
+#: include/classes/import/CConfigurationImport.php:2509
+#: include/classes/import/CConfigurationImport.php:2613
+#: include/classes/import/CConfigurationImport.php:2623
+#: include/classes/import/CConfigurationImport.php:2659
+#: include/classes/import/CConfigurationImport.php:2668
+#: include/classes/import/CConfigurationImport.php:2674
 #: include/classes/validators/CNewValidator.php:91
 #: include/classes/validators/CNewValidator.php:101
 #: include/classes/validators/CNewValidator.php:267
@@ -8659,7 +8659,7 @@ msgstr ""
 msgid "Incorrect value for field \"%1$s\": %2$s."
 msgstr ""
 
-#: app/controllers/CControllerAuthenticationUpdate.php:126
+#: app/controllers/CControllerAuthenticationUpdate.php:119
 #: app/controllers/CControllerPopupTriggerWizard.php:133
 #: include/validate.inc.php:346
 #, c-format
@@ -8721,7 +8721,7 @@ msgstr ""
 msgid "Inherited and template macros"
 msgstr ""
 
-#: app/views/popup.triggerexpr.php:180
+#: app/views/popup.triggerexpr.php:183
 msgid "Insert"
 msgstr "Beszúrás"
 
@@ -8833,7 +8833,7 @@ msgstr ""
 #: include/views/configuration.item.edit.php:699
 #: include/views/configuration.item.list.php:66
 #: include/views/configuration.item.massupdate.php:456
-#: include/views/configuration.item.prototype.edit.php:627
+#: include/views/configuration.item.prototype.edit.php:629
 #: include/views/configuration.item.prototype.list.php:54
 #: include/views/configuration.services.edit.php:170 latest.php:406
 msgid "Interval"
@@ -8996,65 +8996,66 @@ msgstr ""
 #: include/classes/api/services/CItemGeneral.php:2025
 #: include/classes/api/services/CUser.php:668
 #: include/classes/api/services/CUser.php:679
-#: include/classes/validators/CApiInputValidator.php:246
-#: include/classes/validators/CApiInputValidator.php:251
-#: include/classes/validators/CApiInputValidator.php:256
-#: include/classes/validators/CApiInputValidator.php:286
-#: include/classes/validators/CApiInputValidator.php:347
-#: include/classes/validators/CApiInputValidator.php:354
-#: include/classes/validators/CApiInputValidator.php:386
-#: include/classes/validators/CApiInputValidator.php:391
-#: include/classes/validators/CApiInputValidator.php:433
-#: include/classes/validators/CApiInputValidator.php:438
-#: include/classes/validators/CApiInputValidator.php:472
-#: include/classes/validators/CApiInputValidator.php:477
-#: include/classes/validators/CApiInputValidator.php:518
-#: include/classes/validators/CApiInputValidator.php:523
-#: include/classes/validators/CApiInputValidator.php:563
-#: include/classes/validators/CApiInputValidator.php:594
-#: include/classes/validators/CApiInputValidator.php:599
-#: include/classes/validators/CApiInputValidator.php:655
-#: include/classes/validators/CApiInputValidator.php:688
-#: include/classes/validators/CApiInputValidator.php:693
-#: include/classes/validators/CApiInputValidator.php:734
-#: include/classes/validators/CApiInputValidator.php:739
-#: include/classes/validators/CApiInputValidator.php:744
-#: include/classes/validators/CApiInputValidator.php:773
-#: include/classes/validators/CApiInputValidator.php:828
-#: include/classes/validators/CApiInputValidator.php:835
-#: include/classes/validators/CApiInputValidator.php:862
-#: include/classes/validators/CApiInputValidator.php:907
-#: include/classes/validators/CApiInputValidator.php:936
-#: include/classes/validators/CApiInputValidator.php:941
-#: include/classes/validators/CApiInputValidator.php:978
-#: include/classes/validators/CApiInputValidator.php:983
-#: include/classes/validators/CApiInputValidator.php:1026
-#: include/classes/validators/CApiInputValidator.php:1035
-#: include/classes/validators/CApiInputValidator.php:1041
-#: include/classes/validators/CApiInputValidator.php:1069
-#: include/classes/validators/CApiInputValidator.php:1079
-#: include/classes/validators/CApiInputValidator.php:1085
-#: include/classes/validators/CApiInputValidator.php:1121
-#: include/classes/validators/CApiInputValidator.php:1132
-#: include/classes/validators/CApiInputValidator.php:1139
-#: include/classes/validators/CApiInputValidator.php:1166
-#: include/classes/validators/CApiInputValidator.php:1176
-#: include/classes/validators/CApiInputValidator.php:1201
-#: include/classes/validators/CApiInputValidator.php:1206
-#: include/classes/validators/CApiInputValidator.php:1232
-#: include/classes/validators/CApiInputValidator.php:1239
-#: include/classes/validators/CApiInputValidator.php:1266
-#: include/classes/validators/CApiInputValidator.php:1273
-#: include/classes/validators/CApiInputValidator.php:1300
-#: include/classes/validators/CApiInputValidator.php:1309
-#: include/classes/validators/CApiInputValidator.php:1354
-#: include/classes/validators/CApiInputValidator.php:1365
-#: include/classes/validators/CApiInputValidator.php:1398
-#: include/classes/validators/CApiInputValidator.php:1453
-#: include/classes/validators/CApiInputValidator.php:1540
-#: include/classes/validators/CApiInputValidator.php:1545
-#: include/classes/validators/CApiInputValidator.php:1572
-#: include/classes/validators/CApiInputValidator.php:1577
+#: include/classes/validators/CApiInputValidator.php:250
+#: include/classes/validators/CApiInputValidator.php:255
+#: include/classes/validators/CApiInputValidator.php:260
+#: include/classes/validators/CApiInputValidator.php:290
+#: include/classes/validators/CApiInputValidator.php:351
+#: include/classes/validators/CApiInputValidator.php:358
+#: include/classes/validators/CApiInputValidator.php:390
+#: include/classes/validators/CApiInputValidator.php:395
+#: include/classes/validators/CApiInputValidator.php:437
+#: include/classes/validators/CApiInputValidator.php:442
+#: include/classes/validators/CApiInputValidator.php:476
+#: include/classes/validators/CApiInputValidator.php:481
+#: include/classes/validators/CApiInputValidator.php:522
+#: include/classes/validators/CApiInputValidator.php:527
+#: include/classes/validators/CApiInputValidator.php:567
+#: include/classes/validators/CApiInputValidator.php:598
+#: include/classes/validators/CApiInputValidator.php:603
+#: include/classes/validators/CApiInputValidator.php:659
+#: include/classes/validators/CApiInputValidator.php:692
+#: include/classes/validators/CApiInputValidator.php:697
+#: include/classes/validators/CApiInputValidator.php:738
+#: include/classes/validators/CApiInputValidator.php:743
+#: include/classes/validators/CApiInputValidator.php:748
+#: include/classes/validators/CApiInputValidator.php:777
+#: include/classes/validators/CApiInputValidator.php:832
+#: include/classes/validators/CApiInputValidator.php:839
+#: include/classes/validators/CApiInputValidator.php:866
+#: include/classes/validators/CApiInputValidator.php:911
+#: include/classes/validators/CApiInputValidator.php:940
+#: include/classes/validators/CApiInputValidator.php:985
+#: include/classes/validators/CApiInputValidator.php:990
+#: include/classes/validators/CApiInputValidator.php:1027
+#: include/classes/validators/CApiInputValidator.php:1032
+#: include/classes/validators/CApiInputValidator.php:1075
+#: include/classes/validators/CApiInputValidator.php:1084
+#: include/classes/validators/CApiInputValidator.php:1090
+#: include/classes/validators/CApiInputValidator.php:1118
+#: include/classes/validators/CApiInputValidator.php:1128
+#: include/classes/validators/CApiInputValidator.php:1134
+#: include/classes/validators/CApiInputValidator.php:1170
+#: include/classes/validators/CApiInputValidator.php:1181
+#: include/classes/validators/CApiInputValidator.php:1188
+#: include/classes/validators/CApiInputValidator.php:1215
+#: include/classes/validators/CApiInputValidator.php:1225
+#: include/classes/validators/CApiInputValidator.php:1250
+#: include/classes/validators/CApiInputValidator.php:1255
+#: include/classes/validators/CApiInputValidator.php:1281
+#: include/classes/validators/CApiInputValidator.php:1288
+#: include/classes/validators/CApiInputValidator.php:1315
+#: include/classes/validators/CApiInputValidator.php:1322
+#: include/classes/validators/CApiInputValidator.php:1349
+#: include/classes/validators/CApiInputValidator.php:1358
+#: include/classes/validators/CApiInputValidator.php:1403
+#: include/classes/validators/CApiInputValidator.php:1414
+#: include/classes/validators/CApiInputValidator.php:1447
+#: include/classes/validators/CApiInputValidator.php:1502
+#: include/classes/validators/CApiInputValidator.php:1589
+#: include/classes/validators/CApiInputValidator.php:1594
+#: include/classes/validators/CApiInputValidator.php:1621
+#: include/classes/validators/CApiInputValidator.php:1626
 #: include/classes/widgets/fields/CWidgetFieldGraphOverride.php:133
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:480
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:484
@@ -9184,8 +9185,8 @@ msgstr ""
 msgid "Italian (it_IT)"
 msgstr "Olasz (it_IT)"
 
-#: app/views/popup.triggerexpr.php:88 app/views/popup.triggerwizard.php:82
-#: include/audit.inc.php:38 include/classes/screens/CScreenHistory.php:252
+#: app/views/popup.triggerexpr.php:91 app/views/popup.triggerwizard.php:82
+#: include/audit.inc.php:38 include/classes/screens/CScreenHistory.php:269
 #: include/classes/screens/CScreenPlainText.php:42
 #: include/classes/widgets/forms/CWidgetFormClock.php:48
 #: include/classes/widgets/forms/CWidgetFormGraph.php:48
@@ -9230,7 +9231,7 @@ msgstr ""
 msgid "Item \"%1$s\" has master item and cannot be copied."
 msgstr ""
 
-#: include/classes/import/CConfigurationImport.php:732
+#: include/classes/import/CConfigurationImport.php:734
 #, c-format
 msgid "Item \"%1$s\" on \"%2$s\": application \"%3$s\" does not exist."
 msgstr ""
@@ -9274,7 +9275,7 @@ msgstr[1] ""
 msgid "Item in \"not supported\" state"
 msgstr ""
 
-#: app/controllers/CControllerPopupTriggerExpr.php:686
+#: app/controllers/CControllerPopupTriggerExpr.php:693
 msgid "Item not selected"
 msgstr ""
 
@@ -9418,8 +9419,8 @@ msgstr ""
 #: include/views/configuration.template.edit.php:154
 #: include/views/configuration.template.list.php:87
 #: include/views/configuration.template.list.php:188
-#: include/views/conf.import.php:34 include/views/inventory.host.view.php:154
-#: include/views/inventory.host.view.php:165 items.php:1666 queue.php:109
+#: include/views/conf.import.php:34 include/views/inventory.host.view.php:161
+#: include/views/inventory.host.view.php:172 items.php:1666 queue.php:109
 #: search.php:134 search.php:164 search.php:193 search.php:409 search.php:437
 #: search.php:466
 msgid "Items"
@@ -9429,7 +9430,7 @@ msgstr "Elemek"
 msgid "Items deleted"
 msgstr "Elemek törölve"
 
-#: include/views/monitoring.history.php:129
+#: include/views/monitoring.history.php:136
 msgid "Items list"
 msgstr ""
 
@@ -9452,7 +9453,7 @@ msgstr ""
 #: include/views/configuration.host.discovery.edit.php:463
 #: include/views/configuration.item.edit.php:611
 #: include/views/configuration.item.massupdate.php:97
-#: include/views/configuration.item.prototype.edit.php:542
+#: include/views/configuration.item.prototype.edit.php:544
 msgid "JMX endpoint"
 msgstr ""
 
@@ -9596,11 +9597,11 @@ msgstr ""
 msgid "LDAP host"
 msgstr ""
 
-#: app/controllers/CControllerAuthenticationUpdate.php:96
+#: app/controllers/CControllerAuthenticationUpdate.php:89
 msgid "LDAP is not configured"
 msgstr ""
 
-#: app/controllers/CControllerAuthenticationUpdate.php:182
+#: app/controllers/CControllerAuthenticationUpdate.php:185
 msgid "LDAP login successful"
 msgstr ""
 
@@ -9613,17 +9614,17 @@ msgstr ""
 #: include/views/configuration.correlation.edit.php:48
 #: include/views/configuration.host.discovery.edit.php:615
 #: include/views/js/monitoring.sysmaps.js.php:110
-#: include/views/js/monitoring.sysmaps.js.php:578
-#: include/views/js/monitoring.sysmaps.js.php:686
+#: include/views/js/monitoring.sysmaps.js.php:582
+#: include/views/js/monitoring.sysmaps.js.php:690
 msgid "Label"
 msgstr "Cimke"
 
 #: include/views/js/monitoring.sysmaps.js.php:116
-#: include/views/js/monitoring.sysmaps.js.php:587
+#: include/views/js/monitoring.sysmaps.js.php:591
 msgid "Label location"
 msgstr "Cimke elhelyezkedése"
 
-#: include/views/administration.users.edit.php:183
+#: include/views/administration.users.edit.php:188
 msgid "Language"
 msgstr "Nyelv"
 
@@ -9739,7 +9740,7 @@ msgstr "Utolsó érték"
 msgid "Last week graph"
 msgstr "Utolsó hét grafikonja"
 
-#: include/menu.inc.php:68 include/views/inventory.host.view.php:127
+#: include/menu.inc.php:68 include/views/inventory.host.view.php:134
 #: jsLoader.php:268 latest.php:26 latest.php:306 search.php:128 search.php:232
 #: search.php:289 search.php:338
 msgid "Latest data"
@@ -9754,16 +9755,16 @@ msgstr ""
 msgid "Latvian (lv_LV)"
 msgstr "Litván (lv_LV)"
 
-#: include/classes/widgets/CWidgetHelper.php:671
-#: include/classes/widgets/CWidgetHelper.php:745
-#: include/classes/widgets/CWidgetHelper.php:1026
+#: include/classes/widgets/CWidgetHelper.php:670
+#: include/classes/widgets/CWidgetHelper.php:744
+#: include/classes/widgets/CWidgetHelper.php:1027
 #: include/classes/widgets/forms/CWidgetFormDataOver.php:59
 #: include/classes/widgets/forms/CWidgetFormPlainText.php:42
 #: include/classes/widgets/forms/CWidgetFormTrigOver.php:75
 #: include/views/js/configuration.graph.edit.js.php:81
 #: include/views/js/monitoring.sysmaps.js.php:10
 #: include/views/js/monitoring.sysmaps.js.php:120
-#: include/views/js/monitoring.sysmaps.js.php:591
+#: include/views/js/monitoring.sysmaps.js.php:595
 #: include/views/monitoring.overview.items.php:65
 #: include/views/monitoring.overview.triggers.php:102
 #: include/views/monitoring.screen.constructor.edit.php:833
@@ -9788,25 +9789,25 @@ msgstr ""
 msgid "Limit for search and filter results"
 msgstr "Keresési/Szűrési limit"
 
-#: include/classes/widgets/CWidgetHelper.php:660
-#: include/classes/widgets/CWidgetHelper.php:702
-#: include/classes/widgets/CWidgetHelper.php:964 include/graphs.inc.php:55
+#: include/classes/widgets/CWidgetHelper.php:659
+#: include/classes/widgets/CWidgetHelper.php:701
+#: include/classes/widgets/CWidgetHelper.php:965 include/graphs.inc.php:55
 #: include/views/js/monitoring.sysmaps.js.php:302
 #: include/views/js/monitoring.sysmaps.js.php:351
-#: include/views/js/monitoring.sysmaps.js.php:695
-#: include/views/js/monitoring.sysmaps.js.php:783
+#: include/views/js/monitoring.sysmaps.js.php:699
+#: include/views/js/monitoring.sysmaps.js.php:787
 msgid "Line"
 msgstr "Vonal"
 
-#: include/views/js/monitoring.sysmaps.js.php:528
+#: include/views/js/monitoring.sysmaps.js.php:532
 msgid "Line colour"
 msgstr ""
 
-#: include/views/js/monitoring.sysmaps.js.php:508
+#: include/views/js/monitoring.sysmaps.js.php:512
 msgid "Line type"
 msgstr ""
 
-#: include/views/js/monitoring.sysmaps.js.php:518
+#: include/views/js/monitoring.sysmaps.js.php:522
 msgid "Line width"
 msgstr ""
 
@@ -9814,9 +9815,9 @@ msgstr ""
 msgid "Link"
 msgstr "Kapcsolat"
 
-#: include/views/js/monitoring.sysmaps.js.php:658
-#: include/views/js/monitoring.sysmaps.js.php:669
-#: include/views/js/monitoring.sysmaps.js.php:704
+#: include/views/js/monitoring.sysmaps.js.php:662
+#: include/views/js/monitoring.sysmaps.js.php:673
+#: include/views/js/monitoring.sysmaps.js.php:708
 msgid "Link indicators"
 msgstr "Kapcsolatjelzők"
 
@@ -9869,8 +9870,8 @@ msgstr "Csatolt minták"
 msgid "Linked to"
 msgstr "Csatolva"
 
-#: include/views/js/monitoring.sysmaps.js.php:655
-#: include/views/js/monitoring.sysmaps.js.php:666
+#: include/views/js/monitoring.sysmaps.js.php:659
+#: include/views/js/monitoring.sysmaps.js.php:670
 msgid "Links"
 msgstr ""
 
@@ -9926,9 +9927,9 @@ msgstr ""
 msgid "Local"
 msgstr ""
 
-#: include/classes/screens/CScreenHistory.php:253
+#: include/classes/screens/CScreenHistory.php:270
 #: include/classes/widgets/forms/CWidgetFormClock.php:32
-#: include/views/monitoring.history.php:261
+#: include/views/monitoring.history.php:266
 #: include/views/monitoring.screen.constructor.edit.php:766
 msgid "Local time"
 msgstr "Helyi idő"
@@ -9948,7 +9949,7 @@ msgstr ""
 #: include/forms.inc.php:354 include/items.inc.php:133
 #: include/views/configuration.item.edit.php:678
 #: include/views/configuration.item.massupdate.php:280
-#: include/views/configuration.item.prototype.edit.php:606
+#: include/views/configuration.item.prototype.edit.php:608
 msgid "Log"
 msgstr "Napló"
 
@@ -9962,7 +9963,7 @@ msgstr ""
 
 #: include/views/configuration.item.edit.php:828
 #: include/views/configuration.item.massupdate.php:566
-#: include/views/configuration.item.prototype.edit.php:701
+#: include/views/configuration.item.prototype.edit.php:703
 msgid "Log time format"
 msgstr "Napló időformátuma"
 
@@ -10029,7 +10030,7 @@ msgstr "MD2"
 #: include/views/configuration.item.edit.php:535
 #: include/views/configuration.item.edit.php:542
 #: include/views/configuration.item.massupdate.php:225
-#: include/views/configuration.item.prototype.edit.php:503
+#: include/views/configuration.item.prototype.edit.php:505
 #: include/views/js/configuration.discovery.edit.js.php:94
 msgid "MD5"
 msgstr "MD5"
@@ -10046,7 +10047,7 @@ msgstr ""
 msgid "Macro"
 msgstr ""
 
-#: include/classes/api/services/CUserMacro.php:886
+#: include/classes/api/services/CUserMacro.php:892
 #, c-format
 msgid "Macro \"%1$s\" already exists on \"%2$s\"."
 msgstr ""
@@ -10056,12 +10057,12 @@ msgstr ""
 msgid "Macro \"%1$s\" already exists."
 msgstr ""
 
-#: include/classes/api/services/CUserMacro.php:802
+#: include/classes/api/services/CUserMacro.php:808
 #, c-format
 msgid "Macro \"%1$s\" is not unique."
 msgstr ""
 
-#: include/classes/api/services/CUserMacro.php:909
+#: include/classes/api/services/CUserMacro.php:915
 #, c-format
 msgid "Macro with hostmacroid \"%1$s\" does not exist."
 msgstr ""
@@ -10293,11 +10294,11 @@ msgstr "Március"
 msgid "Mark elements on trigger status change"
 msgstr ""
 
-#: include/views/monitoring.history.php:155
+#: include/views/monitoring.history.php:160
 msgid "Mark others"
 msgstr "Inverz megjelölése"
 
-#: include/views/monitoring.history.php:154
+#: include/views/monitoring.history.php:159
 msgid "Mark selected"
 msgstr "Válaszott megjelölése"
 
@@ -10316,17 +10317,17 @@ msgstr ""
 msgid "Mass update"
 msgstr "Tömeges frissítés"
 
-#: include/views/js/monitoring.sysmaps.js.php:555
+#: include/views/js/monitoring.sysmaps.js.php:559
 msgid "Mass update elements"
 msgstr ""
 
-#: include/views/js/monitoring.sysmaps.js.php:435
+#: include/views/js/monitoring.sysmaps.js.php:439
 msgid "Mass update shapes"
 msgstr ""
 
 #: disc_prototypes.php:48 include/views/configuration.item.edit.php:394
 #: include/views/configuration.item.massupdate.php:724
-#: include/views/configuration.item.prototype.edit.php:426 items.php:49
+#: include/views/configuration.item.prototype.edit.php:428 items.php:49
 msgid "Master item"
 msgstr ""
 
@@ -10389,8 +10390,8 @@ msgid "May"
 msgstr ""
 
 #: app/controllers/CControllerPopupMedia.php:170 app/views/popup.media.php:54
-#: include/views/administration.users.edit.php:322
-#: include/views/administration.users.edit.php:455
+#: include/views/administration.users.edit.php:327
+#: include/views/administration.users.edit.php:460
 msgid "Media"
 msgstr "Eszköztípus"
 
@@ -10488,8 +10489,8 @@ msgstr "Üzenet"
 msgid "Message text limit"
 msgstr ""
 
-#: include/views/administration.users.edit.php:353
-#: include/views/administration.users.edit.php:364
+#: include/views/administration.users.edit.php:358
+#: include/views/administration.users.edit.php:369
 msgid "Message timeout"
 msgstr ""
 
@@ -10501,7 +10502,7 @@ msgstr ""
 msgid "Messages"
 msgstr ""
 
-#: include/views/administration.users.edit.php:510
+#: include/views/administration.users.edit.php:515
 msgid "Messaging"
 msgstr ""
 
@@ -10594,11 +10595,11 @@ msgstr ""
 msgid "Missing \"name\" field for graph."
 msgstr ""
 
-#: include/classes/widgets/CWidgetHelper.php:666
+#: include/classes/widgets/CWidgetHelper.php:665
+#: include/classes/widgets/CWidgetHelper.php:740
 #: include/classes/widgets/CWidgetHelper.php:741
 #: include/classes/widgets/CWidgetHelper.php:742
-#: include/classes/widgets/CWidgetHelper.php:743
-#: include/classes/widgets/CWidgetHelper.php:1010
+#: include/classes/widgets/CWidgetHelper.php:1011
 msgid "Missing data"
 msgstr ""
 
@@ -10650,7 +10651,7 @@ msgstr "Proxin keresztül monitorozva"
 msgid "Monitored host"
 msgstr "Monitorozitt hoszt"
 
-#: include/menu.inc.php:38 include/views/inventory.host.view.php:122
+#: include/menu.inc.php:38 include/views/inventory.host.view.php:129
 msgid "Monitoring"
 msgstr "Felügyelet"
 
@@ -10715,8 +10716,8 @@ msgstr "NNTP"
 msgid "NTLM"
 msgstr ""
 
-#: actionconf.php:36 adm.regexps.php:36 adm.regexps.php:158
-#: adm.regexps.php:189 app/controllers/CControllerPopupGeneric.php:71
+#: actionconf.php:36 adm.regexps.php:36 adm.regexps.php:152
+#: adm.regexps.php:183 app/controllers/CControllerPopupGeneric.php:71
 #: app/controllers/CControllerPopupGeneric.php:83
 #: app/controllers/CControllerPopupGeneric.php:95
 #: app/controllers/CControllerPopupGeneric.php:107
@@ -10813,7 +10814,7 @@ msgstr ""
 #: include/views/configuration.item.prototype.edit.php:51
 #: include/views/configuration.item.prototype.edit.php:130
 #: include/views/configuration.item.prototype.edit.php:225
-#: include/views/configuration.item.prototype.edit.php:776
+#: include/views/configuration.item.prototype.edit.php:778
 #: include/views/configuration.item.prototype.list.php:52
 #: include/views/configuration.maintenance.edit.php:40
 #: include/views/configuration.maintenance.list.php:45
@@ -10833,7 +10834,7 @@ msgstr ""
 #: include/views/inventory.host.list.php:66
 #: include/views/js/monitoring.sysmaps.js.php:146
 #: include/views/js/monitoring.sysmaps.js.php:254
-#: include/views/js/monitoring.sysmaps.js.php:568
+#: include/views/js/monitoring.sysmaps.js.php:572
 #: include/views/monitoring.screen.edit.php:102
 #: include/views/monitoring.screen.list.php:59
 #: include/views/monitoring.screen.list.php:79
@@ -10915,11 +10916,11 @@ msgstr "Új"
 
 #: include/views/configuration.httpconf.edit.php:74
 #: include/views/configuration.item.edit.php:891
-#: include/views/configuration.item.prototype.edit.php:734
+#: include/views/configuration.item.prototype.edit.php:736
 msgid "New application"
 msgstr "Új alkalmazás"
 
-#: include/views/configuration.item.prototype.edit.php:748
+#: include/views/configuration.item.prototype.edit.php:750
 msgid "New application prototype"
 msgstr ""
 
@@ -11249,7 +11250,7 @@ msgstr "Nincs kép"
 #: include/views/configuration.host.discovery.edit.php:380
 #: include/views/configuration.item.edit.php:473
 #: include/views/configuration.item.massupdate.php:78
-#: include/views/configuration.item.prototype.edit.php:459 jsLoader.php:292
+#: include/views/configuration.item.prototype.edit.php:461 jsLoader.php:292
 msgid "No interface found"
 msgstr ""
 
@@ -11317,7 +11318,7 @@ msgstr ""
 msgid "No permissions for system access."
 msgstr ""
 
-#: adm.regexps.php:117
+#: adm.regexps.php:111
 #: app/controllers/CControllerDashboardPropertiesCheck.php:62
 #: app/controllers/CControllerDashboardPropertiesEdit.php:99
 #: app/controllers/CControllerDashboardShareEdit.php:74
@@ -11460,7 +11461,7 @@ msgstr ""
 #: include/classes/api/services/CUserGroup.php:876
 #: include/classes/api/services/CUserMacro.php:373
 #: include/classes/api/services/CUserMacro.php:460
-#: include/classes/api/services/CUserMacro.php:766
+#: include/classes/api/services/CUserMacro.php:772
 #: include/classes/api/services/CUser.php:422
 #: include/classes/api/services/CUser.php:986
 #: include/classes/api/services/CValueMap.php:240
@@ -11531,7 +11532,7 @@ msgstr ""
 msgid "No triggers defined."
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:798
+#: include/classes/validators/CApiInputValidator.php:802
 msgid "Non-boolean flags are deprecated."
 msgstr ""
 
@@ -11541,9 +11542,9 @@ msgstr ""
 #: app/views/administration.proxy.list.php:126
 #: app/views/monitoring.problem.view.php:265
 #: app/views/monitoring.problem.view.php:276
-#: include/classes/widgets/CWidgetHelper.php:667
-#: include/classes/widgets/CWidgetHelper.php:741
-#: include/classes/widgets/CWidgetHelper.php:1014
+#: include/classes/widgets/CWidgetHelper.php:666
+#: include/classes/widgets/CWidgetHelper.php:740
+#: include/classes/widgets/CWidgetHelper.php:1015
 #: include/classes/widgets/forms/CWidgetFormProblems.php:117
 #: include/classes/widgets/forms/CWidgetFormProblems.php:139
 #: include/hosts.inc.php:32 include/httptest.inc.php:27
@@ -11561,8 +11562,8 @@ msgstr ""
 #: include/views/configuration.item.edit.php:896
 #: include/views/configuration.item.edit.php:910
 #: include/views/configuration.item.prototype.edit.php:313
-#: include/views/configuration.item.prototype.edit.php:741
-#: include/views/configuration.item.prototype.edit.php:756
+#: include/views/configuration.item.prototype.edit.php:743
+#: include/views/configuration.item.prototype.edit.php:758
 #: include/views/configuration.trigger.prototype.edit.php:274
 #: include/views/configuration.triggers.edit.php:298
 #: include/views/js/monitoring.sysmaps.js.php:3
@@ -11572,7 +11573,7 @@ msgstr "Nincs"
 #: app/views/popup.generic.php:538 include/graphs.inc.php:24
 #: include/items.inc.php:160 include/triggers.inc.php:1278
 #: include/views/configuration.triggers.list.php:42
-#: include/views/monitoring.history.php:224
+#: include/views/monitoring.history.php:229
 msgid "Normal"
 msgstr "Normál"
 
@@ -11812,7 +11813,7 @@ msgstr ""
 #: include/forms.inc.php:352 include/items.inc.php:129
 #: include/triggers.inc.php:1886 include/views/configuration.item.edit.php:676
 #: include/views/configuration.item.massupdate.php:278
-#: include/views/configuration.item.prototype.edit.php:604
+#: include/views/configuration.item.prototype.edit.php:606
 msgid "Numeric (float)"
 msgstr "Numerikus (lebegőpontos)"
 
@@ -11823,7 +11824,7 @@ msgstr ""
 #: include/forms.inc.php:351 include/items.inc.php:127
 #: include/views/configuration.item.edit.php:675
 #: include/views/configuration.item.massupdate.php:277
-#: include/views/configuration.item.prototype.edit.php:603
+#: include/views/configuration.item.prototype.edit.php:605
 msgid "Numeric (unsigned)"
 msgstr "Numerikus (pozitív egész)"
 
@@ -11930,7 +11931,7 @@ msgstr "BEKAPCSOL"
 msgid "On status change triggers blink for"
 msgstr ""
 
-#: include/views/administration.users.edit.php:362
+#: include/views/administration.users.edit.php:367
 msgid "Once"
 msgstr ""
 
@@ -12233,7 +12234,7 @@ msgid "Overrides"
 msgstr ""
 
 #: include/menu.inc.php:57 include/menu.inc.php:128
-#: include/views/inventory.host.view.php:186
+#: include/views/inventory.host.view.php:193
 #: include/views/monitoring.overview.items.php:40
 #: include/views/monitoring.overview.triggers.php:77 overview.php:27
 #: queue.php:73
@@ -12462,7 +12463,7 @@ msgstr ""
 msgid "Parameter"
 msgstr "Paraméter"
 
-#: include/classes/validators/CApiInputValidator.php:858
+#: include/classes/validators/CApiInputValidator.php:862
 #, c-format
 msgid "Parameter \"%1$s\" is deprecated."
 msgstr ""
@@ -12470,7 +12471,7 @@ msgstr ""
 #: include/classes/debug/CProfiler.php:182
 #: include/views/configuration.item.edit.php:950
 #: include/views/configuration.item.massupdate.php:342
-#: include/views/configuration.item.prototype.edit.php:777
+#: include/views/configuration.item.prototype.edit.php:779
 msgid "Parameters"
 msgstr ""
 
@@ -12526,8 +12527,8 @@ msgstr ""
 #: app/views/administration.mediatype.edit.php:163 disc_prototypes.php:227
 #: host_discovery.php:207 httpconf.php:65
 #: include/classes/setup/CSetupWizard.php:248
-#: include/views/administration.users.edit.php:110
-#: include/views/administration.users.edit.php:141
+#: include/views/administration.users.edit.php:114
+#: include/views/administration.users.edit.php:146
 #: include/views/configuration.action.edit.php:948
 #: include/views/configuration.action.edit.php:977
 #: include/views/configuration.action.edit.php:1720
@@ -12546,18 +12547,18 @@ msgstr ""
 #: include/views/configuration.item.massupdate.php:299
 #: include/views/configuration.item.massupdate.php:331
 #: include/views/configuration.item.prototype.edit.php:331
-#: include/views/configuration.item.prototype.edit.php:538
-#: include/views/configuration.item.prototype.edit.php:566
+#: include/views/configuration.item.prototype.edit.php:540
+#: include/views/configuration.item.prototype.edit.php:568
 #: include/views/general.login.php:64
 #: include/views/js/common.item.edit.js.php:364 items.php:194
 msgid "Password"
 msgstr "Jelszó"
 
-#: include/views/administration.users.edit.php:116
+#: include/views/administration.users.edit.php:121
 msgid "Password (once again)"
 msgstr "Jelszó (ismétlés)"
 
-#: include/views/administration.users.edit.php:126
+#: include/views/administration.users.edit.php:127
 msgid "Password is not mandatory for non internal authentication type."
 msgstr ""
 
@@ -12603,7 +12604,7 @@ msgstr ""
 #: include/views/configuration.host.discovery.edit.php:516
 #: include/views/configuration.item.edit.php:699
 #: include/views/configuration.item.massupdate.php:457
-#: include/views/configuration.item.prototype.edit.php:627
+#: include/views/configuration.item.prototype.edit.php:629
 #: include/views/configuration.maintenance.edit.php:77 report4.php:108
 #: srv_status.php:170
 msgid "Period"
@@ -12626,9 +12627,9 @@ msgstr ""
 #: include/views/administration.usergroups.edit.php:133
 #: include/views/administration.usergroups.edit.php:217
 #: include/views/administration.usergroups.edit.php:269
-#: include/views/administration.users.edit.php:479
-#: include/views/administration.users.edit.php:499
-#: include/views/administration.users.edit.php:506
+#: include/views/administration.users.edit.php:484
+#: include/views/administration.users.edit.php:504
+#: include/views/administration.users.edit.php:511
 #: include/views/monitoring.screen.edit.php:124
 #: include/views/monitoring.screen.edit.php:160
 #: include/views/monitoring.slideconf.edit.php:173
@@ -12638,7 +12639,7 @@ msgstr ""
 msgid "Permissions"
 msgstr ""
 
-#: include/views/administration.users.edit.php:504
+#: include/views/administration.users.edit.php:509
 msgid "Permissions can be assigned for user groups only."
 msgstr ""
 
@@ -12658,12 +12659,12 @@ msgstr ""
 msgid "Plain text"
 msgstr "Szöveg"
 
-#: include/views/administration.users.edit.php:383
-#: include/views/administration.users.edit.php:420
+#: include/views/administration.users.edit.php:388
+#: include/views/administration.users.edit.php:425
 msgid "Play"
 msgstr ""
 
-#: include/views/administration.users.edit.php:367
+#: include/views/administration.users.edit.php:372
 msgid "Play sound"
 msgstr ""
 
@@ -12685,7 +12686,8 @@ msgstr ""
 msgid "Please select two elements"
 msgstr ""
 
-#: include/classes/widgets/CWidgetHelper.php:665
+#: include/classes/widgets/CWidgetHelper.php:664
+#: include/classes/widgets/CWidgetHelper.php:729
 #: include/classes/widgets/CWidgetHelper.php:730
 #: include/classes/widgets/CWidgetHelper.php:731
 #: include/classes/widgets/CWidgetHelper.php:732
@@ -12695,14 +12697,13 @@ msgstr ""
 #: include/classes/widgets/CWidgetHelper.php:736
 #: include/classes/widgets/CWidgetHelper.php:737
 #: include/classes/widgets/CWidgetHelper.php:738
-#: include/classes/widgets/CWidgetHelper.php:739
-#: include/classes/widgets/CWidgetHelper.php:978
+#: include/classes/widgets/CWidgetHelper.php:979
 msgid "Point size"
 msgstr ""
 
-#: include/classes/widgets/CWidgetHelper.php:661
-#: include/classes/widgets/CWidgetHelper.php:703
-#: include/classes/widgets/CWidgetHelper.php:965
+#: include/classes/widgets/CWidgetHelper.php:660
+#: include/classes/widgets/CWidgetHelper.php:702
+#: include/classes/widgets/CWidgetHelper.php:966
 #: include/views/js/monitoring.sysmaps.js.php:371
 msgid "Points"
 msgstr ""
@@ -12728,7 +12729,7 @@ msgstr ""
 #: include/views/configuration.host.prototype.edit.php:86
 #: include/views/configuration.item.edit.php:585
 #: include/views/configuration.item.massupdate.php:266
-#: include/views/configuration.item.prototype.edit.php:525
+#: include/views/configuration.item.prototype.edit.php:527
 #: include/views/inventory.host.view.php:75 items.php:100 items.php:235
 #: setup.php:50
 msgid "Port"
@@ -12764,13 +12765,13 @@ msgid "Pre-installation summary"
 msgstr ""
 
 #: include/views/configuration.item.edit.php:1068
-#: include/views/configuration.item.prototype.edit.php:895
+#: include/views/configuration.item.prototype.edit.php:897
 msgid "Preprocessing"
 msgstr ""
 
 #: include/views/configuration.item.edit.php:1063
 #: include/views/configuration.item.massupdate.php:438
-#: include/views/configuration.item.prototype.edit.php:890
+#: include/views/configuration.item.prototype.edit.php:892
 msgid "Preprocessing steps"
 msgstr ""
 
@@ -12824,7 +12825,7 @@ msgstr ""
 #: include/views/configuration.host.discovery.edit.php:441
 #: include/views/configuration.item.edit.php:580
 #: include/views/configuration.item.massupdate.php:257
-#: include/views/configuration.item.prototype.edit.php:520
+#: include/views/configuration.item.prototype.edit.php:522
 #: include/views/js/configuration.discovery.edit.js.php:115
 msgid "Privacy passphrase"
 msgstr ""
@@ -12832,7 +12833,7 @@ msgstr ""
 #: include/views/configuration.host.discovery.edit.php:434
 #: include/views/configuration.item.edit.php:574
 #: include/views/configuration.item.massupdate.php:243
-#: include/views/configuration.item.prototype.edit.php:513
+#: include/views/configuration.item.prototype.edit.php:515
 #: include/views/js/configuration.discovery.edit.js.php:107
 msgid "Privacy protocol"
 msgstr ""
@@ -12850,7 +12851,7 @@ msgstr ""
 #: include/views/configuration.host.discovery.edit.php:481
 #: include/views/configuration.item.edit.php:629
 #: include/views/configuration.item.massupdate.php:323
-#: include/views/configuration.item.prototype.edit.php:560
+#: include/views/configuration.item.prototype.edit.php:562
 msgid "Private key file"
 msgstr "Privát kulcsfájl"
 
@@ -12940,7 +12941,7 @@ msgstr "Számítás, ha legalább egy alárendelt elem állapota hibás"
 #: include/maps.inc.php:390 include/maps.inc.php:471 include/maps.inc.php:483
 #: include/maps.inc.php:559 include/maps.inc.php:571 include/menu.inc.php:52
 #: include/views/common.filter.trigger.php:42
-#: include/views/inventory.host.view.php:135 jsLoader.php:273 report2.php:455
+#: include/views/inventory.host.view.php:142 jsLoader.php:273 report2.php:455
 #: search.php:129 search.php:233 search.php:290 search.php:339
 msgid "Problems"
 msgstr "Hibák"
@@ -13050,7 +13051,7 @@ msgstr ""
 #: include/views/configuration.host.discovery.edit.php:460
 #: include/views/configuration.item.edit.php:600
 #: include/views/configuration.item.massupdate.php:300
-#: include/views/configuration.item.prototype.edit.php:539
+#: include/views/configuration.item.prototype.edit.php:541
 msgid "Public key"
 msgstr "Publikus kulcs"
 
@@ -13060,7 +13061,7 @@ msgstr "Publikus kulcs"
 #: include/views/configuration.host.discovery.edit.php:474
 #: include/views/configuration.item.edit.php:622
 #: include/views/configuration.item.massupdate.php:315
-#: include/views/configuration.item.prototype.edit.php:553
+#: include/views/configuration.item.prototype.edit.php:555
 msgid "Public key file"
 msgstr "Publikus kulcsfájl"
 
@@ -13173,7 +13174,7 @@ msgid "Recipient (descending)"
 msgstr ""
 
 #: include/classes/screens/CScreenProblem.php:1050
-#: include/views/administration.users.edit.php:377
+#: include/views/administration.users.edit.php:382
 #: include/views/configuration.item.list.php:174
 #: include/views/configuration.trigger.prototype.list.php:130
 #: include/views/configuration.triggers.list.php:266
@@ -13208,11 +13209,11 @@ msgid "Recovery time"
 msgstr ""
 
 #: include/views/js/monitoring.sysmaps.js.php:300
-#: include/views/js/monitoring.sysmaps.js.php:449
+#: include/views/js/monitoring.sysmaps.js.php:453
 msgid "Rectangle"
 msgstr ""
 
-#: include/views/administration.users.edit.php:221 profile.php:52 users.php:62
+#: include/views/administration.users.edit.php:226 profile.php:52 users.php:62
 msgid "Refresh"
 msgstr ""
 
@@ -13248,11 +13249,11 @@ msgstr "Reguláris kifejezés"
 msgid "Regular expression \"%s\" already exists."
 msgstr ""
 
-#: adm.regexps.php:152
+#: adm.regexps.php:146
 msgid "Regular expression added"
 msgstr "Reguláris kifejezés hozzáadva"
 
-#: adm.regexps.php:202
+#: adm.regexps.php:196
 #, fuzzy
 msgid "Regular expression deleted"
 msgid_plural "Regular expressions deleted"
@@ -13263,11 +13264,11 @@ msgstr[1] "Reguláris kifejezés törölve"
 msgid "Regular expression does not exist."
 msgstr ""
 
-#: adm.regexps.php:67 include/regexp.inc.php:119
+#: include/regexp.inc.php:119
 msgid "Regular expression must be a string"
 msgstr ""
 
-#: adm.regexps.php:146
+#: adm.regexps.php:140
 msgid "Regular expression updated"
 msgstr "Reguláris kifejezés frissítve"
 
@@ -13309,7 +13310,7 @@ msgstr "Távoli parancs"
 #: include/views/administration.general.regularexpressions.edit.php:77
 #: include/views/administration.general.valuemapping.edit.php:65
 #: include/views/administration.usergroups.edit.php:189
-#: include/views/administration.users.edit.php:313
+#: include/views/administration.users.edit.php:318
 #: include/views/common.filter.trigger.php:106
 #: include/views/configuration.action.edit.php:89
 #: include/views/configuration.action.edit.php:512
@@ -13332,8 +13333,8 @@ msgstr "Távoli parancs"
 #: include/views/configuration.item.massupdate.php:489
 #: include/views/configuration.item.prototype.edit.php:151
 #: include/views/configuration.item.prototype.edit.php:246
-#: include/views/configuration.item.prototype.edit.php:656
-#: include/views/configuration.item.prototype.edit.php:873
+#: include/views/configuration.item.prototype.edit.php:658
+#: include/views/configuration.item.prototype.edit.php:875
 #: include/views/configuration.maintenance.edit.php:95
 #: include/views/configuration.maintenance.edit.php:193
 #: include/views/configuration.maintenance.edit.php:213
@@ -13389,13 +13390,13 @@ msgstr "Távoli parancs"
 #: include/views/js/monitoring.sysmap.edit.js.php:24
 #: include/views/js/monitoring.sysmap.edit.js.php:58
 #: include/views/js/monitoring.sysmaps.js.php:270
-#: include/views/js/monitoring.sysmaps.js.php:418
-#: include/views/js/monitoring.sysmaps.js.php:538
-#: include/views/js/monitoring.sysmaps.js.php:633
-#: include/views/js/monitoring.sysmaps.js.php:731
-#: include/views/js/monitoring.sysmaps.js.php:791
-#: include/views/js/monitoring.sysmaps.js.php:807
-#: include/views/js/monitoring.sysmaps.js.php:833
+#: include/views/js/monitoring.sysmaps.js.php:422
+#: include/views/js/monitoring.sysmaps.js.php:542
+#: include/views/js/monitoring.sysmaps.js.php:637
+#: include/views/js/monitoring.sysmaps.js.php:735
+#: include/views/js/monitoring.sysmaps.js.php:795
+#: include/views/js/monitoring.sysmaps.js.php:811
+#: include/views/js/monitoring.sysmaps.js.php:837
 #: include/views/monitoring.slideconf.edit.php:134
 #: include/views/monitoring.sysmap.constructor.php:31
 #: include/views/monitoring.sysmap.constructor.php:37
@@ -13606,18 +13607,18 @@ msgid "Response time"
 msgstr "Válaszidő"
 
 #: app/views/popup.testtriggerexpr.php:48
-#: app/views/popup.testtriggerexpr.php:94 app/views/popup.triggerexpr.php:160
+#: app/views/popup.testtriggerexpr.php:94 app/views/popup.triggerexpr.php:163
 #: include/classes/debug/CProfiler.php:183
 #: include/views/administration.general.regularexpressions.edit.php:123
 #: include/views/administration.general.regularexpressions.edit.php:128
 msgid "Result"
 msgstr "Eredmény"
 
-#: include/regexp.inc.php:226 include/views/js/adm.regexprs.edit.js.php:149
+#: include/regexp.inc.php:226 include/views/js/adm.regexprs.edit.js.php:152
 msgid "Result is FALSE"
 msgstr "Az eredmény HAMIS"
 
-#: include/regexp.inc.php:225 include/views/js/adm.regexprs.edit.js.php:145
+#: include/regexp.inc.php:225 include/views/js/adm.regexprs.edit.js.php:148
 msgid "Result is TRUE"
 msgstr "Az eredmény IGAZ"
 
@@ -13686,13 +13687,13 @@ msgstr ""
 msgid "Returns percentage of lost ICMP ping packets."
 msgstr ""
 
-#: include/classes/widgets/CWidgetHelper.php:672
-#: include/classes/widgets/CWidgetHelper.php:746
-#: include/classes/widgets/CWidgetHelper.php:1027
+#: include/classes/widgets/CWidgetHelper.php:671
+#: include/classes/widgets/CWidgetHelper.php:745
+#: include/classes/widgets/CWidgetHelper.php:1028
 #: include/views/js/configuration.graph.edit.js.php:82
 #: include/views/js/monitoring.sysmaps.js.php:12
 #: include/views/js/monitoring.sysmaps.js.php:121
-#: include/views/js/monitoring.sysmaps.js.php:592
+#: include/views/js/monitoring.sysmaps.js.php:596
 #: include/views/monitoring.screen.constructor.edit.php:887
 #: include/views/monitoring.sysmap.edit.php:205
 msgid "Right"
@@ -13726,7 +13727,7 @@ msgstr "Sorok száma"
 msgid "Rows"
 msgstr "Sorok"
 
-#: include/views/administration.users.edit.php:226 profile.php:53 users.php:63
+#: include/views/administration.users.edit.php:231 profile.php:53 users.php:63
 msgid "Rows per page"
 msgstr "Sorok oldalanként"
 
@@ -13795,7 +13796,7 @@ msgstr ""
 #: include/views/configuration.item.edit.php:536
 #: include/views/configuration.item.edit.php:543
 #: include/views/configuration.item.massupdate.php:226
-#: include/views/configuration.item.prototype.edit.php:504
+#: include/views/configuration.item.prototype.edit.php:506
 #: include/views/js/configuration.discovery.edit.js.php:95
 msgid "SHA"
 msgstr ""
@@ -13841,7 +13842,7 @@ msgstr ""
 #: disc_prototypes.php:100 host_discovery.php:100 include/forms.inc.php:453
 #: include/views/configuration.host.discovery.edit.php:391
 #: include/views/configuration.item.edit.php:487
-#: include/views/configuration.item.prototype.edit.php:470
+#: include/views/configuration.item.prototype.edit.php:472
 #: include/views/js/configuration.discovery.edit.js.php:62 items.php:98
 msgid "SNMP OID"
 msgstr "SNMP OID"
@@ -13850,7 +13851,7 @@ msgstr "SNMP OID"
 #: include/views/configuration.host.discovery.edit.php:403
 #: include/views/configuration.item.edit.php:500
 #: include/views/configuration.item.massupdate.php:185
-#: include/views/configuration.item.prototype.edit.php:482
+#: include/views/configuration.item.prototype.edit.php:484
 #: include/views/js/configuration.discovery.edit.js.php:48 items.php:96
 msgid "SNMP community"
 msgstr "SNMP jelszó (community)"
@@ -13893,7 +13894,7 @@ msgstr ""
 #: include/items.inc.php:1669
 #: include/views/configuration.host.discovery.edit.php:499
 #: include/views/configuration.item.edit.php:648
-#: include/views/configuration.item.prototype.edit.php:578
+#: include/views/configuration.item.prototype.edit.php:580
 msgid "SQL query"
 msgstr ""
 
@@ -14007,7 +14008,7 @@ msgstr ""
 #: include/views/configuration.item.edit.php:707
 #: include/views/configuration.item.edit.php:714
 #: include/views/configuration.item.massupdate.php:466
-#: include/views/configuration.item.prototype.edit.php:633
+#: include/views/configuration.item.prototype.edit.php:635
 #: include/views/js/common.item.edit.js.php:10
 #: include/views/js/configuration.item.massupdate.js.php:10
 msgid "Scheduling"
@@ -14095,7 +14096,7 @@ msgstr "Képernyő frissítve"
 #: include/menu.inc.php:78 include/views/configuration.template.edit.php:306
 #: include/views/configuration.template.list.php:90
 #: include/views/configuration.template.list.php:200
-#: include/views/conf.import.php:39 include/views/inventory.host.view.php:142
+#: include/views/conf.import.php:39 include/views/inventory.host.view.php:149
 #: include/views/monitoring.hostscreen.php:28
 #: include/views/monitoring.screen.constructor.list.php:22
 #: include/views/monitoring.screen.edit.php:24
@@ -14215,14 +14216,14 @@ msgstr ""
 msgid "Secondary POC screen name"
 msgstr ""
 
-#: include/views/administration.users.edit.php:363
+#: include/views/administration.users.edit.php:368
 msgid "Seconds"
 msgstr "Másodpercek"
 
 #: include/views/configuration.host.discovery.edit.php:421
 #: include/views/configuration.item.edit.php:529
 #: include/views/configuration.item.massupdate.php:209
-#: include/views/configuration.item.prototype.edit.php:500
+#: include/views/configuration.item.prototype.edit.php:502
 #: include/views/js/configuration.discovery.edit.js.php:83
 msgid "Security level"
 msgstr ""
@@ -14231,14 +14232,14 @@ msgstr ""
 #: include/views/configuration.host.discovery.edit.php:409
 #: include/views/configuration.item.edit.php:506
 #: include/views/configuration.item.massupdate.php:201
-#: include/views/configuration.item.prototype.edit.php:488
+#: include/views/configuration.item.prototype.edit.php:490
 #: include/views/js/configuration.discovery.edit.js.php:76
 msgid "Security name"
 msgstr ""
 
 #: app/controllers/CControllerWidgetNavTreeItemEdit.php:97
 #: app/views/monitoring.problem.view.php:132 app/views/popup.generic.php:635
-#: app/views/popup.services.php:128 app/views/popup.triggerexpr.php:65
+#: app/views/popup.services.php:128 app/views/popup.triggerexpr.php:68
 #: include/classes/html/CMultiSelect.php:74
 #: include/classes/widgets/CWidgetHelper.php:156
 #: include/classes/widgets/CWidgetHelper.php:286
@@ -14276,10 +14277,10 @@ msgstr ""
 msgid "Select"
 msgstr "Kiválaszt"
 
-#: app/views/popup.triggerexpr.php:72
+#: app/views/popup.triggerexpr.php:75
 #: include/views/configuration.graph.edit.php:206
 #: include/views/configuration.graph.edit.php:288
-#: include/views/configuration.item.prototype.edit.php:409
+#: include/views/configuration.item.prototype.edit.php:410
 msgid "Select prototype"
 msgstr ""
 
@@ -14288,7 +14289,7 @@ msgid "Select widget"
 msgstr ""
 
 #: app/views/administration.script.edit.php:80
-#: include/views/monitoring.history.php:167
+#: include/views/monitoring.history.php:172
 msgid "Selected"
 msgstr "Kijelölt"
 
@@ -14304,7 +14305,7 @@ msgstr ""
 msgid "Selected correlations deleted"
 msgstr ""
 
-#: include/views/js/monitoring.sysmaps.js.php:565
+#: include/views/js/monitoring.sysmaps.js.php:569
 msgid "Selected elements"
 msgstr ""
 
@@ -14347,7 +14348,7 @@ msgid "Send only to"
 msgstr "Küldés csak ide"
 
 #: app/views/popup.media.php:57 app/views/popup.media.php:64
-#: include/views/administration.users.edit.php:244
+#: include/views/administration.users.edit.php:249
 msgid "Send to"
 msgstr "Küldés"
 
@@ -14541,7 +14542,7 @@ msgstr ""
 #: app/views/monitoring.widget.problems.view.php:58
 #: app/views/popup.triggerwizard.php:83
 #: include/classes/screens/CScreenEvents.php:33
-#: include/classes/screens/CScreenHistory.php:258
+#: include/classes/screens/CScreenHistory.php:275
 #: include/classes/screens/CScreenProblem.php:884
 #: include/classes/screens/CScreenProblem.php:906
 #: include/classes/screens/CScreenProblem.php:1128
@@ -14590,7 +14591,7 @@ msgid "Severity increased"
 msgstr ""
 
 #: include/views/js/monitoring.sysmaps.js.php:298
-#: include/views/js/monitoring.sysmaps.js.php:447
+#: include/views/js/monitoring.sysmaps.js.php:451
 #: include/views/monitoring.sysmap.constructor.php:34
 msgid "Shape"
 msgstr ""
@@ -14669,7 +14670,7 @@ msgstr "Vonalak megjelenítése"
 msgid "Show problems"
 msgstr ""
 
-#: include/views/monitoring.history.php:152
+#: include/views/monitoring.history.php:157
 msgid "Show selected"
 msgstr "Választottak megjelenítése"
 
@@ -14679,7 +14680,7 @@ msgstr "Választottak megjelenítése"
 #: include/classes/widgets/forms/CWidgetFormProblemsBySv.php:76
 #: include/classes/widgets/forms/CWidgetFormProblems.php:158
 #: include/classes/widgets/forms/CWidgetFormTrigOver.php:64
-#: include/views/administration.users.edit.php:438
+#: include/views/administration.users.edit.php:443
 #: include/views/common.filter.trigger.php:129
 #: include/views/monitoring.overview.items.php:101
 #: include/views/monitoring.sysmap.edit.php:223
@@ -14718,7 +14719,7 @@ msgstr ""
 
 #: include/views/configuration.item.edit.php:856
 #: include/views/configuration.item.massupdate.php:583
-#: include/views/configuration.item.prototype.edit.php:723
+#: include/views/configuration.item.prototype.edit.php:725
 msgid "Show value"
 msgstr "Érték megjelenítése"
 
@@ -14808,7 +14809,7 @@ msgstr ""
 msgid "Site state / province"
 msgstr ""
 
-#: include/views/js/monitoring.sysmaps.js.php:390
+#: include/views/js/monitoring.sysmaps.js.php:394
 msgid "Size"
 msgstr ""
 
@@ -14944,7 +14945,7 @@ msgstr ""
 msgid "Sorting by field \"%1$s\" not allowed."
 msgstr ""
 
-#: include/classes/screens/CScreenHistory.php:255
+#: include/classes/screens/CScreenHistory.php:272
 #: include/classes/widgets/forms/CWidgetFormGraph.php:31
 msgid "Source"
 msgstr "Forrás"
@@ -14965,7 +14966,7 @@ msgstr ""
 msgid "Specify some filter condition to see the items."
 msgstr ""
 
-#: include/views/monitoring.history.php:264 latest.php:386
+#: include/views/monitoring.history.php:269 latest.php:386
 msgid "Specify some filter condition to see the values."
 msgstr ""
 
@@ -14974,13 +14975,13 @@ msgid "Speed"
 msgstr "Sebesség"
 
 #: app/views/popup.generic.php:529 include/graphs.inc.php:25
-#: include/views/monitoring.history.php:225
+#: include/views/monitoring.history.php:230
 msgid "Stacked"
 msgstr "Rögzített"
 
-#: include/classes/widgets/CWidgetHelper.php:662
-#: include/classes/widgets/CWidgetHelper.php:704
-#: include/classes/widgets/CWidgetHelper.php:966
+#: include/classes/widgets/CWidgetHelper.php:661
+#: include/classes/widgets/CWidgetHelper.php:703
+#: include/classes/widgets/CWidgetHelper.php:967
 msgid "Staircase"
 msgstr ""
 
@@ -15132,8 +15133,8 @@ msgstr ""
 msgid "Steps"
 msgstr "Lépések száma"
 
-#: include/views/administration.users.edit.php:388
-#: include/views/administration.users.edit.php:425
+#: include/views/administration.users.edit.php:393
+#: include/views/administration.users.edit.php:430
 msgid "Stop"
 msgstr ""
 
@@ -15141,8 +15142,8 @@ msgstr ""
 #: include/views/configuration.item.edit.php:816
 #: include/views/configuration.item.massupdate.php:523
 #: include/views/configuration.item.massupdate.php:540
-#: include/views/configuration.item.prototype.edit.php:678
-#: include/views/configuration.item.prototype.edit.php:691
+#: include/views/configuration.item.prototype.edit.php:680
+#: include/views/configuration.item.prototype.edit.php:693
 msgid "Storage period"
 msgstr ""
 
@@ -15252,7 +15253,7 @@ msgstr ""
 msgid "System boot time. Returns integer (Unix timestamp)"
 msgstr ""
 
-#: include/users.inc.php:83 include/views/administration.users.edit.php:190
+#: include/users.inc.php:83 include/views/administration.users.edit.php:195
 msgid "System default"
 msgstr "Alapértelmezett"
 
@@ -15315,8 +15316,8 @@ msgstr "TELNET agent"
 msgid "TOTAL"
 msgstr "ÖSSZESEN"
 
-#: include/views/js/adm.regexprs.edit.js.php:128
-#: include/views/js/adm.regexprs.edit.js.php:173
+#: include/views/js/adm.regexprs.edit.js.php:131
+#: include/views/js/adm.regexprs.edit.js.php:177
 msgid "TRUE"
 msgstr "IGAZ"
 
@@ -15579,9 +15580,9 @@ msgstr "Teszt szöveg"
 #: include/forms.inc.php:355 include/items.inc.php:135
 #: include/items.inc.php:1707 include/views/configuration.item.edit.php:679
 #: include/views/configuration.item.massupdate.php:281
-#: include/views/configuration.item.prototype.edit.php:607
+#: include/views/configuration.item.prototype.edit.php:609
 #: include/views/js/monitoring.sysmaps.js.php:306
-#: include/views/js/monitoring.sysmaps.js.php:456
+#: include/views/js/monitoring.sysmaps.js.php:460
 msgid "Text"
 msgstr "Szöveg"
 
@@ -15679,7 +15680,7 @@ msgstr ""
 msgid "The web scenario application belongs to a different host than the web scenario host."
 msgstr ""
 
-#: include/views/administration.users.edit.php:198
+#: include/views/administration.users.edit.php:203
 msgid "Theme"
 msgstr "Téma"
 
@@ -15748,7 +15749,7 @@ msgstr "-ig"
 #: app/controllers/CControllerPopupTriggerExpr.php:174
 #: app/views/monitoring.widget.actionlog.view.php:29
 #: app/views/monitoring.widget.problems.view.php:36
-#: app/views/popup.triggerexpr.php:128 app/views/popup.triggerexpr.php:132
+#: app/views/popup.triggerexpr.php:131 app/views/popup.triggerexpr.php:135
 #: include/actions.inc.php:1746 include/actions.inc.php:1800
 #: include/actions.inc.php:1881 include/actions.inc.php:1965
 #: include/actions.inc.php:2015 include/blocks.inc.php:536
@@ -15797,9 +15798,9 @@ msgstr "Idő periódus"
 #: app/controllers/CControllerPopupTriggerExpr.php:155
 #: app/controllers/CControllerPopupTriggerExpr.php:169
 #: app/controllers/CControllerPopupTriggerExpr.php:198
-#: include/classes/widgets/CWidgetHelper.php:673
-#: include/classes/widgets/CWidgetHelper.php:748
-#: include/classes/widgets/CWidgetHelper.php:1030
+#: include/classes/widgets/CWidgetHelper.php:672
+#: include/classes/widgets/CWidgetHelper.php:747
+#: include/classes/widgets/CWidgetHelper.php:1031
 msgid "Time shift"
 msgstr ""
 
@@ -15821,18 +15822,18 @@ msgid "Timeout"
 msgstr "Időtúllépés"
 
 #: app/views/monitoring.widget.plaintext.view.php:28
-#: include/classes/screens/CScreenHistory.php:251
-#: include/classes/screens/CScreenHistory.php:358
-#: include/classes/screens/CScreenHistory.php:398
+#: include/classes/screens/CScreenHistory.php:268
+#: include/classes/screens/CScreenHistory.php:393
+#: include/classes/screens/CScreenHistory.php:448
 #: include/classes/screens/CScreenPlainText.php:42
 #: include/classes/screens/CScreenPlainText.php:53
-#: include/views/monitoring.history.php:260
+#: include/views/monitoring.history.php:265
 msgid "Timestamp"
 msgstr "Időpecsét"
 
 #: include/classes/html/CFilter.php:290
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:98
-#: include/views/js/monitoring.sysmaps.js.php:669
+#: include/views/js/monitoring.sysmaps.js.php:673
 msgid "To"
 msgstr ""
 
@@ -15854,7 +15855,7 @@ msgstr ""
 #: include/classes/widgets/forms/CWidgetFormTrigOver.php:76
 #: include/views/js/monitoring.sysmaps.js.php:16
 #: include/views/js/monitoring.sysmaps.js.php:122
-#: include/views/js/monitoring.sysmaps.js.php:593
+#: include/views/js/monitoring.sysmaps.js.php:597
 #: include/views/monitoring.overview.items.php:64
 #: include/views/monitoring.overview.triggers.php:101
 #: include/views/monitoring.screen.constructor.edit.php:834
@@ -15891,7 +15892,8 @@ msgstr ""
 msgid "Transform SQL query result into a JSON object for low-level discovery."
 msgstr ""
 
-#: include/classes/widgets/CWidgetHelper.php:663
+#: include/classes/widgets/CWidgetHelper.php:662
+#: include/classes/widgets/CWidgetHelper.php:705
 #: include/classes/widgets/CWidgetHelper.php:706
 #: include/classes/widgets/CWidgetHelper.php:707
 #: include/classes/widgets/CWidgetHelper.php:708
@@ -15902,8 +15904,7 @@ msgstr ""
 #: include/classes/widgets/CWidgetHelper.php:713
 #: include/classes/widgets/CWidgetHelper.php:714
 #: include/classes/widgets/CWidgetHelper.php:715
-#: include/classes/widgets/CWidgetHelper.php:716
-#: include/classes/widgets/CWidgetHelper.php:986
+#: include/classes/widgets/CWidgetHelper.php:987
 msgid "Transparency"
 msgstr ""
 
@@ -15911,9 +15912,9 @@ msgstr ""
 msgid "Transport error."
 msgstr ""
 
-#: include/classes/widgets/CWidgetHelper.php:669
-#: include/classes/widgets/CWidgetHelper.php:743
-#: include/classes/widgets/CWidgetHelper.php:1018
+#: include/classes/widgets/CWidgetHelper.php:668
+#: include/classes/widgets/CWidgetHelper.php:742
+#: include/classes/widgets/CWidgetHelper.php:1019
 msgctxt "missing data function"
 msgid "Treat as 0"
 msgstr ""
@@ -15929,7 +15930,7 @@ msgstr ""
 
 #: disc_prototypes.php:164 include/views/configuration.item.edit.php:812
 #: include/views/configuration.item.massupdate.php:535
-#: include/views/configuration.item.prototype.edit.php:687 items.php:76
+#: include/views/configuration.item.prototype.edit.php:689 items.php:76
 msgid "Trend storage period"
 msgstr ""
 
@@ -15953,7 +15954,7 @@ msgstr "Trendek"
 #: include/views/configuration.services.parent.list.php:35
 #: include/views/configuration.triggers.edit.php:582
 #: include/views/js/monitoring.sysmaps.js.php:70
-#: include/views/js/monitoring.sysmaps.js.php:707
+#: include/views/js/monitoring.sysmaps.js.php:711
 #: include/views/reports.toptriggers.php:79 jsLoader.php:181 jsLoader.php:278
 #: services.php:357
 msgid "Trigger"
@@ -15969,7 +15970,7 @@ msgstr ""
 msgid "Trigger \"%1$s\" belongs to templates with different linkages."
 msgstr ""
 
-#: include/classes/import/CConfigurationImport.php:1647
+#: include/classes/import/CConfigurationImport.php:1649
 #, c-format
 msgid "Trigger \"%1$s\" depends on trigger \"%2$s\", which does not exist."
 msgstr ""
@@ -16087,7 +16088,7 @@ msgstr ""
 msgid "Trigger prototype \"%1$s\" contains item prototypes from multiple discovery rules."
 msgstr ""
 
-#: include/classes/import/CConfigurationImport.php:1369
+#: include/classes/import/CConfigurationImport.php:1371
 #, c-format
 msgid "Trigger prototype \"%1$s\" depends on trigger \"%2$s\", which does not exist."
 msgstr ""
@@ -16143,7 +16144,7 @@ msgstr ""
 msgid "Trigger severities"
 msgstr ""
 
-#: include/actions.inc.php:43 include/views/administration.users.edit.php:437
+#: include/actions.inc.php:43 include/views/administration.users.edit.php:442
 msgid "Trigger severity"
 msgstr "Trigger súlyosság"
 
@@ -16175,8 +16176,8 @@ msgstr "Trigger frissítve"
 #: include/views/configuration.triggers.edit.php:24
 #: include/views/configuration.triggers.list.php:117
 #: include/views/configuration.triggers.massupdate.php:24
-#: include/views/conf.import.php:36 include/views/inventory.host.view.php:155
-#: include/views/inventory.host.view.php:166
+#: include/views/conf.import.php:36 include/views/inventory.host.view.php:162
+#: include/views/inventory.host.view.php:173
 #: include/views/js/monitoring.sysmaps.js.php:143
 #: include/views/monitoring.overview.items.php:56
 #: include/views/monitoring.overview.triggers.php:93 search.php:135
@@ -16241,7 +16242,7 @@ msgstr ""
 #: include/forms.inc.php:347 include/hosts.inc.php:99
 #: include/views/administration.auditacts.list.php:58
 #: include/views/administration.general.image.list.php:30
-#: include/views/administration.users.edit.php:244
+#: include/views/administration.users.edit.php:249
 #: include/views/configuration.action.edit.php:916
 #: include/views/configuration.action.edit.php:1696
 #: include/views/configuration.action.edit.php:2145
@@ -16258,15 +16259,15 @@ msgstr ""
 #: include/views/configuration.item.massupdate.php:455
 #: include/views/configuration.item.prototype.edit.php:61
 #: include/views/configuration.item.prototype.edit.php:66
-#: include/views/configuration.item.prototype.edit.php:627
+#: include/views/configuration.item.prototype.edit.php:629
 #: include/views/configuration.item.prototype.list.php:57
 #: include/views/configuration.maintenance.list.php:71
 #: include/views/configuration.services.edit.php:170
 #: include/views/inventory.host.list.php:67
 #: include/views/js/monitoring.sysmaps.js.php:66
 #: include/views/js/monitoring.sysmaps.js.php:353
-#: include/views/js/monitoring.sysmaps.js.php:568
-#: include/views/js/monitoring.sysmaps.js.php:707
+#: include/views/js/monitoring.sysmaps.js.php:572
+#: include/views/js/monitoring.sysmaps.js.php:711
 #: include/views/monitoring.overview.items.php:53
 #: include/views/monitoring.overview.triggers.php:90
 #: include/views/monitoring.screen.edit.php:197
@@ -16279,7 +16280,7 @@ msgstr "Típus"
 msgid "Type (Full details)"
 msgstr ""
 
-#: include/views/js/monitoring.sysmaps.js.php:693
+#: include/views/js/monitoring.sysmaps.js.php:697
 msgid "Type (OK)"
 msgstr "Típus (OK)"
 
@@ -16303,8 +16304,8 @@ msgstr "Számítás tipusa"
 #: include/forms.inc.php:842 include/views/configuration.item.edit.php:667
 #: include/views/configuration.item.edit.php:673
 #: include/views/configuration.item.massupdate.php:274
-#: include/views/configuration.item.prototype.edit.php:595
-#: include/views/configuration.item.prototype.edit.php:601
+#: include/views/configuration.item.prototype.edit.php:597
+#: include/views/configuration.item.prototype.edit.php:603
 msgid "Type of information"
 msgstr "Információ típusa"
 
@@ -16317,7 +16318,7 @@ msgid "Types"
 msgstr "Típusok"
 
 #: include/translateDefines.inc.php:25
-#: include/views/js/adm.regexprs.edit.js.php:167
+#: include/views/js/adm.regexprs.edit.js.php:170
 msgid "UNKNOWN"
 msgstr "ISMERETLEN"
 
@@ -16339,7 +16340,7 @@ msgstr "ISMERETLEN"
 msgid "URL"
 msgstr "URL"
 
-#: include/views/administration.users.edit.php:231
+#: include/views/administration.users.edit.php:236
 msgid "URL (after login)"
 msgstr "URL (belépés után)"
 
@@ -16441,7 +16442,7 @@ msgstr "Engedélyezi a kijelölt zárolt felhasználókat?"
 #: include/classes/widgets/forms/CWidgetFormSvgGraph.php:227
 #: include/views/configuration.item.edit.php:684
 #: include/views/configuration.item.massupdate.php:288
-#: include/views/configuration.item.prototype.edit.php:612
+#: include/views/configuration.item.prototype.edit.php:614
 msgid "Units"
 msgstr "Egységek"
 
@@ -16484,7 +16485,7 @@ msgid "Unknown function."
 msgstr ""
 
 #: app/controllers/CControllerPopupTestTriggerExpr.php:48
-#: app/controllers/CControllerPopupTriggerExpr.php:535
+#: app/controllers/CControllerPopupTriggerExpr.php:542
 #: include/triggers.inc.php:1433
 msgid "Unknown host item, no such item in selected host"
 msgstr ""
@@ -16637,7 +16638,7 @@ msgstr ""
 #: include/views/administration.general.valuemapping.edit.php:105
 #: include/views/administration.general.workingtime.edit.php:44
 #: include/views/administration.usergroups.edit.php:278
-#: include/views/administration.users.edit.php:528
+#: include/views/administration.users.edit.php:533
 #: include/views/configuration.action.edit.php:1238
 #: include/views/configuration.action.edit.php:1835
 #: include/views/configuration.action.edit.php:2317
@@ -16654,7 +16655,7 @@ msgstr ""
 #: include/views/configuration.httpconf.edit.php:253
 #: include/views/configuration.item.edit.php:1098
 #: include/views/configuration.item.massupdate.php:743
-#: include/views/configuration.item.prototype.edit.php:904
+#: include/views/configuration.item.prototype.edit.php:906
 #: include/views/configuration.maintenance.edit.php:134
 #: include/views/configuration.maintenance.edit.php:285
 #: include/views/configuration.services.edit.php:355
@@ -16682,7 +16683,7 @@ msgstr ""
 #: include/views/configuration.httpconf.edit.php:79
 #: include/views/configuration.item.edit.php:689
 #: include/views/configuration.item.massupdate.php:510
-#: include/views/configuration.item.prototype.edit.php:617 items.php:53
+#: include/views/configuration.item.prototype.edit.php:619 items.php:53
 #: items.php:237
 msgid "Update interval"
 msgstr "Frissítési gyakoriság"
@@ -16753,7 +16754,7 @@ msgid "Use custom event status colours"
 msgstr ""
 
 #: app/views/popup.media.php:73
-#: include/views/administration.users.edit.php:244
+#: include/views/administration.users.edit.php:249
 msgid "Use if severity"
 msgstr "Használat, ha a súlyosság"
 
@@ -16770,7 +16771,7 @@ msgstr ""
 #: include/classes/setup/CSetupWizard.php:245 include/hosts.inc.php:61
 #: include/views/administration.auditlogs.list.php:26
 #: include/views/administration.auditlogs.list.php:71
-#: include/views/administration.users.edit.php:453
+#: include/views/administration.users.edit.php:458
 #: include/views/configuration.action.edit.php:698
 #: include/views/configuration.action.edit.php:1440
 #: include/views/configuration.action.edit.php:1985
@@ -16820,7 +16821,7 @@ msgstr "Új felhasználó felvéve"
 msgid "User agent string"
 msgstr ""
 
-#: include/views/administration.users.edit.php:470
+#: include/views/administration.users.edit.php:475
 msgid "User can't change type for himself"
 msgstr ""
 
@@ -16941,7 +16942,7 @@ msgstr ""
 #: include/views/configuration.item.edit.php:617
 #: include/views/configuration.item.massupdate.php:307
 #: include/views/configuration.item.prototype.edit.php:323
-#: include/views/configuration.item.prototype.edit.php:548 items.php:84
+#: include/views/configuration.item.prototype.edit.php:550 items.php:84
 msgid "User name"
 msgstr "Felhasználónév"
 
@@ -16979,8 +16980,8 @@ msgstr ""
 msgid "User sharing is missing parameters: %1$s for screen \"%2$s\"."
 msgstr ""
 
-#: include/views/administration.users.edit.php:470
-#: include/views/administration.users.edit.php:474
+#: include/views/administration.users.edit.php:475
+#: include/views/administration.users.edit.php:479
 #: include/views/administration.users.list.php:63
 #: include/views/administration.users.list.php:86
 msgid "User type"
@@ -17250,8 +17251,8 @@ msgstr ""
 #: app/views/popup.testtriggerexpr.php:30 include/blocks.inc.php:427
 #: include/classes/graphdraw/CPieGraphDraw.php:346
 #: include/classes/screens/CScreenEvents.php:32
-#: include/classes/screens/CScreenHistory.php:263
-#: include/classes/screens/CScreenHistory.php:360
+#: include/classes/screens/CScreenHistory.php:280
+#: include/classes/screens/CScreenHistory.php:393
 #: include/classes/screens/CScreenPlainText.php:53
 #: include/views/administration.general.macros.edit.php:38
 #: include/views/administration.general.valuemapping.edit.php:55
@@ -17266,8 +17267,8 @@ msgstr ""
 #: include/views/configuration.item.prototype.edit.php:225
 #: include/views/configuration.triggers.list.php:55
 #: include/views/configuration.triggers.list.php:167
-#: include/views/hostmacros.php:50 include/views/monitoring.history.php:145
-#: include/views/monitoring.history.php:262
+#: include/views/hostmacros.php:50 include/views/monitoring.history.php:152
+#: include/views/monitoring.history.php:267
 #, c-format
 msgid "Value"
 msgstr "Érték"
@@ -17384,7 +17385,7 @@ msgstr ""
 msgid "Value: no data"
 msgstr ""
 
-#: charts.php:100 include/views/monitoring.history.php:67
+#: charts.php:100 include/views/monitoring.history.php:72
 msgid "Values"
 msgstr "Értékek"
 
@@ -17420,7 +17421,7 @@ msgid "Vertical"
 msgstr "Függőleges"
 
 #: include/views/js/monitoring.sysmaps.js.php:332
-#: include/views/js/monitoring.sysmaps.js.php:490
+#: include/views/js/monitoring.sysmaps.js.php:494
 #: include/views/monitoring.screen.constructor.edit.php:895
 msgid "Vertical align"
 msgstr "Függőleges igazítás"
@@ -17430,7 +17431,7 @@ msgid "Vietnamese (vi_VN)"
 msgstr ""
 
 #: include/views/monitoring.charts.php:43
-#: include/views/monitoring.history.php:80
+#: include/views/monitoring.history.php:85
 msgid "View as"
 msgstr ""
 
@@ -17483,9 +17484,9 @@ msgstr ""
 #: include/views/configuration.host.list.php:353
 #: include/views/configuration.template.list.php:92
 #: include/views/configuration.template.list.php:208
-#: include/views/inventory.host.view.php:124
-#: include/views/inventory.host.view.php:160
-#: include/views/inventory.host.view.php:169 search.php:132 search.php:138
+#: include/views/inventory.host.view.php:131
+#: include/views/inventory.host.view.php:167
+#: include/views/inventory.host.view.php:176 search.php:132 search.php:138
 #: search.php:180 search.php:209 search.php:241 search.php:292 search.php:346
 #: search.php:414 search.php:457 search.php:471
 msgid "Web"
@@ -17514,7 +17515,7 @@ msgstr ""
 msgid "Web scenario \"%1$s\" already exists."
 msgstr ""
 
-#: include/classes/import/CConfigurationImport.php:1419
+#: include/classes/import/CConfigurationImport.php:1421
 #, c-format
 msgid "Web scenario \"%1$s\" on \"%2$s\": application \"%3$s\" does not exist."
 msgstr ""
@@ -17572,11 +17573,12 @@ msgid "Welcome to"
 msgstr ""
 
 #: app/controllers/CControllerPopupMedia.php:110 app/views/popup.media.php:68
-#: include/views/administration.users.edit.php:244
+#: include/views/administration.users.edit.php:249
 msgid "When active"
 msgstr "Amikor aktív"
 
-#: graphs.php:45 include/classes/widgets/CWidgetHelper.php:658
+#: graphs.php:45 include/classes/widgets/CWidgetHelper.php:657
+#: include/classes/widgets/CWidgetHelper.php:689
 #: include/classes/widgets/CWidgetHelper.php:690
 #: include/classes/widgets/CWidgetHelper.php:691
 #: include/classes/widgets/CWidgetHelper.php:692
@@ -17587,13 +17589,12 @@ msgstr "Amikor aktív"
 #: include/classes/widgets/CWidgetHelper.php:697
 #: include/classes/widgets/CWidgetHelper.php:698
 #: include/classes/widgets/CWidgetHelper.php:699
-#: include/classes/widgets/CWidgetHelper.php:700
-#: include/classes/widgets/CWidgetHelper.php:970
+#: include/classes/widgets/CWidgetHelper.php:971
 #: include/views/configuration.graph.edit.php:84
 #: include/views/configuration.graph.list.php:88
 #: include/views/js/monitoring.sysmaps.js.php:92
 #: include/views/js/monitoring.sysmaps.js.php:357
-#: include/views/js/monitoring.sysmaps.js.php:395
+#: include/views/js/monitoring.sysmaps.js.php:399
 #: include/views/monitoring.screen.constructor.edit.php:860
 #: include/views/monitoring.sysmap.edit.php:95
 #: include/views/monitoring.sysmap.list.php:59 screenedit.php:69
@@ -17709,7 +17710,7 @@ msgstr ""
 msgid "X1"
 msgstr ""
 
-#: include/views/js/monitoring.sysmaps.js.php:396
+#: include/views/js/monitoring.sysmaps.js.php:400
 msgid "X2"
 msgstr ""
 
@@ -17733,7 +17734,7 @@ msgid "XML is expected"
 msgstr ""
 
 #: include/views/js/monitoring.sysmaps.js.php:247
-#: include/views/js/monitoring.sysmaps.js.php:382
+#: include/views/js/monitoring.sysmaps.js.php:384
 msgid "Y"
 msgstr "Y"
 
@@ -17759,10 +17760,10 @@ msgstr "Y tengely MIN érték"
 msgid "Y axis side"
 msgstr "Y tengely elhelyezkedése"
 
-#: include/classes/widgets/CWidgetHelper.php:670
+#: include/classes/widgets/CWidgetHelper.php:669
+#: include/classes/widgets/CWidgetHelper.php:744
 #: include/classes/widgets/CWidgetHelper.php:745
-#: include/classes/widgets/CWidgetHelper.php:746
-#: include/classes/widgets/CWidgetHelper.php:1024
+#: include/classes/widgets/CWidgetHelper.php:1025
 msgid "Y-axis"
 msgstr ""
 
@@ -17778,11 +17779,11 @@ msgstr ""
 msgid "Y-m-d H:i:s"
 msgstr ""
 
-#: include/views/js/monitoring.sysmaps.js.php:383
+#: include/views/js/monitoring.sysmaps.js.php:385
 msgid "Y1"
 msgstr ""
 
-#: include/views/js/monitoring.sysmaps.js.php:405
+#: include/views/js/monitoring.sysmaps.js.php:409
 msgid "Y2"
 msgstr ""
 
@@ -17840,7 +17841,7 @@ msgstr ""
 msgid "You are logged in as \"%1$s\"."
 msgstr ""
 
-#: include/views/administration.users.edit.php:174
+#: include/views/administration.users.edit.php:179
 msgid "You are not able to choose some of the languages, because locales for them are not installed on the web server."
 msgstr ""
 
@@ -18045,7 +18046,7 @@ msgstr ""
 msgid "[Wrong value for month: \"%s\" ]"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:773
+#: include/classes/validators/CApiInputValidator.php:777
 msgid "a boolean is expected"
 msgstr ""
 
@@ -18053,29 +18054,29 @@ msgstr ""
 #: include/classes/api/services/CTriggerGeneral.php:258
 #: include/classes/api/services/CUser.php:668
 #: include/classes/import/validators/CXmlValidatorGeneral.php:193
-#: include/classes/validators/CApiInputValidator.php:246
+#: include/classes/validators/CApiInputValidator.php:250
 #: include/classes/validators/CNewValidator.php:279
 msgid "a character string is expected"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:563
+#: include/classes/validators/CApiInputValidator.php:567
 msgid "a floating point value is expected"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:287
+#: include/classes/validators/CApiInputValidator.php:291
 msgid "a hexadecimal colour code (6 symbols) is expected"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:734
-#: include/classes/validators/CApiInputValidator.php:1132
+#: include/classes/validators/CApiInputValidator.php:738
+#: include/classes/validators/CApiInputValidator.php:1181
 msgid "a number is expected"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:438
-#: include/classes/validators/CApiInputValidator.php:477
-#: include/classes/validators/CApiInputValidator.php:744
-#: include/classes/validators/CApiInputValidator.php:1139
-#: include/classes/validators/CApiInputValidator.php:1365
+#: include/classes/validators/CApiInputValidator.php:442
+#: include/classes/validators/CApiInputValidator.php:481
+#: include/classes/validators/CApiInputValidator.php:748
+#: include/classes/validators/CApiInputValidator.php:1188
+#: include/classes/validators/CApiInputValidator.php:1414
 msgid "a number is too large"
 msgstr ""
 
@@ -18090,23 +18091,23 @@ msgid "a time is expected"
 msgstr ""
 
 #: app/controllers/CControllerPopupMedia.php:110
-#: include/classes/validators/CApiInputValidator.php:1273
+#: include/classes/validators/CApiInputValidator.php:1322
 #: include/validate.inc.php:216
 msgid "a time period is expected"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:1239
+#: include/classes/validators/CApiInputValidator.php:1288
 #: include/validate.inc.php:235
 msgid "a time range is expected"
 msgstr ""
 
 #: app/controllers/CControllerPopupHttpStep.php:94
-#: include/classes/validators/CApiInputValidator.php:1354
+#: include/classes/validators/CApiInputValidator.php:1403
 #: include/validate.inc.php:227 include/validate.inc.php:591
 msgid "a time unit is expected"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:1206
+#: include/classes/validators/CApiInputValidator.php:1255
 msgid "a user macro is expected"
 msgstr ""
 
@@ -18152,17 +18153,18 @@ msgstr ""
 #: include/classes/api/services/CItemGeneral.php:1919
 #: include/classes/api/services/CItemGeneral.php:1943
 #: include/classes/import/validators/CXmlValidatorGeneral.php:207
-#: include/classes/validators/CApiInputValidator.php:386
-#: include/classes/validators/CApiInputValidator.php:518
-#: include/classes/validators/CApiInputValidator.php:594
-#: include/classes/validators/CApiInputValidator.php:688
-#: include/classes/validators/CApiInputValidator.php:828
-#: include/classes/validators/CApiInputValidator.php:936
-#: include/classes/validators/CApiInputValidator.php:978
+#: include/classes/validators/CApiInputValidator.php:390
+#: include/classes/validators/CApiInputValidator.php:522
+#: include/classes/validators/CApiInputValidator.php:598
+#: include/classes/validators/CApiInputValidator.php:692
+#: include/classes/validators/CApiInputValidator.php:832
+#: include/classes/validators/CApiInputValidator.php:985
+#: include/classes/validators/CApiInputValidator.php:1027
 msgid "an array is expected"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:907
+#: include/classes/validators/CApiInputValidator.php:911
+#: include/classes/validators/CApiInputValidator.php:940
 msgid "an array or a character string is expected"
 msgstr ""
 
@@ -18179,23 +18181,23 @@ msgstr ""
 msgid "an explicit time is expected"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:433
+#: include/classes/validators/CApiInputValidator.php:437
 msgid "an integer is expected"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:472
+#: include/classes/validators/CApiInputValidator.php:476
 msgid "an unsigned integer is expected"
 msgstr ""
 
-#: include/views/monitoring.history.php:163
+#: include/views/monitoring.history.php:168
 msgid "as Blue"
 msgstr "Kék"
 
-#: include/views/monitoring.history.php:162
+#: include/views/monitoring.history.php:167
 msgid "as Green"
 msgstr "Zöld"
 
-#: include/views/monitoring.history.php:161
+#: include/views/monitoring.history.php:166
 msgid "as Red"
 msgstr "Piros"
 
@@ -18307,14 +18309,14 @@ msgstr ""
 #: include/classes/api/services/CUserGroup.php:463
 #: include/classes/api/services/CUser.php:536
 #: include/classes/api/services/CUser.php:679
-#: include/classes/validators/CApiInputValidator.php:256
-#: include/classes/validators/CApiInputValidator.php:391
-#: include/classes/validators/CApiInputValidator.php:523
-#: include/classes/validators/CApiInputValidator.php:599
-#: include/classes/validators/CApiInputValidator.php:693
-#: include/classes/validators/CApiInputValidator.php:739
-#: include/classes/validators/CApiInputValidator.php:941
-#: include/classes/validators/CApiInputValidator.php:983
+#: include/classes/validators/CApiInputValidator.php:260
+#: include/classes/validators/CApiInputValidator.php:395
+#: include/classes/validators/CApiInputValidator.php:527
+#: include/classes/validators/CApiInputValidator.php:603
+#: include/classes/validators/CApiInputValidator.php:697
+#: include/classes/validators/CApiInputValidator.php:743
+#: include/classes/validators/CApiInputValidator.php:990
+#: include/classes/validators/CApiInputValidator.php:1032
 #: include/classes/validators/CNewValidator.php:91 usergrps.php:318
 #: usergrps.php:358 usergrps.php:361
 msgid "cannot be empty"
@@ -18338,7 +18340,7 @@ msgid "check expression starting from \"%1$s\""
 msgstr ""
 
 #: include/classes/api/services/CItemGeneral.php:1649
-#: include/classes/import/CConfigurationImport.php:2658
+#: include/classes/import/CConfigurationImport.php:2660
 msgid "circular item dependency is not allowed"
 msgstr ""
 
@@ -18417,7 +18419,7 @@ msgstr ""
 msgid "diff() - Difference between last and preceding values (1 - true, 0 - false)"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:1176
+#: include/classes/validators/CApiInputValidator.php:1225
 msgid "directory or script name cannot be empty"
 msgstr ""
 
@@ -18549,7 +18551,7 @@ msgid "in"
 msgstr "ban / ben"
 
 #: include/views/administration.usergroups.edit.php:116
-#: include/views/administration.users.edit.php:489
+#: include/views/administration.users.edit.php:494
 msgid "including subgroups"
 msgstr ""
 
@@ -18573,7 +18575,7 @@ msgstr ""
 msgid "invalid address range \"%1$s\""
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:251
+#: include/classes/validators/CApiInputValidator.php:255
 msgid "invalid byte sequence in UTF-8"
 msgstr ""
 
@@ -18588,15 +18590,15 @@ msgstr ""
 msgid "invalid history storage period"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:1035
+#: include/classes/validators/CApiInputValidator.php:1084
 msgid "invalid host group name"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:1079
+#: include/classes/validators/CApiInputValidator.php:1128
 msgid "invalid host name"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:1309
+#: include/classes/validators/CApiInputValidator.php:1358
 msgid "invalid regular expression"
 msgstr ""
 
@@ -18618,7 +18620,7 @@ msgstr ""
 msgid "is less than or equals"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:1545
+#: include/classes/validators/CApiInputValidator.php:1594
 msgid "is not enclosed in {} or is malformed"
 msgstr ""
 
@@ -18656,7 +18658,7 @@ msgstr ""
 
 #: include/views/configuration.item.edit.php:991
 #: include/views/configuration.item.massupdate.php:379
-#: include/views/configuration.item.prototype.edit.php:818
+#: include/views/configuration.item.prototype.edit.php:820
 #: include/views/js/common.item.edit.js.php:151
 #: include/views/js/configuration.item.massupdate.js.php:176
 msgid "list of characters"
@@ -18733,8 +18735,8 @@ msgid "maximum dependent items count reached"
 msgstr ""
 
 #: include/classes/api/services/CItemGeneral.php:1729
-#: include/classes/import/CConfigurationImport.php:2612
-#: include/classes/import/CConfigurationImport.php:2673
+#: include/classes/import/CConfigurationImport.php:2614
+#: include/classes/import/CConfigurationImport.php:2675
 msgid "maximum number of dependency levels reached"
 msgstr ""
 
@@ -18783,8 +18785,8 @@ msgstr ""
 msgid "must be between \"%1$s\" and \"%2$s\""
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:1042
-#: include/classes/validators/CApiInputValidator.php:1086
+#: include/classes/validators/CApiInputValidator.php:1091
+#: include/classes/validators/CApiInputValidator.php:1135
 msgid "must contain at least one low-level discovery macro"
 msgstr ""
 
@@ -18821,7 +18823,7 @@ msgstr "nincs adat"
 msgid "nodata() - No data received during period of time T (1 - true, 0 - false)"
 msgstr ""
 
-#: include/classes/widgets/CWidgetHelper.php:1032
+#: include/classes/widgets/CWidgetHelper.php:1033
 msgid "none"
 msgstr ""
 
@@ -18848,7 +18850,7 @@ msgstr ""
 
 #: include/views/configuration.item.edit.php:964
 #: include/views/configuration.item.massupdate.php:355
-#: include/views/configuration.item.prototype.edit.php:791
+#: include/views/configuration.item.prototype.edit.php:793
 #: include/views/js/common.item.edit.js.php:142
 #: include/views/js/configuration.item.massupdate.js.php:45
 #: include/views/js/configuration.item.massupdate.js.php:167
@@ -18879,7 +18881,7 @@ msgstr ""
 #: include/classes/setup/CFrontendSetup.php:618
 #: include/classes/setup/CFrontendSetup.php:619
 #: include/classes/setup/CFrontendSetup.php:635
-#: include/views/administration.users.edit.php:287
+#: include/views/administration.users.edit.php:292
 msgid "off"
 msgstr ""
 
@@ -18902,7 +18904,7 @@ msgstr ""
 #: include/classes/setup/CFrontendSetup.php:601
 #: include/classes/setup/CFrontendSetup.php:618
 #: include/classes/setup/CFrontendSetup.php:635
-#: include/views/administration.users.edit.php:287
+#: include/views/administration.users.edit.php:292
 #: include/views/monitoring.hostscreen.php:33
 msgid "on"
 msgstr ""
@@ -18913,7 +18915,7 @@ msgstr ""
 
 #: include/views/configuration.item.edit.php:979
 #: include/views/configuration.item.massupdate.php:368
-#: include/views/configuration.item.prototype.edit.php:806
+#: include/views/configuration.item.prototype.edit.php:808
 #: include/views/js/common.item.edit.js.php:49
 #: include/views/js/configuration.item.massupdate.js.php:46
 msgid "output"
@@ -18921,7 +18923,7 @@ msgstr ""
 
 #: include/views/configuration.item.edit.php:997
 #: include/views/configuration.item.massupdate.php:385
-#: include/views/configuration.item.prototype.edit.php:824
+#: include/views/configuration.item.prototype.edit.php:826
 #: include/views/js/common.item.edit.js.php:159
 #: include/views/js/configuration.item.massupdate.js.php:184
 msgid "path"
@@ -18929,7 +18931,7 @@ msgstr ""
 
 #: include/views/configuration.item.edit.php:1002
 #: include/views/configuration.item.massupdate.php:390
-#: include/views/configuration.item.prototype.edit.php:829
+#: include/views/configuration.item.prototype.edit.php:831
 #: include/views/js/common.item.edit.js.php:48
 #: include/views/js/common.item.edit.js.php:166
 #: include/views/js/configuration.item.massupdate.js.php:191
@@ -19035,7 +19037,7 @@ msgstr ""
 
 #: include/views/configuration.item.edit.php:851
 #: include/views/configuration.item.massupdate.php:577
-#: include/views/configuration.item.prototype.edit.php:721
+#: include/views/configuration.item.prototype.edit.php:723
 msgid "show value mappings"
 msgstr "érték hozzárendelések"
 
@@ -19094,7 +19096,7 @@ msgstr ""
 #: app/controllers/CControllerDashboardUpdate.php:143
 #: include/classes/api/services/CDashboard.php:385
 #: include/classes/api/services/CHttpTest.php:744
-#: include/classes/validators/CApiInputValidator.php:863
+#: include/classes/validators/CApiInputValidator.php:867
 #, c-format
 msgid "the parameter \"%1$s\" is missing"
 msgstr ""
@@ -19151,7 +19153,7 @@ msgstr ""
 msgid "type here to search"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:1577
+#: include/classes/validators/CApiInputValidator.php:1626
 msgid "unacceptable URL"
 msgstr ""
 
@@ -19165,7 +19167,7 @@ msgstr ""
 
 #: include/classes/api/services/CHttpTest.php:458
 #: include/classes/api/services/CHttpTest.php:482
-#: include/classes/validators/CApiInputValidator.php:835
+#: include/classes/validators/CApiInputValidator.php:839
 #, c-format
 msgid "unexpected parameter \"%1$s\""
 msgstr ""
@@ -19243,32 +19245,32 @@ msgstr ""
 msgid "value"
 msgstr "érték"
 
-#: include/classes/import/CConfigurationImport.php:841
-#: include/classes/import/CConfigurationImport.php:879
-#: include/classes/import/CConfigurationImport.php:2508
-#: include/classes/import/CConfigurationImport.php:2622
-#: include/classes/import/CConfigurationImport.php:2667
+#: include/classes/import/CConfigurationImport.php:843
+#: include/classes/import/CConfigurationImport.php:881
+#: include/classes/import/CConfigurationImport.php:2510
+#: include/classes/import/CConfigurationImport.php:2624
+#: include/classes/import/CConfigurationImport.php:2669
 #, c-format
 msgid "value \"%1$s\" not found"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:1399
-#: include/classes/validators/CApiInputValidator.php:1453
+#: include/classes/validators/CApiInputValidator.php:1448
+#: include/classes/validators/CApiInputValidator.php:1502
 #, c-format
 msgid "value %1$s already exists"
 msgstr ""
 
-#: include/classes/validators/CApiInputValidator.php:354
-#: include/classes/validators/CApiInputValidator.php:1026
-#: include/classes/validators/CApiInputValidator.php:1069
-#: include/classes/validators/CApiInputValidator.php:1121
-#: include/classes/validators/CApiInputValidator.php:1166
-#: include/classes/validators/CApiInputValidator.php:1201
-#: include/classes/validators/CApiInputValidator.php:1232
-#: include/classes/validators/CApiInputValidator.php:1266
-#: include/classes/validators/CApiInputValidator.php:1300
-#: include/classes/validators/CApiInputValidator.php:1540
-#: include/classes/validators/CApiInputValidator.php:1572
+#: include/classes/validators/CApiInputValidator.php:358
+#: include/classes/validators/CApiInputValidator.php:1075
+#: include/classes/validators/CApiInputValidator.php:1118
+#: include/classes/validators/CApiInputValidator.php:1170
+#: include/classes/validators/CApiInputValidator.php:1215
+#: include/classes/validators/CApiInputValidator.php:1250
+#: include/classes/validators/CApiInputValidator.php:1281
+#: include/classes/validators/CApiInputValidator.php:1315
+#: include/classes/validators/CApiInputValidator.php:1349
+#: include/classes/validators/CApiInputValidator.php:1589
+#: include/classes/validators/CApiInputValidator.php:1621
 msgid "value is too long"
 msgstr ""
 
@@ -19281,8 +19283,8 @@ msgstr ""
 #: include/classes/api/services/CMap.php:681
 #: include/classes/api/services/CMap.php:1129
 #: include/classes/api/services/CMap.php:1135
-#: include/classes/validators/CApiInputValidator.php:348
-#: include/classes/validators/CApiInputValidator.php:656
+#: include/classes/validators/CApiInputValidator.php:352
+#: include/classes/validators/CApiInputValidator.php:660
 #: include/validate.inc.php:584
 #, c-format
 msgid "value must be one of %1$s"

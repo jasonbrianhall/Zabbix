@@ -122,6 +122,7 @@ tests/libs/zbxcommshigh/zbx_tcp_recv_ext
 tests/libs/zbxcommshigh/zbx_tcp_recv_ext_zlib
 tests/libs/zbxcommshigh/zbx_tcp_recv_raw_ext
 tests/libs/zbxconf/parse_cfg_file
+tests/libs/zbxdbcache/dc_check_maintenance_period
 tests/libs/zbxdbcache/dc_item_poller_type_update
 tests/libs/zbxdbcache/dc_maintenance_match_tags
 tests/libs/zbxdbcache/is_item_processed_by_server
@@ -158,6 +159,8 @@ tests/libs/zbxsysinfo/parse_item_key
 tests/libs/zbxsysinfo/process
 tests/libs/zbxcommon/zbx_user_macro_parse
 tests/libs/zbxdbcache/is_item_processed_by_server
+tests/libs/zbxcommon/convert_to_utf8
+tests/libs/zbxdbhigh/DBadd_condition_alloc
 tests/zabbix_server/preprocessor/item_preproc_xpath
 tests/zabbix_server/preprocessor/zbx_item_preproc
 tests/zabbix_server/preprocessor/zbx_item_preproc_jsonpath

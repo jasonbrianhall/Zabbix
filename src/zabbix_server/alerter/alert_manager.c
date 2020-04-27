@@ -1940,6 +1940,8 @@ ZBX_THREAD_ENTRY(alert_manager_thread, args)
 	zabbix_log(LOG_LEVEL_INFORMATION, "%s #%d started [%s #%d]", get_program_type_string(program_type),
 			server_num, get_process_type_string(process_type), process_num);
 
+	update_selfmon_counter(ZBX_PROCESS_STATE_BUSY);
+
 	if (FAIL == zbx_ipc_service_start(&alerter_service, ZBX_IPC_SERVICE_ALERTER, &error))
 	{
 		zabbix_log(LOG_LEVEL_CRIT, "cannot start alert manager service: %s", error);
@@ -1959,8 +1961,6 @@ ZBX_THREAD_ENTRY(alert_manager_thread, args)
 		freq_watchdog = ZBX_WATCHDOG_ALERT_FREQUENCY;
 
 	zbx_setproctitle("%s #%d started", get_process_type_string(process_type), process_num);
-
-	update_selfmon_counter(ZBX_PROCESS_STATE_BUSY);
 
 	while (ZBX_IS_RUNNING())
 	{

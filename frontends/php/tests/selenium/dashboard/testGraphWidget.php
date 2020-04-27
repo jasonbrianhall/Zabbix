@@ -106,6 +106,7 @@ class testGraphWidget extends CWebTest {
 			}
 
 			$this->page->removeFocus();
+			sleep(1);
 			// Collect all screenshot errors.
 			try {
 				$this->assertScreenshotExcept($overlay, [$element], 'tab_'.$tab);

@@ -634,6 +634,7 @@ class testProblemsBySeverityWidget extends CWebTest {
 	private function fillFormAndSaveDashboard($dashboard, $form, $data, $header) {
 		$form->fill($data['fields']);
 		$form->submit();
+		$this->query('id:overlay_bg')->waitUntilNotVisible();
 		$this->page->waitUntilReady();
 		$dashboard->getWidget($header);
 		$dashboard->save();
