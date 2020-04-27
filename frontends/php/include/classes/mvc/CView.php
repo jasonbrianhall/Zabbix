@@ -163,13 +163,14 @@ class CView {
 	 *   - A copy of $data variable will be available for using within the file.
 	 *
 	 * @param string $file_name
+	 * @param array  $data
 	 *
 	 * @throws RuntimeException if the file not found, not readable or returned false.
 	 *
 	 * @return string
 	 */
-	public function readJsFile($file_name) {
-		$data = $this->data;
+	public function readJsFile(string $file_name, ?array $data = null): string {
+		$data = ($data === null) ? $this->data : $data;
 
 		$file_path = $this->directory.'/js/'.$file_name;
 
@@ -191,11 +192,12 @@ class CView {
 	 *   - A copy of $data variable will be available for using within the file.
 	 *
 	 * @param string $file_name
+	 * @param array  $data
 	 *
 	 * @throws RuntimeException if the file not found, not readable or returned false.
 	 */
-	public function includeJsFile($file_name) {
-		echo $this->readJsFile($file_name);
+	public function includeJsFile(string $file_name, array $data = null) {
+		echo $this->readJsFile($file_name, $data);
 	}
 
 	/**
@@ -226,7 +228,7 @@ class CView {
 	/**
 	 * Get current layout mode if layout modes were enabled for this view, or ZBX_LAYOUT_NORMAL otherwise.
 	 *
-	 * @return int  ZBX_LAYOUT_NORMAL | ZBX_LAYOUT_FULLSCREEN | ZBX_LAYOUT_KIOSKMODE
+	 * @return int  ZBX_LAYOUT_NORMAL | ZBX_LAYOUT_KIOSKMODE
 	 */
 	public function getLayoutMode() {
 		return $this->layout_modes_enabled ? CViewHelper::loadLayoutMode() : ZBX_LAYOUT_NORMAL;
